@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>참좋은공인중개사사무소 | 부산 사상구 아파트·주택·상가·사무실·토지 전문</title>
+  <meta name="description" content="부산 사상구 공인중개사 신제환 대표. 덕포동 426-16 1층 위치. 아파트, 주택, 상가·사무실, 토지 100% 현장 검증 실매물 및 실시간 1:1 상담.">
+  <meta name="keywords" content="사상구부동산, 덕포동부동산, 사상참좋은부동산, 사상상가, 사상사무실, 사상아파트, 사상단독주택, 사상토지">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="참좋은공인중개사사무소 | 사상구 부동산의 모든 것">
+  <meta property="og:description" content="직접 발로 뛰는 현장 확인과 꼼꼼한 권리분석으로 고객님이 원하시는 최적의 매물을 찾아드립니다.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/hero_busan.jpg">
+
+  <!-- Fonts (Preconnect & Google Fonts: Pretendard alternative Outfit / Noto Sans KR) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       Header / Navigation (Glassmorphic Sticky Header)
+       ========================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner container">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" aria-label="참좋은부동산 홈으로 이동">
+        <div class="brand-symbol">참</div>
+        <div class="brand-text-group">
+          <span class="brand-title">참좋은부동산</span>
+          <span class="brand-subtitle">공인중개사사무소 · 사상구 덕포동</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="desktop-nav" aria-label="메인 내비게이션">
+        <a href="#propertiesSection" class="nav-link active" data-section="properties">추천매물</a>
+        <a href="#blogSection" class="nav-link" data-section="blog">네이버블로그</a>
+        <a href="#newsSection" class="nav-link" data-section="news">부동산뉴스</a>
+        <a href="#consultationSection" class="nav-link" data-section="consultation">1:1상담</a>
+        <a href="#reviewsSection" class="nav-link" data-section="reviews">고객후기</a>
+        <a href="#ctaSection" class="nav-link" data-section="cta">오시는길</a>
+      </nav>
+
+      <!-- Header CTA & Actions -->
+      <div class="header-actions">
+        <!-- Favorites Counter Pill -->
+        <button class="btn-favorites-pill" id="btnHeaderFavorites" aria-label="찜한 관심매물 목록 보기">
+          <svg class="icon heart-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="fav-count-badge" id="likesCounter">0</span>
+        </button>
+
+        <!-- Direct Phone CTA -->
+        <a href="tel:010-9667-4201" class="btn-header-call" aria-label="전화상담 010-9667-4201 바로연결">
+          <svg class="icon" viewBox="0 0 24 24">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span>010-9667-4201</span>
+        </a>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button class="btn-hamburger" id="btnHamburger" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileDrawer">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+  <aside class="mobile-drawer" id="mobileDrawer" aria-label="모바일 전체 메뉴" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-brand">
+        <span class="brand-symbol sm">참</span>
+        <span class="brand-title">참좋은부동산</span>
+      </div>
+      <button class="btn-close-drawer" id="btnCloseDrawer" aria-label="메뉴 닫기">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <div class="drawer-section-title">매물 카테고리</div>
+      <nav class="drawer-nav">
+        <button class="drawer-link" data-cat="all">
+          <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>전체 매물 모아보기</span>
+        </button>
+        <button class="drawer-link" data-cat="apartment">
+          <svg class="icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="6" x2="9" y2="6.01"/><line x1="15" y1="6" x2="15" y2="6.01"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/><line x1="9" y1="14" x2="9" y2="14.01"/><line x1="15" y1="14" x2="15" y2="14.01"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
+          <span>아파트</span>
+        </button>
+        <button class="drawer-link" data-cat="house">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10H3z"/><path d="M9 20v-6h6v6"/></svg>
+          <span>주택 / 빌라</span>
+        </button>
+        <button class="drawer-link" data-cat="store">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M3 3h18v4H3zM4 7v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7"/><path d="M9 11v6M15 11v6"/></svg>
+          <span>상가 · 사무실</span>
+        </button>
+        <button class="drawer-link" data-cat="land">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <span>토지 / 나대지</span>
+        </button>
+      </nav>
+
+      <div class="drawer-divider"></div>
+
+      <div class="drawer-section-title">커뮤니티 &amp; 상담</div>
+      <nav class="drawer-nav">
+        <a href="#blogSection" class="drawer-link">
+          <span class="naver-n-icon">N</span>
+          <span>네이버 블로그 현장실사</span>
+        </a>
+        <a href="#newsSection" class="drawer-link">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 13a2 2 0 0 1-2-2V7m2 13a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2m-4-3H9M7 16h6M7 8h6M7 12h4"/></svg>
+          <span>부동산 소식 &amp; 정책</span>
+        </a>
+        <a href="#consultationSection" class="drawer-link">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>실시간 1:1 맞춤 상담</span>
+        </a>
+        <a href="#reviewsSection" class="drawer-link">
+          <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>고객 실거래 후기</span>
+        </a>
+        <a href="#ctaSection" class="drawer-link">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>오시는 길 / 대표 안내</span>
+        </a>
+      </nav>
+
+      <div class="drawer-footer-actions">
+        <a href="tel:010-9667-4201" class="drawer-phone-btn">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>010-9667-4201 전화연결</span>
+        </a>
+        <a href="https://open.kakao.com/o/sZyQr1th" target="_blank" rel="noopener noreferrer" class="drawer-phone-btn" style="background:#fee500; color:#181600; font-weight:800; margin-top:8px;">
+          <span>💬 카카오톡 1:1 상담하기</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       Hero Section (Airbnb Search Pill + Immersive Cityscape)
+       ========================================================================== -->
+  <section class="hero-section" id="heroSection">
+    <div class="hero-bg-overlay"></div>
+    <div class="container hero-content-wrap">
+      <div class="hero-badge-pill">
+        <span class="badge-dot"></span>
+        <span>부산 사상구 공인중개사사무소 · 책임중개 전문</span>
+      </div>
+
+      <h1 class="hero-headline">
+        사상구의 내일을 짓다,<br>
+        <span class="text-gold-gradient">참좋은 부동산</span>이 함께합니다
+      </h1>
+
+      <p class="hero-subtext">
+        직접 발로 뛰는 현장 확인과 꼼꼼한 권리분석으로 고객님이 원하시는 최적의 매물을 딱 찾아드립니다.
+      </p>
+
+      <!-- Airbnb-Style Unified Search Pill -->
+      <div class="hero-search-wrapper">
+        <form class="search-pill-container airbnb-search-bar" id="heroSearchForm" onsubmit="event.preventDefault(); (window.handleHeroSearch || window.handleSearchSubmit || function(){})();">
+          <!-- 1. 지역 선택 -->
+          <div class="search-segment">
+            <label class="search-segment-label" for="searchDistrict">지역 (어디로)</label>
+            <select class="search-select" id="searchDistrict">
+              <option value="all">사상구 전체 (동 선택)</option>
+              <option value="감전동">감전동 (공업지역·스마트시티)</option>
+              <option value="괘법동">괘법동 (사상역 역세권·상가)</option>
+              <option value="주례동">주례동 (대단지 아파트·주거)</option>
+              <option value="학장동">학장동 (주거·소형공장)</option>
+              <option value="엄궁동">엄궁동 (낙동강변·신흥주거)</option>
+              <option value="모라동">모라동 (벤처타운·지식산업)</option>
+              <option value="삼락동">삼락동 (물류단지·공원)</option>
+              <option value="덕포동">덕포동 (역세권 주거단지)</option>
+              <option value="기타구">기타구 (부산 전지역)</option>
+            </select>
+          </div>
+
+          <div class="search-divider" aria-hidden="true"></div>
+
+          <!-- 2. 매물 종류 (전체 로 변경) -->
+          <div class="search-segment">
+            <label class="search-segment-label" for="searchCategory">매물 종류 (무엇을)</label>
+            <select class="search-select" id="searchCategory">
+              <option value="all">전체</option>
+              <option value="apartment">아파트</option>
+              <option value="house">주택 / 빌라</option>
+              <option value="store">상가 / 사무실</option>
+              <option value="land">토지 / 나대지</option>
+            </select>
+          </div>
+
+          <div class="search-divider" aria-hidden="true"></div>
+
+          <!-- 3. 거래 구분 -->
+          <div class="search-segment">
+            <label class="search-segment-label" for="searchDealType">거래 구분 (어떻게)</label>
+            <select class="search-select" id="searchDealType">
+              <option value="all">거래 형태 전체</option>
+              <option value="매매">매매</option>
+              <option value="전세">전세</option>
+              <option value="월세">월세 / 임대</option>
+            </select>
+          </div>
+
+          <!-- Search Button Orb -->
+          <button type="submit" class="search-btn-orb" aria-label="매물 검색 실행">
+            <svg class="icon" viewBox="0 0 24 24" style="width:22px; height:22px;">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <span>매물 검색하기</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Trust Stats Bar -->
+      <div class="hero-trust-bar">
+        <div class="trust-item">
+          <span class="trust-num">1:1 맞춤</span>
+          <span class="trust-label">고객이 원하는 매물 딱 매칭</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-num">전문 분석</span>
+          <span class="trust-label">철저하고 안전한 권리분석</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-num">100%</span>
+          <span class="trust-label">직접 검증한 현장 실매물</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-num">책임 중개</span>
+          <span class="trust-label">상담부터 입주까지 완벽 케어</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Section 1: 매물 카테고리 (아파트, 주택, 상가·사무실, 토지)
+       ========================================================================== -->
+  <section class="section-properties" id="propertiesSection">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">
+          <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Real Estate Showcase
+        </span>
+        <h2 class="section-title">참좋은 엄선 추천 매물</h2>
+        <p class="section-desc">사상구 및 부산 전역의 아파트, 주택, 상가·사무실, 토지 실매물을 확인하세요.</p>
+      </div>
+
+      <!-- Category Tab Strip (아파트, 주택, 상가·사무실, 토지) -->
+      <div class="category-tab-strip" role="tablist" aria-label="매물 카테고리">
+        <button class="category-tab active" data-category="all" role="tab" aria-selected="true">
+          <svg class="icon category-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          전체보기
+        </button>
+        <button class="category-tab" data-category="apartment" role="tab" aria-selected="false">
+          <svg class="icon category-icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="6" x2="9" y2="6.01"/><line x1="15" y1="6" x2="15" y2="6.01"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/><line x1="9" y1="14" x2="9" y2="14.01"/><line x1="15" y1="14" x2="15" y2="14.01"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
+          아파트
+        </button>
+        <button class="category-tab" data-category="house" role="tab" aria-selected="false">
+          <svg class="icon category-icon" viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10H3z"/><path d="M9 20v-6h6v6"/></svg>
+          주택
+        </button>
+        <button class="category-tab" data-category="store" role="tab" aria-selected="false">
+          <svg class="icon category-icon" viewBox="0 0 24 24"><path d="M3 3h18v4H3zM4 7v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7"/><path d="M9 11v6M15 11v6"/></svg>
+          상가 · 사무실
+        </button>
+        <button class="category-tab" data-category="land" role="tab" aria-selected="false">
+          <svg class="icon category-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          토지
+        </button>
+      </div>
+
+      <!-- Sub-Filter Bar (거래유형 칩 & 정렬 & 카운트) -->
+      <div class="sub-filter-bar" id="subFilterBar">
+        <div class="deal-type-chips">
+          <button class="deal-chip active" data-deal="all">전체 거래</button>
+          <button class="deal-chip" data-deal="매매">매매</button>
+          <button class="deal-chip" data-deal="전세">전세</button>
+          <button class="deal-chip" data-deal="월세">월세 / 임대</button>
+        </div>
+        <div class="filter-controls">
+          <span class="property-count-badge">등록 매물 <strong id="propCount">0</strong>건</span>
+          <select class="sort-select" id="propSortSelect">
+            <option value="recommended">추천순</option>
+            <option value="priceDesc">가격 높은순</option>
+            <option value="priceAsc">가격 낮은순</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Dynamic Property Grid -->
+      <div class="property-grid" id="propertyGrid" aria-live="polite">
+        <!-- Rendered via app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Section 2: 네이버 블로그 섹션 (썸네일 + 요약내용)
+       ========================================================================== -->
+  <section class="section-blog" id="blogSection">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">
+          <span class="naver-brand-badge">NAVER BLOG</span>
+          <span>공식 네이버 블로그 포스팅</span>
+        </div>
+        <h2 class="section-title">참좋은부동산 현장답사 &amp; 실전 분석기</h2>
+        <p class="section-desc">사상구 현장 임장기, 급매물 분석, 상권 및 개발 정보를 생생하게 전해드립니다.</p>
+      </div>
+
+      <!-- Blog Cards Grid -->
+      <div class="blog-grid" id="blogGrid">
+        <!-- Rendered via app.js -->
+      </div>
+
+      <!-- Blog Visit CTA -->
+      <div class="blog-cta-box">
+        <div>
+          <h3 style="font-size:1.15rem; font-weight:800; color:var(--ink-900); margin-bottom:4px;">
+            참좋은부동산 공식 네이버 블로그에서 더 많은 실매물을 만나보세요
+          </h3>
+          <p style="font-size:0.9rem; color:var(--ink-600);">
+            매일 업데이트되는 사상구 상가·아파트·주택 실거래가 분석과 현장 사진이 가득합니다.
+          </p>
+        </div>
+        <a href="https://blog.naver.com" target="_blank" rel="noopener noreferrer" class="btn-naver-blog">
+          <svg class="icon" viewBox="0 0 24 24" style="width:20px; height:20px;">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          <span>네이버 블로그 이웃추가</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Section 3: 부동산 소식 & 뉴스 게시판
+       ========================================================================== -->
+  <section class="section-news" id="newsSection">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 13a2 2 0 0 1-2-2V7m2 13a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2m-4-3H9M7 16h6M7 8h6M7 12h4"/></svg>
+          Market Insights &amp; Policy
+        </span>
+        <h2 class="section-title">부동산 최신 소식 및 정책 뉴스</h2>
+        <p class="section-desc">사상스마트시티, 서부산 개발호재, 세무 및 금융 규제 변화를 공인중개사가 엄선하여 브리핑합니다.</p>
+      </div>
+
+      <!-- News Cards Layout -->
+      <div class="news-layout" id="newsGrid">
+        <!-- Rendered via app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Section 4: 1:1 상담게시판 (Inquiry / Consultation)
+       ========================================================================== -->
+  <section class="section-consultation" id="consultationSection">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          1:1 Consultation Service
+        </span>
+        <h2 class="section-title">실시간 1:1 맞춤 상담</h2>
+        <p class="section-desc">원하시는 상담 방식을 선택하시거나 매물접수·매수의뢰를 남겨주시면, 담당 공인중개사가 빠르게 연락드립니다.</p>
+      </div>
+
+      <!-- Consultation Hub Card (전화상담 / 카카오톡상담 / 매물접수 / 매수의뢰) -->
+      <div class="consultation-hub-card">
+        <!-- Row 1: Direct Contact Pills (전화상담 & 카카오톡상담) -->
+        <div class="consultation-pill-row">
+          <a href="tel:010-9667-4201" class="btn-pill-olive" aria-label="전화상담 010-9667-4201 바로연결">
+            <svg class="icon" viewBox="0 0 24 24" style="width:20px; height:20px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>전화 상담</span>
+          </a>
+          <a href="https://open.kakao.com/o/sZyQr1th" target="_blank" rel="noopener noreferrer" class="btn-pill-kakao" aria-label="카카오톡으로 실시간 상담하기">
+            <svg class="icon" viewBox="0 0 24 24" style="width:22px; height:22px; fill:currentColor;"><path d="M12 3C6.48 3 2 6.58 2 11c0 2.83 1.83 5.32 4.6 6.64l-1.17 4.31c-.1.38.32.7.67.5l5.03-3.32c.29.04.58.07.87.07 5.52 0 10-3.58 10-8s-4.48-8-10-8z"/></svg>
+            <span>카카오톡으로 상담하기</span>
+          </a>
+        </div>
+
+        <!-- Row 2: Intake Action Pills (매물접수 & 매수의뢰) -->
+        <div class="consultation-pill-row sub-row">
+          <button type="button" class="btn-pill-tan" onclick="window.openPropertyRegisterModal();" aria-label="내 부동산 매물접수 창 열기">
+            <span class="pill-icon" aria-hidden="true">🏠</span>
+            <span>매물접수</span>
+          </button>
+          <button type="button" class="btn-pill-tan" onclick="window.openPropertyBuyRequestModal();" aria-label="매수 의뢰 접수 창 열기">
+            <span class="pill-icon" aria-hidden="true">🔍</span>
+            <span>매수의뢰</span>
+          </button>
+        </div>
+
+        <!-- Sincere Message Underneath -->
+        <div class="consultation-hub-message">
+          <p>내 공간을 구하는 마음으로, 온전히 당신이 되어 봅니다.</p>
+          <p>내놓으실 때도 구하실 때도 가장 든든한 내 편을 만나보세요.</p>
+          <p class="highlight-text">진심을 다해 당신의 내일을 중개합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Section 5: 고객 후기 게시판 (Reviews & Testimonials)
+       ========================================================================== -->
+  <section class="section-reviews" id="reviewsSection">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">
+          <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Customer Reviews
+        </span>
+        <h2 class="section-title">참좋은부동산 고객 실거래 후기</h2>
+        <p class="section-desc">사상구에서 상가, 사무실, 아파트, 주택을 거래하신 고객님들의 100% 진솔한 평가입니다.</p>
+      </div>
+
+      <!-- Rating Hero Banner (Airbnb / Stripe Metric Style) -->
+      <div class="review-summary-banner">
+        <div class="rating-hero-block">
+          <span class="rating-big-number">4.9</span>
+          <div class="rating-stars-col">
+            <div class="stars-row" aria-label="별점 5점 만점에 4.9점">
+              <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <span class="rating-caption">고객 만족도 99.8% · 사상구 실거래 고객 인증</span>
+          </div>
+        </div>
+        <div class="review-actions-col">
+          <button type="button" class="btn-write-review" onclick="window.openWriteReviewModal();" aria-label="거래 후기 남기기">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <span>솔직한 거래 후기 남기기</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Review Filter Chips (아파트, 주택, 상가·사무실, 토지) -->
+      <div class="review-filter-strip" role="group" aria-label="후기 분류 필터">
+        <button class="review-chip active" data-review-cat="all">전체보기</button>
+        <button class="review-chip" data-review-cat="apartment">아파트</button>
+        <button class="review-chip" data-review-cat="house">주택</button>
+        <button class="review-chip" data-review-cat="store">상가 · 사무실</button>
+        <button class="review-chip" data-review-cat="land">토지</button>
+      </div>
+
+      <!-- Reviews Grid -->
+      <div class="reviews-grid" id="reviewsGrid">
+        <!-- Rendered via app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Section 6: 공인중개사 직통 전화연결 CTA & 사무소 위치 안내
+       ========================================================================== -->
+  <section class="section-cta" id="ctaSection">
+    <div class="container">
+      <!-- Big Call Banner -->
+      <div class="cta-banner-card">
+        <span class="cta-eyebrow">FAST &amp; RELIABLE BROKERAGE</span>
+        <h2 class="cta-title">지금 바로 공인중개사와 직접 상담하세요</h2>
+        <p class="cta-subtitle">
+          찾으시는 매물 조건이나 매도 의뢰, 언제든 편안하게 말씀해 주시면 신속하고 정직하게 안내해 드립니다.
+        </p>
+
+        <div class="cta-btn-group">
+          <a href="tel:010-9667-4201" class="btn-cta-call" style="background:linear-gradient(135deg, #2563eb, #1d4ed8); color:#fff; box-shadow:0 10px 30px rgba(37,99,235,0.35);">
+            <svg class="icon" viewBox="0 0 24 24" style="width:24px; height:24px;">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
+            </svg>
+            <span>공인중개사 직통: 010-9667-4201</span>
+          </a>
+
+          <a href="https://open.kakao.com/o/sZyQr1th" target="_blank" rel="noopener noreferrer" class="btn-cta-kakao" style="background:#fee500; color:#181600; font-weight:800;">
+            <svg class="icon" viewBox="0 0 24 24" style="width:22px; height:22px; fill:currentColor;">
+              <path d="M12 3C6.48 3 2 6.58 2 11c0 2.83 1.83 5.32 4.6 6.64l-1.17 4.31c-.1.38.32.7.67.5l5.03-3.32c.29.04.58.07.87.07 5.52 0 10-3.58 10-8s-4.48-8-10-8z"/>
+            </svg>
+            <span>카카오톡 1:1 상담하기</span>
+          </a>
+
+          <a href="https://map.naver.com/p/search/%EC%82%AC%EC%83%81%EC%B0%B8%EC%A2%8B%EC%9D%80%EB%B6%80%EB%8F%99%EC%82%B0" target="_blank" rel="noopener noreferrer" class="btn-cta-kakao" style="background:#03c75a; color:#fff;">
+            <svg class="icon" viewBox="0 0 24 24" style="width:22px; height:22px;">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>네이버 지도 찾아오기</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4 Core Pillars Grid (소재지, 등록번호, 대표번호, 대표자) -->
+      <div class="business-pillars-wrap">
+        <div class="business-slogan-box">
+          <div class="business-slogan-pill">
+            <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>사장님의 내일을 짓다 · 참좋은 공인중개사 사무소</span>
+          </div>
+        </div>
+
+        <div class="business-pillars-grid">
+          <!-- Pillar 1: 소재지 -->
+          <div class="pillar-card">
+            <div class="pillar-badge-circle blue" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <h3 class="pillar-title">소 재 지</h3>
+            <p class="pillar-value">
+              <strong>부산광역시</strong><br>
+              사상구 덕포동 426-16 1층
+            </p>
+          </div>
+
+          <!-- Pillar 2: 등록번호 -->
+          <div class="pillar-card">
+            <div class="pillar-badge-circle pink" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3 class="pillar-title">등록번호</h3>
+            <p class="pillar-value">
+              <strong>26530-2026-00009</strong><br>
+              사상구청 정식등록 공인중개사
+            </p>
+          </div>
+
+          <!-- Pillar 3: 대표번호 -->
+          <div class="pillar-card">
+            <div class="pillar-badge-circle gold" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <h3 class="pillar-title">대표번호</h3>
+            <p class="pillar-value">
+              <a href="tel:010-9667-4201"><strong>010-9667-4201</strong></a><br>
+              연중무휴 친절 유선상담
+            </p>
+          </div>
+
+          <!-- Pillar 4: 대표자 -->
+          <div class="pillar-card">
+            <div class="pillar-badge-circle coral" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <h3 class="pillar-title">대 표 자</h3>
+            <p class="pillar-value">
+              <strong>신 제 환</strong><br>
+              대표 공인중개사
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual Showcase Grid (Broker Profile + Real Office Interior) -->
+      <div class="office-showcase-grid">
+        <!-- 1. Broker Profile Card (신제환 대표 사진 적용) -->
+        <div class="broker-profile-card">
+          <div class="broker-photo-wrap">
+            <img src="images/broker_profile.jpg" alt="참좋은공인중개사사무소 대표 공인중개사 신제환" class="broker-photo-img">
+            <span class="broker-verified-badge">공인중개사 신제환</span>
+          </div>
+          <div class="broker-info-col">
+            <span class="broker-role-tag">대표 공인중개사</span>
+            <h3 class="broker-name-title">신 제 환</h3>
+            <p class="broker-quote">
+              "고객님이 원하시는 최적의 매물을 전문적이고 꼼꼼하게 딱 찾아드리겠습니다. 정직과 신뢰로 사장님의 내일을 함께 짓겠습니다."
+            </p>
+            <div style="font-size:0.85rem; color:#94a3b8; margin-bottom:16px; line-height:1.6;">
+              • <strong>등록번호:</strong> 26530-2026-00009<br>
+              • <strong>사무소:</strong> 부산광역시 사상구 덕포동 426-16 1층<br>
+              • <strong>영업시간:</strong> 월~토 09:00 ~ 20:00 (일요일 사전예약 상담)
+            </div>
+            <div class="broker-contact-quick">
+              <a href="tel:010-9667-4201" class="btn-broker-call">
+                <svg class="icon" viewBox="0 0 24 24" style="width:16px; height:16px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span>직통 전화상담</span>
+              </a>
+              <a href="https://open.kakao.com/o/sZyQr1th" target="_blank" rel="noopener noreferrer" class="deal-chip" style="background:#fee500; color:#191919; border-color:#fee500; text-decoration:none;">
+                카카오톡 1:1 상담
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Real Office Interior Card (첨부한 사무실 내부 사진 적용) -->
+        <div class="office-interior-card">
+          <div class="office-interior-imgbox">
+            <img src="images/office_interior_real.jpg" alt="참좋은공인중개사사무소 실제 사무실 내부 전경" class="office-interior-img">
+            <div class="office-interior-badge">
+              <svg class="icon" viewBox="0 0 24 24" style="width:16px; height:16px;"><path d="M3 21h18M3 10l9-7 9 7v11H3V10z"/></svg>
+              <span>참좋은부동산 실제 사무소 전경</span>
+            </div>
+          </div>
+          <div class="office-interior-body">
+            <h4 class="office-interior-title">쾌적하고 프라이빗한 1:1 상담 환경</h4>
+            <p class="office-interior-desc">
+              부산 사상구 덕포동 426-16 1층에 위치한 참좋은부동산입니다. 대형 지적도와 실시간 매물 현황 디스플레이, 편안한 독립 상담 테이블을 갖추고 있어 고객님의 조건에 맞춘 최적의 브리핑을 제공합니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3. Naver Map Directions Card (네이버 지도 연동 & 찾아오는 길) -->
+        <div class="naver-map-card">
+          <a href="https://map.naver.com/p/search/%EC%82%AC%EC%83%81%EC%B0%B8%EC%A2%8B%EC%9D%80%EB%B6%80%EB%8F%99%EC%82%B0" target="_blank" rel="noopener noreferrer" class="naver-map-imgbox" aria-label="네이버 지도에서 참좋은부동산 위치 보기 (새 창 열림)">
+            <img src="images/naver_map_view.jpg" alt="사상 참좋은부동산 찾아오는 길 네이버 지도" class="naver-map-img">
+            <div class="map-pin-badge">
+              <svg class="icon" viewBox="0 0 24 24" style="color:var(--primary-gold); width:20px; height:20px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>참좋은부동산 (사상구 덕포동 426-16)</span>
+            </div>
+          </a>
+          <div class="naver-map-info-col">
+            <div>
+              <h4 class="map-info-title">
+                <svg class="icon" viewBox="0 0 24 24" style="color:var(--primary-gold);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                찾아오시는 길 안내
+              </h4>
+              <div class="map-info-address">부산광역시 사상구 덕포동 426-16 1층</div>
+
+              <div class="map-transit-details">
+                <div class="transit-item">
+                  <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                  <div><strong>지하철 이용 시:</strong> 부산 2호선 <strong>덕포역 1번 또는 2번 출구</strong> 도보 2분 거리 (사상도서관·덕포1동 행정복지센터 인근)</div>
+                </div>
+                <div class="transit-item">
+                  <svg class="icon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                  <div><strong>자가용 이용 시:</strong> 내비게이션에 <strong>'사상참좋은부동산'</strong> 또는 <strong>'덕포동 426-16'</strong> 검색 (사무소 앞/뒤 전용 무료 주차 가능)</div>
+                </div>
+              </div>
+            </div>
+
+            <a href="https://map.naver.com/p/search/%EC%82%AC%EC%83%81%EC%B0%B8%EC%A2%8B%EC%9D%80%EB%B6%80%EB%8F%99%EC%82%B0" target="_blank" rel="noopener noreferrer" class="btn-naver-map-link">
+              <svg class="icon" viewBox="0 0 24 24" style="width:20px; height:20px;"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+              <span>네이버 지도에서 길찾기 / 빠른 내비 연결</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Footer (사업자 필수 정보 및 저작권)
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <h4 class="footer-brand-title">참좋은공인중개사사무소</h4>
+        <p class="footer-legal-text">
+          대표: 신제환 | 등록번호: 26530-2026-00009 | 사업자등록번호: 355-03-03698<br>
+          소재지: 부산광역시 사상구 덕포동 426-16 1층 | 대표전화: 051-911-8249 | 휴대전화: 010-9667-4201<br>
+          슬로건: 사장님의 내일을 짓다 | 업무분야: 사상구 상가·사무실 창업/이전, 아파트·주택 매매전세, 토지 개발컨설팅
+        </p>
+      </div>
+      <div class="footer-bottom-row">
+        <p>© 2026 참좋은공인중개사사무소. All rights reserved. 본 사이트의 매물 정보는 100% 현장 검증 실매물입니다.</p>
+        <p>부산광역시 사상구청 지정 공인중개사사무소</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       Mobile Sticky Action Bar (< 768px)
+       ========================================================================== -->
+  <nav class="mobile-sticky-bar" aria-label="모바일 하단 빠른 액션바">
+    <a href="tel:010-9667-4201" class="mobile-bar-btn primary-call" aria-label="전화상담 010-9667-4201">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span>전화걸기</span>
+    </a>
+    <a href="#consultationSection" class="mobile-bar-btn" onclick="window.scrollToConsultation(); return false;">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span>1:1 상담</span>
+    </a>
+    <a href="#propertiesSection" class="mobile-bar-btn" onclick="window.scrollToProperties(); return false;">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span>매물찾기</span>
+    </a>
+    <button class="mobile-bar-btn" id="btnMobileFavorites" aria-label="찜한 매물 보기">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span>찜한매물 (<span id="mobileLikesCount">0</span>)</span>
+    </button>
+  </nav>
+
+  <!-- ==========================================================================
+       Interactive Accessible Modals
+       ========================================================================== -->
+  <!-- 1. Property Detail Modal -->
+  <dialog id="propertyDetailModal" aria-labelledby="modalPropertyTitle" closedby="any">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modalPropertyTitle">매물 상세 정보</h3>
+      <button class="modal-close-btn" id="btnClosePropModal" aria-label="닫기">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="modalPropertyContent">
+      <!-- Injected via app.js -->
+    </div>
+    <div class="modal-footer">
+      <button class="deal-chip" id="btnModalShare">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        링크 공유
+      </button>
+      <a href="tel:010-9667-4201" class="btn-write-review" style="padding:10px 20px; font-size:0.95rem;">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        이 매물 전화 문의
+      </a>
+    </div>
+  </dialog>
+
+  <!-- 2. Write Review Modal -->
+  <dialog id="writeReviewModal" aria-labelledby="modalReviewTitle" closedby="any">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modalReviewTitle">거래 후기 작성하기</h3>
+      <button class="modal-close-btn" id="btnCloseReviewModal" aria-label="닫기">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form id="writeReviewForm" onsubmit="event.preventDefault(); window.handleReviewSubmit();">
+        <div class="form-group" style="margin-bottom:14px;">
+          <label class="form-label" for="reviewAuthor">성함 또는 상호명 (예: 김*수 대표님)</label>
+          <input type="text" class="form-input" id="reviewAuthor" required placeholder="예: 박*진 님 또는 삼호정밀 대표님">
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label class="form-label" for="reviewCategory">거래 매물 종류</label>
+          <select class="form-select" id="reviewCategory" required>
+            <option value="apartment">아파트 매매/전세</option>
+            <option value="house">주택 매매</option>
+            <option value="store">상가 · 사무실 임대/매매</option>
+            <option value="land">토지 매매</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label class="form-label" for="reviewPropertyTitle">계약 매물명</label>
+          <input type="text" class="form-input" id="reviewPropertyTitle" required placeholder="예: 덕포역 1층 상가 임대 / 괘법 한신2차 아파트">
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label class="form-label">서비스 만족도 별점</label>
+          <div style="display:flex; gap:8px; font-size:1.5rem; color:#eab308; cursor:pointer;" id="starRatingSelect">
+            <span class="star-btn" data-val="1">★</span>
+            <span class="star-btn" data-val="2">★</span>
+            <span class="star-btn" data-val="3">★</span>
+            <span class="star-btn" data-val="4">★</span>
+            <span class="star-btn" data-val="5">★</span>
+          </div>
+          <input type="hidden" id="selectedStarScore" value="5">
+        </div>
+        <div class="form-group" style="margin-bottom:18px;">
+          <label class="form-label" for="reviewContent">상세 후기 내용</label>
+          <textarea class="form-textarea" id="reviewContent" required placeholder="중개 과정에서의 만족스러웠던 점이나 솔직한 소감을 남겨주세요."></textarea>
+        </div>
+        <button type="submit" class="btn-submit-consultation" style="margin-top:0;">후기 등록 완료</button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- 3. Favorites (찜 목록) Modal -->
+  <dialog id="favoritesModal" aria-labelledby="modalFavTitle" closedby="any">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modalFavTitle">내가 찜한 관심 매물</h3>
+      <button class="modal-close-btn" id="btnCloseFavModal" aria-label="닫기">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="favoritesListContent">
+      <!-- Injected via app.js -->
+    </div>
+  </dialog>
+
+  <!-- 4. News Detail Modal -->
+  <dialog id="newsDetailModal" aria-labelledby="modalNewsTitle" closedby="any">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modalNewsTitle">부동산 정책 &amp; 시장 분석 브리핑</h3>
+      <button class="modal-close-btn" id="btnCloseNewsModal" aria-label="닫기">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="modalNewsContent">
+      <!-- Injected via app.js -->
+    </div>
+  </dialog>
+
+  <!-- ==========================================================================
+       5. 내 부동산 매물접수 Modal (첨부 이미지 디자인 매칭)
+       ========================================================================== -->
+  <dialog id="modalPropertyRegister" class="custom-form-modal" aria-labelledby="modalRegisterTitle" closedby="any">
+    <div class="custom-modal-header">
+      <h3 class="custom-modal-title" id="modalRegisterTitle">내 부동산 매물접수</h3>
+      <button type="button" class="modal-close-btn" onclick="document.getElementById('modalPropertyRegister').close();" aria-label="닫기">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="custom-modal-subtitle">
+      접수 내용을 확인한 후 담당 공인중개사가 직접 연락드립니다.<br>
+      정확한 주소와 희망 조건을 남겨주시면 더욱 빠르게 상담해 드릴 수 있습니다.
+    </div>
+    <hr class="custom-modal-divider">
+    <div class="custom-modal-body">
+      <form id="formPropertyRegister" onsubmit="event.preventDefault(); window.handlePropertyRegisterSubmit();">
+        <div class="custom-form-group">
+          <label class="custom-form-label" for="regName">성함 <span class="required">*</span></label>
+          <input type="text" class="custom-form-input" id="regName" required placeholder="홍길동">
+        </div>
+
+        <div class="custom-form-group">
+          <label class="custom-form-label" for="regPhone">연락처 <span class="required">*</span></label>
+          <input type="tel" class="custom-form-input" id="regPhone" required placeholder="010-0000-0000">
+        </div>
+
+        <div class="custom-form-group">
+          <label class="custom-form-label" for="regCategory">매물 종류 <span class="required">*</span></label>
+          <select class="custom-form-select" id="regCategory" required>
+            <option value="" disabled selected>선택해 주세요</option>
+            <option value="아파트">아파트</option>
+            <option value="주택">주택 / 빌라</option>
+            <option value="상가·사무실">상가 · 사무실</option>
+            <option value="토지">토지 / 나대지</option>
+          </select>
+        </div>
+
+        <div class="custom-form-row">
+          <div class="custom-form-group">
+            <label class="custom-form-label" for="regType">의뢰 구분 <span class="required">*</span></label>
+            <select class="custom-form-select" id="regType" required>
+              <option value="매도" selected>매도</option>
+              <option value="임대">임대</option>
+              <option value="전세">전세</option>
+            </select>
+          </div>
+          <div class="custom-form-group">
+            <label class="custom-form-label" for="regDealType">거래 형태</label>
+            <select class="custom-form-select" id="regDealType">
+              <option value="선택" selected>선택</option>
+              <option value="매매">매매</option>
+              <option value="전세">전세</option>
+              <option value="월세">월세</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="custom-form-group">
+          <label class="custom-form-label" for="regLocation">희망 지역 / 단지명 (선택)</label>
+          <input type="text" class="custom-form-input" id="regLocation" placeholder="예) 사상구 덕포동, 24~25평대 / 특정 단지 없으면 비워두셔도 됩니다">
+        </div>
+
+        <div class="custom-form-group">
+          <label class="custom-form-label" for="regPrice">희망 가격</label>
+          <input type="text" class="custom-form-input" id="regPrice" placeholder="예) 매매 3억 이하 / 협의 가능">
+        </div>
+
+        <div class="custom-form-group">
+          <label class="custom-form-label" for="regMoveIn">입주 또는 거래 희망 시기</label>
+          <input type="text" class="custom-form-input" id="regMoveIn" placeholder="예) 즉시입주 가능, 협의">
+        </div>
+
+        <div class="custom-form-group">
+          <label class="custom-form-label" for="regContent">상세 내용</label>
+          <textarea class="custom-form-textarea" id="regContent" rows="3" placeholder="매물 상태, 특이사항 등을 자유롭게 남겨주세요."></textarea>
+        </div>
+
+        <!-- Photo Attach Notice Box with Kakao -->
+        <div class="custom-photo-box">
+          <div class="custom-photo-title">
+            <span class="camera-icon">📷</span>
+            <span>매물 사진은 <strong>카카오톡</strong>으로 보내주시면 가장 빠르고 확실해요.</span>
+          </div>
+          <p class="custom-photo-desc">접수 후 아래 버튼을 눌러 사진을 보내주세요.</p>
+          <a href="https://open.kakao.com/o/sZyQr1th" target="_blank" rel="noopener noreferrer" class="btn-kakao-photo">
+            <svg class="icon" viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;"><path d="M12 3C6.48 3 2 6.58 2 11c0 2.83 1.83 5.32 4.6 6.64l-1.17 4.31c-.1.38.32.7.67.5l5.03-3.32c.29.04.58.07.87.07 5.52 0 10-3.58 10-8s-4.48-8-10-8z"/></svg>
+            <span>카카오톡으로 사진 보내기</span>
+          </a>
+        </div>
+
+        <div class="custom-agreement-row">
+          <input type="checkbox" id="regAgreement" required>
+          <label for="regAgreement">[필수] 개인정보 수집 및 이용에 동의합니다.</label>
+        </div>
+
+        <button type="submit" class="btn-modal-action-olive">매물접수 완료하기</button>
+
+        <p class="custom-privacy-note">
+          수집된 개인정보는 매물 상담 및 연락 목적으로만 사용하며, 상담 종료 후 관련 법령과 내부 기준에 따라 안전하게 관리합니다.
+        </p>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- ==========================================================================
+       6. 매수 의뢰 접수 Modal (첨부 이미지 디자인 매칭)
+       ========================================================================== -->
+  <dialog id="modalPropertyBuyRequest" class="custom-form-modal" aria-labelledby="modalBuyTitle" closedby="any">
+    <div class="custom-modal-header">
+      <h3 class="custom-modal-title" id="modalBuyTitle">매수 의뢰 접수</h3>
+      <button type="button" class="modal-close-btn" onclick="document.getElementById('modalPropertyBuyRequest').close();" aria-label="닫기">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="custom-modal-subtitle">
+      접수 내용을 확인한 후 담당 공인중개사가 직접 연락드립니다.<br>
+      정확한 주소와 희망 조건을 남겨주시면 더욱 빠르게 상담해 드릴 수 있습니다.
+    </div>
+    <hr class="custom-modal-divider">
+    <div class="custom-modal-body">
+      <form id="formPropertyBuyRequest" onsubmit="event.preventDefault(); window.handlePropertyBuyRequestSubmit();">
+        <div class="custom-form-group">
+          <label class="custom-form-label" for="buyName">성함 <span class="required">*</span></label>
+          <input type="text" class="custom-form-input" id="buyName" required placeholder="홍길동">
+        </div>
+
+        <div class="custom-form-group">
+          <label class="custom-form-label" for="buyPhone">연락처 <span class="required">*</span></label>
+          <input type="tel" class="custom-form-input" id="buyPhone" required placeholder="010-0000-0000">
+        </div>
+
+        <div class="custom-form-group">
+          <label class="custom-form-label" for="buyCategory">매물 종류 <span class="required">*</span></label>
+          <select class="custom-form-select" id="buyCategory" required>
+            <option value="" disabled selected>선택해 주세요</option>
+            <option value="아파트">아파트</option>
+            <option value="주택">주택 / 빌라</option>
+            <option value="상가·사무실">상가 · 사무실</option>
+            <option value="토지">토지 / 나대지</option>
+          </select>
+        </div>
+
+        <div class="custom-form-row">
+          <div class="custom-form-group">
+            <label class="custom-form-label" for="buyType">의뢰 구분 <span class="required">*</span></label>
+            <select class="custom-form-select" id="buyType" required>
+              <option value="매수" selected>매수</option>
+              <option value="임차">임차 (전월세)</option>
+            </select>
+          </div>
+          <div class="custom-form-group">
+            <label class="custom-form-label" for="buyDealType">거래 형태</label>
+            <select class="custom-form-select" id="buyDealType">
+              <option value="선택" selected>선택</option>
+              <option value="매매">매매</option>
+              <option value="전세">전세</option>
+              <option value="월세">월세</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="custom-form-group">
+          <label class="custom-form-label" for="buyLocation">희망 지역 / 단지명 (선택)</label>
+          <input type="text" class="custom-form-input" id="buyLocation" placeholder="예) 사상구 괘법동 한신2차 / 덕포역 인근 역세권">
+        </div>
+
+        <div class="custom-form-group">
+          <label class="custom-form-label" for="buyBudget">희망 예산</label>
+          <input type="text" class="custom-form-input" id="buyBudget" placeholder="예) 매매 3억 이하 / 협의 가능">
+        </div>
+
+        <div class="custom-form-group">
+          <label class="custom-form-label" for="buyMoveIn">입주 또는 거래 희망 시기</label>
+          <input type="text" class="custom-form-input" id="buyMoveIn" placeholder="예) 즉시입주 가능, 협의">
+        </div>
+
+        <div class="custom-form-group">
+          <label class="custom-form-label" for="buyContent">상세 내용</label>
+          <textarea class="custom-form-textarea" id="buyContent" rows="3" placeholder="희망 평형, 층수, 대출 여부, 특이조건 등을 자유롭게 남겨주세요."></textarea>
+        </div>
+
+        <!-- Photo Attach Notice Box with Kakao -->
+        <div class="custom-photo-box">
+          <div class="custom-photo-title">
+            <span class="camera-icon">📷</span>
+            <span>참고 사진은 <strong>카카오톡</strong>으로 보내주시면 가장 빠르고 확실해요.</span>
+          </div>
+          <p class="custom-photo-desc">접수 후 아래 버튼을 눌러 사진을 보내주세요.</p>
+          <a href="https://open.kakao.com/o/sZyQr1th" target="_blank" rel="noopener noreferrer" class="btn-kakao-photo">
+            <svg class="icon" viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;"><path d="M12 3C6.48 3 2 6.58 2 11c0 2.83 1.83 5.32 4.6 6.64l-1.17 4.31c-.1.38.32.7.67.5l5.03-3.32c.29.04.58.07.87.07 5.52 0 10-3.58 10-8s-4.48-8-10-8z"/></svg>
+            <span>카카오톡으로 사진 보내기</span>
+          </a>
+        </div>
+
+        <div class="custom-agreement-row">
+          <input type="checkbox" id="buyAgreement" required>
+          <label for="buyAgreement">[필수] 개인정보 수집 및 이용에 동의합니다.</label>
+        </div>
+
+        <button type="submit" class="btn-modal-action-olive">매수의뢰 접수 완료하기</button>
+
+        <p class="custom-privacy-note">
+          수집된 개인정보는 매물 상담 및 연락 목적으로만 사용하며, 상담 종료 후 관련 법령과 내부 기준에 따라 안전하게 관리합니다.
+        </p>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Toast Notification -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
