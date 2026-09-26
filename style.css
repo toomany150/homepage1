@@ -157,7 +157,8 @@ img {
   gap: 12px;
 }
 
-.brand-mark {
+.brand-mark,
+.brand-symbol {
   width: 44px;
   height: 44px;
   background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
@@ -167,18 +168,31 @@ img {
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+  font-weight: 800;
+  font-size: 1.25rem;
+  flex-shrink: 0;
 }
 
-.brand-text {
+.brand-symbol.sm {
+  width: 32px;
+  height: 32px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+}
+
+.brand-text,
+.brand-text-group {
   display: flex;
   flex-direction: column;
 }
 
-.brand-name {
+.brand-name,
+.brand-title {
   font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: -0.5px;
   color: var(--ink-900);
+  white-space: nowrap;
 }
 
 .brand-sub {
