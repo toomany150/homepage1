@@ -12,6 +12,7 @@ const url = require('url');
 const PORT = process.env.PORT || 3000;
 const boardHandler = require('./api/board');
 const adminHandler = require('./api/admin');
+const contentHandler = require('./api/content');
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -76,6 +77,13 @@ const server = http.createServer(async (req, res) => {
     req.query = searchParams;
     req.body = await parseBody();
     return adminHandler(req, res);
+  }
+
+  // 3. API Route: /api/content
+  if (pathname === '/api/content' || pathname === '/api/content.js') {
+    req.query = searchParams;
+    req.body = await parseBody();
+    return contentHandler(req, res);
   }
 
   // 3. Static File Server

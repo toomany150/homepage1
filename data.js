@@ -520,3 +520,10 @@ const REAL_ESTATE_DATA = {
     }
   ]
 };
+
+if (typeof window !== 'undefined') {
+  window.REAL_ESTATE_DATA = REAL_ESTATE_DATA;
+}
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = REAL_ESTATE_DATA;
+}

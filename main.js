@@ -108,6 +108,104 @@
     renderConsultationTicker();
     updateLikesCount();
     bindEvents();
+    loadDynamicContent();
+  }
+
+  // Load latest dynamic content from API or JSON
+  async function loadDynamicContent() {
+    try {
+      const res = await fetch('/api/content');
+      if (res.ok) {
+        const json = await res.json();
+        if (json.data) {
+          applyNewContent(json.data);
+          return;
+        }
+      }
+    } catch (e) {
+      console.warn('API /api/content fetch failed, attempting data/content.json fallback', e);
+    }
+
+    try {
+      const resFallback = await fetch('data/content.json');
+      if (resFallback.ok) {
+        const fallbackData = await resFallback.json();
+        applyNewContent(fallbackData);
+      }
+    } catch (err) {}
+  }
+
+  function applyNewContent(newData) {
+    if (!newData) return;
+    if (Array.isArray(newData.properties) && newData.properties.length > 0) {
+      REAL_ESTATE_DATA.properties = newData.properties;
+    }
+    if (Array.isArray(newData.blogPosts) && newData.blogPosts.length > 0) {
+      REAL_ESTATE_DATA.blogPosts = newData.blogPosts;
+    }
+    if (Array.isArray(newData.newsList) && newData.newsList.length > 0) {
+      REAL_ESTATE_DATA.newsList = newData.newsList;
+    }
+    if (Array.isArray(newData.reviews) && newData.reviews.length > 0) {
+      REAL_ESTATE_DATA.reviews = newData.reviews;
+    }
+    if (Array.isArray(newData.recentConsultations) && newData.recentConsultations.length > 0) {
+      REAL_ESTATE_DATA.recentConsultations = newData.recentConsultations;
+    }
+    if (newData.officeInfo) {
+      REAL_ESTATE_DATA.officeInfo = newData.officeInfo;
+      updateOfficeInfoDOM(newData.officeInfo);
+    }
+
+    renderProperties();
+    renderBlogPosts();
+    renderNews();
+    renderReviews();
+    renderConsultationTicker();
+  }
+
+  function updateOfficeInfoDOM(office) {
+    if (!office) return;
+    if (office.phone) {
+      document.querySelectorAll('a[href^="tel:"]').forEach(el => {
+        el.href = `tel:${office.phone}`;
+        const phoneSpans = el.querySelectorAll('span');
+        phoneSpans.forEach(s => {
+          if (s.textContent.includes('010-') || s.textContent.includes('전화')) {
+            if (s.textContent.includes('직통')) {
+              s.textContent = `공인중개사 직통: ${office.phone}`;
+            } else if (s.textContent.includes('전화연결')) {
+              s.textContent = `${office.phone} 전화연결`;
+            } else if (s.textContent.trim() === '010-9667-4201' || /^\d{2,3}-\d{3,4}-\d{4}$/.test(s.textContent.trim())) {
+              s.textContent = office.phone;
+            }
+          }
+        });
+        const strong = el.querySelector('strong');
+        if (strong && (strong.textContent.includes('010-') || /^\d{2,3}-\d{3,4}-\d{4}$/.test(strong.textContent.trim()))) {
+          strong.textContent = office.phone;
+        }
+      });
+    }
+
+    if (office.quote) {
+      const quoteEl = document.querySelector('.broker-quote');
+      if (quoteEl) quoteEl.textContent = `"${office.quote}"`;
+    }
+
+    if (office.representative) {
+      document.querySelectorAll('.broker-name-title, .pillar-value strong').forEach(el => {
+        if (el.textContent.replace(/\s+/g, '') === '신제환') {
+          el.textContent = office.representative;
+        }
+      });
+    }
+
+    if (office.address) {
+      document.querySelectorAll('.map-info-address').forEach(el => {
+        el.textContent = office.address;
+      });
+    }
   }
 
   // 1. Render Properties Grid
