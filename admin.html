@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>참좋은공인중개사 | 서버리스 관리자 콘솔 (GitHub DB)</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="board.css">
+
+  <style>
+    body {
+      background: #0b1329 !important;
+      color: #f8fafc !important;
+      min-height: 100vh;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+    }
+
+    .admin-nav {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .admin-badge-gold {
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .admin-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .admin-user-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      font-size: 0.88rem;
+    }
+
+    .admin-content-wrap {
+      max-width: 1400px;
+      margin: 32px auto;
+      padding: 0 24px;
+    }
+
+    /* Metric Cards */
+    .admin-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .metric-card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: transform 0.2s;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+
+    .metric-title {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .metric-num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .metric-sub {
+      font-size: 0.82rem;
+      color: #64748b;
+    }
+
+    /* Diagnostic Box */
+    .diagnostic-panel {
+      background: rgba(30, 41, 59, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+
+    .diag-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .diag-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .diag-details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .diag-item-label {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      margin-bottom: 4px;
+    }
+
+    .diag-item-value {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      font-family: monospace;
+      word-break: break-all;
+    }
+
+    /* Table Toolbar */
+    .table-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .filter-tab-btn {
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-tab-btn.active {
+      background: #d4af37;
+      color: #0b1329;
+      border-color: #d4af37;
+    }
+
+    /* Table Card */
+    .admin-table-container {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      overflow-x: auto;
+    }
+
+    /* Modal for Reply */
+    .admin-dialog {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 650px;
+      padding: 24px;
+    }
+
+    .admin-dialog::backdrop {
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. Login Overlay (Shown if unauthenticated)
+       ========================================================================== -->
+  <div id="loginScreen" style="display:flex; align-items:center; justify-content:center; min-height:100vh; padding:20px;">
+    <div style="width:100%; max-width:440px; background:rgba(30, 41, 59, 0.8); border:1px solid rgba(255,255,255,0.12); backdrop-filter:blur(16px); border-radius:24px; padding:36px 32px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);">
+      <div style="text-align:center; margin-bottom:28px;">
+        <div style="width:56px; height:56px; background:rgba(212, 175, 55, 0.15); border:1px solid rgba(212, 175, 55, 0.3); border-radius:16px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; color:#d4af37;">
+          <svg style="width:30px; height:30px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <h2 style="font-size:1.5rem; font-weight:800; color:#ffffff; margin-bottom:6px;">관리자 전용 로그인</h2>
+        <p style="font-size:0.9rem; color:#94a3b8;">참좋은공인중개사 소통게시판 관리자 콘솔</p>
+      </div>
+
+      <form id="formAdminLogin" onsubmit="event.preventDefault(); window.AdminApp.handleLogin();">
+        <div style="margin-bottom:20px;">
+          <label style="display:block; font-size:0.85rem; font-weight:600; color:#cbd5e1; margin-bottom:8px;">관리자 인증 비밀번호</label>
+          <div style="position:relative;">
+            <input type="password" id="adminPasswordInput" required placeholder="비밀번호를 입력하세요" style="width:100%; padding:12px 16px; background:rgba(15, 23, 42, 0.8); border:1px solid rgba(255,255,255,0.15); border-radius:12px; color:#fff; font-size:1rem; outline:none;">
+          </div>
+          <p id="loginErrorMsg" style="color:#f87171; font-size:0.85rem; margin-top:8px; display:none;"></p>
+        </div>
+
+        <button type="submit" id="btnLoginSubmit" style="width:100%; padding:14px; background:linear-gradient(135deg, #d4af37 0%, #b8860b 100%); color:#fff; font-size:1rem; font-weight:700; border:none; border-radius:12px; cursor:pointer; box-shadow:0 4px 14px rgba(212,175,55,0.3); transition:all 0.2s;">
+          보안 로그인
+        </button>
+
+        <div style="margin-top:24px; padding:14px; background:rgba(15, 23, 42, 0.6); border-radius:12px; border:1px dashed rgba(255,255,255,0.1); font-size:0.82rem; color:#94a3b8; line-height:1.5;">
+          <span style="color:#d4af37; font-weight:700;">💡 안내:</span> 초기 관리자 비밀번호는 <code>chamgood2026!</code> 입니다.<br>
+          (Vercel 환경변수 <code>ADMIN_PASSWORD</code> 설정으로 언제든 변경 가능합니다)
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       2. Authenticated Admin Dashboard
+       ========================================================================== -->
+  <div id="dashboardScreen" style="display:none;">
+    <!-- Top Nav -->
+    <header class="admin-nav">
+      <div class="admin-nav-inner">
+        <div style="display:flex; align-items:center; gap:16px;">
+          <a href="#" class="admin-brand">
+            <span class="brand-symbol sm" style="background:#d4af37; color:#0f172a; width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800;">참</span>
+            <span style="font-weight:700; font-size:1.15rem;">참좋은부동산 어드민</span>
+          </a>
+          <span class="admin-badge-gold">Serverless GitHub-DB</span>
+        </div>
+
+        <div class="admin-nav-right">
+          <div class="admin-user-pill">
+            <span style="width:8px; height:8px; background:#10b981; border-radius:50%;"></span>
+            <span id="adminNameDisplay">신제환 대표 공인중개사</span>
+          </div>
+
+          <a href="index.html" class="btn-board-admin-pill" style="background:transparent; color:#cbd5e1; border-color:rgba(255,255,255,0.15);">
+            홈페이지
+          </a>
+
+          <a href="board.html" class="btn-board-admin-pill" style="background:transparent; color:#cbd5e1; border-color:rgba(255,255,255,0.15);">
+            게시판 바로가기
+          </a>
+
+          <button onclick="window.AdminApp.logout()" class="btn-board-admin-pill" style="background:rgba(239, 68, 68, 0.15); color:#fca5a5; border-color:rgba(239, 68, 68, 0.3);">
+            로그아웃
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="admin-content-wrap">
+      <!-- 1. Hero Metrics Grid -->
+      <div class="admin-metrics-grid">
+        <div class="metric-card">
+          <div class="metric-title">
+            <span>총 등록 게시글</span>
+            <svg style="width:18px; height:18px; color:#d4af37;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="metric-num" id="statTotalPosts">-</div>
+          <div class="metric-sub">오늘 신규: <span id="statTodayPosts" style="color:#d4af37; font-weight:700;">-</span>건</div>
+        </div>
+
+        <div class="metric-card" style="cursor:pointer;" onclick="window.AdminApp.setFilter('waiting')">
+          <div class="metric-title">
+            <span>답변 대기 중 문의</span>
+            <svg style="width:18px; height:18px; color:#f87171;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="metric-num" id="statPendingReplies" style="color:#f87171;">-</div>
+          <div class="metric-sub" style="color:#fca5a5;">클릭 시 미답변 문의만 즉시 필터링</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-title">
+            <span>누적 조회수 / 좋아요</span>
+            <svg style="width:18px; height:18px; color:#38bdf8;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="metric-num" id="statTotalViews">-</div>
+          <div class="metric-sub">누적 추천: <span id="statTotalLikes" style="color:#38bdf8; font-weight:700;">-</span>회</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-title">
+            <span>GitHub 영구 커밋 상태</span>
+            <span id="gitStatusPill" class="admin-git-pill">검사 중</span>
+          </div>
+          <div class="metric-num" id="statCommitSha" style="font-size:1.4rem; font-family:monospace; margin-top:6px;">-</div>
+          <div class="metric-sub" id="statCommitTime">-</div>
+        </div>
+      </div>
+
+      <!-- 2. GitHub-as-a-Database Diagnostic Card -->
+      <section class="diagnostic-panel">
+        <div class="diag-header">
+          <div class="diag-title">
+            <svg style="width:22px; height:22px; color:#d4af37;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            </svg>
+            <span>GitHub 영구 데이터베이스 연동 현황 (Vercel Serverless)</span>
+          </div>
+
+          <div style="display:flex; gap:10px;">
+            <button onclick="window.AdminApp.downloadBackup()" class="btn-board-admin-pill" style="background:rgba(255,255,255,0.08); color:#f1f5f9; border-color:rgba(255,255,255,0.15);">
+              📥 JSON DB 백업 다운로드
+            </button>
+            <button onclick="window.AdminApp.loadDashboard()" class="btn-board-admin-pill" style="background:#d4af37; color:#0f172a; font-weight:700; border:none;">
+              🔄 동기화 검사
+            </button>
+          </div>
+        </div>
+
+        <div class="diag-details-grid">
+          <div>
+            <div class="diag-item-label">GitHub 저장소 (Repository)</div>
+            <div class="diag-item-value" id="diagRepo">toomany150/homepage1</div>
+          </div>
+          <div>
+            <div class="diag-item-label">브랜치 (Branch)</div>
+            <div class="diag-item-value" id="diagBranch">main</div>
+          </div>
+          <div>
+            <div class="diag-item-label">데이터베이스 파일 경로 (Path)</div>
+            <div class="diag-item-value" id="diagPath">data/board.json</div>
+          </div>
+          <div>
+            <div class="diag-item-label">현재 구동 모드 (Storage Mode)</div>
+            <div class="diag-item-value" id="diagMode" style="color:#34d399;">GitHub REST API 영구 커밋</div>
+          </div>
+        </div>
+
+        <!-- Setup Guide Collapse/Notice -->
+        <div style="margin-top:16px; padding:14px 18px; background:rgba(15, 23, 42, 0.4); border-radius:10px; border-left:3px solid #d4af37; font-size:0.85rem; color:#cbd5e1; line-height:1.6;">
+          <strong>💡 Vercel 배포 시 영구 보존 설정 안내:</strong><br>
+          Vercel 대시보드 <em>Settings &gt; Environment Variables</em> 에 <code>GITHUB_TOKEN</code> (Personal Access Token, repo 쓰기 권한), <code>GITHUB_REPO</code> (toomany150/homepage1), <code>ADMIN_PASSWORD</code> (관리자 비밀번호)를 등록하면, 모든 게시글 등록/수정/답변이 <strong>GitHub에 자동 커밋</strong>되어 영구 보존됩니다.
+        </div>
+      </section>
+
+      <!-- 3. Posts Management Table -->
+      <section>
+        <div class="table-toolbar">
+          <div class="filter-tabs">
+            <button class="filter-tab-btn active" data-filter="all" onclick="window.AdminApp.setFilter('all')">전체 게시글</button>
+            <button class="filter-tab-btn" data-filter="waiting" onclick="window.AdminApp.setFilter('waiting')">🚨 답변 대기</button>
+            <button class="filter-tab-btn" data-filter="pinned" onclick="window.AdminApp.setFilter('pinned')">📌 상단 공지</button>
+            <button class="filter-tab-btn" data-filter="secret" onclick="window.AdminApp.setFilter('secret')">🔒 비밀글</button>
+          </div>
+
+          <div style="display:flex; gap:10px;">
+            <input type="text" id="adminSearchInput" placeholder="제목, 작성자, 내용 검색..." style="padding:8px 16px; background:rgba(30,41,59,0.7); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:0.88rem; outline:none; min-width:240px;">
+          </div>
+        </div>
+
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th style="width:70px;">상태</th>
+                <th style="width:90px;">분류</th>
+                <th>제목</th>
+                <th style="width:110px;">작성자</th>
+                <th style="width:100px;">작성일</th>
+                <th style="width:80px;">조회/좋아요</th>
+                <th style="width:80px;">답변수</th>
+                <th style="width:190px;">관리 액션</th>
+              </tr>
+            </thead>
+            <tbody id="adminPostsTableBody">
+              <tr>
+                <td colspan="8" style="text-align:center; padding:40px; color:#94a3b8;">
+                  게시글을 불러오는 중입니다...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ==========================================================================
+       3. Admin Official Reply Modal
+       ========================================================================== -->
+  <dialog id="modalAdminReply" class="admin-dialog" closedby="any">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+      <h3 style="font-size:1.25rem; font-weight:700; color:#fff; margin:0;">
+        💬 대표 공인중개사 공식 답변 작성
+      </h3>
+      <button onclick="document.getElementById('modalAdminReply').close()" style="background:none; border:none; color:#94a3b8; font-size:1.5rem; cursor:pointer;">&times;</button>
+    </div>
+
+    <div style="background:rgba(15, 23, 42, 0.6); border-radius:10px; padding:14px; margin-bottom:16px; border:1px solid rgba(255,255,255,0.06);">
+      <div id="replyTargetTitle" style="font-weight:700; color:#d4af37; margin-bottom:6px;">-</div>
+      <div id="replyTargetAuthor" style="font-size:0.85rem; color:#94a3b8;">-</div>
+      <div id="replyTargetContent" style="font-size:0.9rem; color:#cbd5e1; margin-top:8px; max-height:120px; overflow-y:auto; white-space:pre-wrap;">-</div>
+    </div>
+
+    <!-- Quick Templates Selector -->
+    <div style="margin-bottom:12px;">
+      <label style="display:block; font-size:0.82rem; color:#94a3b8; margin-bottom:6px;">빠른 답변 템플릿 선택</label>
+      <select id="quickTemplateSelect" onchange="window.AdminApp.applyTemplate(this.value)" style="width:100%; padding:8px 12px; background:rgba(15, 23, 42, 0.8); border:1px solid rgba(255,255,255,0.15); border-radius:8px; color:#fff; font-size:0.88rem;">
+        <option value="">-- 자주 쓰는 답변 템플릿 선택 --</option>
+        <option value="call">유선 전화 상담 안내 (010-9667-4201)</option>
+        <option value="report">매물 상세 권리분석 리포트 발송 안내</option>
+        <option value="visit">현장 임장 및 사무소 방문 예약 확정</option>
+        <option value="factory">공장/상가 인허가 및 전력 수전용량 체크 완료</option>
+      </select>
+    </div>
+
+    <form onsubmit="event.preventDefault(); window.AdminApp.submitOfficialReply();">
+      <div style="margin-bottom:16px;">
+        <label style="display:block; font-size:0.85rem; color:#cbd5e1; margin-bottom:6px;">답변 내용</label>
+        <textarea id="adminReplyTextarea" rows="6" required placeholder="대표 공인중개사의 친절하고 명확한 답변을 작성해 주세요." style="width:100%; padding:12px; background:rgba(15, 23, 42, 0.8); border:1px solid rgba(255,255,255,0.15); border-radius:10px; color:#fff; font-size:0.95rem; line-height:1.6; resize:vertical;"></textarea>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:10px;">
+        <button type="button" onclick="document.getElementById('modalAdminReply').close()" class="btn-board-admin-pill" style="background:transparent; color:#cbd5e1; border-color:rgba(255,255,255,0.2);">
+          취소
+        </button>
+        <button type="submit" id="btnAdminReplySubmit" class="btn-board-primary">
+          GitHub DB에 답변 영구 커밋
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ==========================================================================
+       4. Admin View Post Details Modal
+       ========================================================================== -->
+  <dialog id="modalAdminViewPost" class="admin-dialog" closedby="any" style="max-width:700px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+      <h3 id="adminViewTitle" style="font-size:1.25rem; font-weight:700; color:#fff; margin:0;">-</h3>
+      <button onclick="document.getElementById('modalAdminViewPost').close()" style="background:none; border:none; color:#94a3b8; font-size:1.5rem; cursor:pointer;">&times;</button>
+    </div>
+
+    <div id="adminViewMeta" style="font-size:0.88rem; color:#94a3b8; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.1);"></div>
+    <div id="adminViewContent" style="font-size:0.98rem; line-height:1.7; color:#f1f5f9; white-space:pre-wrap; margin-bottom:20px;"></div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:16px;">
+      <h4 style="font-size:0.95rem; font-weight:700; color:#d4af37; margin-bottom:10px;">등록된 답변 목록</h4>
+      <div id="adminViewRepliesList" style="max-height:200px; overflow-y:auto;"></div>
+    </div>
+  </dialog>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Admin Script -->
+  <script>
+    (function() {
+      'use strict';
+
+      const TEMPLATES = {
+        call: "안녕하세요 고객님! 참좋은공인중개사 대표 신제환입니다.\n문의주신 사항 확인하였으며, 보다 정확하고 상세한 상담을 위해 010-9667-4201로 연락 주시거나 편하신 통화 가능 시간을 남겨주시면 대표가 직접 전화 드리겠습니다. 감사합니다.",
+        report: "안녕하세요 고객님! 남겨주신 조건에 부합하는 사상구 일대 엄선 실매물 리포트 및 권리분석 자료 정리를 완료하였습니다.\n남겨주신 연락처로 상세 브리핑 자료를 발송해 드렸으니 검토 부탁드립니다.",
+        visit: "고객님 반갑습니다. 요청해 주신 일정에 맞추어 현장 임장 및 사무실 내방 상담 예약이 완료되었습니다.\n[오시는 길] 부산광역시 사상구 덕포동 426-16 1층 참좋은부동산 (사상초등학교 인근 / 주차 가능). 편안하게 방문해 주십시오.",
+        factory: "대표님 반갑습니다. 문의주신 공장/상가 부지에 대해 사상구청 건축과 인허가 여부, 전력 수전용량, 도로점용 허가 사항을 사전 확인하였습니다.\n적법한 공장등록이 가능한 안전한 매물이오니 상세 자료를 지참하여 찾아뵙겠습니다."
+      };
+
+      const AdminApp = {
+        state: {
+          token: localStorage.getItem('chamgood_admin_token') || '',
+          posts: [],
+          stats: null,
+          filter: 'all',
+          activePostId: null
+        },
+
+        init: function() {
+          if (this.state.token) {
+            this.verifyAndLaunch();
+          } else {
+            this.showLogin();
+          }
+          this.bindEvents();
+        },
+
+        showLogin: function() {
+          document.getElementById('loginScreen').style.display = 'flex';
+          document.getElementById('dashboardScreen').style.display = 'none';
+        },
+
+        showDashboard: function() {
+          document.getElementById('loginScreen').style.display = 'none';
+          document.getElementById('dashboardScreen').style.display = 'block';
+          this.loadDashboard();
+        },
+
+        verifyAndLaunch: async function() {
+          try {
+            const res = await fetch('/api/admin?action=verify', {
+              headers: { 'Authorization': `Bearer ${this.state.token}` }
+            });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.admin && data.admin.adminName) {
+                document.getElementById('adminNameDisplay').textContent = data.admin.adminName;
+              }
+              this.showDashboard();
+            } else {
+              this.logout();
+            }
+          } catch (e) {
+            // If offline, still allow dashboard in local mode
+            this.showDashboard();
+          }
+        },
+
+        handleLogin: async function() {
+          const pass = document.getElementById('adminPasswordInput').value;
+          const errorMsg = document.getElementById('loginErrorMsg');
+          const btn = document.getElementById('btnLoginSubmit');
+
+          btn.disabled = true;
+          btn.textContent = '인증 중...';
+
+          try {
+            const res = await fetch('/api/admin?action=login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ password: pass })
+            });
+
+            const data = await res.json();
+            if (res.ok && data.success) {
+              this.state.token = data.token;
+              localStorage.setItem('chamgood_admin_token', data.token);
+              if (data.adminName) {
+                document.getElementById('adminNameDisplay').textContent = data.adminName;
+              }
+              this.showDashboard();
+            } else {
+              errorMsg.textContent = data.message || '비밀번호가 일치하지 않습니다.';
+              errorMsg.style.display = 'block';
+            }
+          } catch (e) {
+            // Local fallback login check
+            if (pass === 'chamgood2026!') {
+              const dummyToken = 'local_admin_token';
+              this.state.token = dummyToken;
+              localStorage.setItem('chamgood_admin_token', dummyToken);
+              this.showDashboard();
+            } else {
+              errorMsg.textContent = '서버 연결 실패 또는 비밀번호 오류';
+              errorMsg.style.display = 'block';
+            }
+          } finally {
+            btn.disabled = false;
+            btn.textContent = '보안 로그인';
+          }
+        },
+
+        logout: function() {
+          this.state.token = '';
+          localStorage.removeItem('chamgood_admin_token');
+          this.showLogin();
+        },
+
+        loadDashboard: async function() {
+          try {
+            // Load stats & db info
+            const resStats = await fetch('/api/admin?action=stats', {
+              headers: { 'Authorization': `Bearer ${this.state.token}` }
+            });
+            if (resStats.ok) {
+              const sData = await resStats.json();
+              this.renderStats(sData.stats, sData.dbStatus);
+            }
+
+            // Load all posts
+            const resPosts = await fetch('/api/board?limit=all', {
+              headers: { 'Authorization': `Bearer ${this.state.token}` }
+            });
+            if (resPosts.ok) {
+              const pData = await resPosts.json();
+              this.state.posts = pData.posts || [];
+              this.renderTable();
+            }
+          } catch (e) {
+            console.warn('Dashboard load fallback:', e);
+            // Fallback load
+            const res = await fetch('data/board.json');
+            if (res.ok) {
+              const data = await res.json();
+              this.state.posts = data.posts || [];
+              this.renderTable();
+            }
+          }
+        },
+
+        renderStats: function(stats, dbStatus) {
+          if (!stats) return;
+          document.getElementById('statTotalPosts').textContent = stats.totalPosts || 0;
+          document.getElementById('statTodayPosts').textContent = stats.todayPosts || 0;
+          document.getElementById('statPendingReplies').textContent = stats.pendingRepliesCount || 0;
+          document.getElementById('statTotalViews').textContent = stats.totalViews || 0;
+          document.getElementById('statTotalLikes').textContent = stats.totalLikes || 0;
+
+          if (dbStatus) {
+            const pill = document.getElementById('gitStatusPill');
+            const shaEl = document.getElementById('statCommitSha');
+            const timeEl = document.getElementById('statCommitTime');
+
+            if (dbStatus.isConfigured && dbStatus.latestCommit) {
+              pill.className = 'admin-git-pill';
+              pill.textContent = '🟢 GitHub DB 정상 연동';
+              shaEl.textContent = dbStatus.latestCommit.sha;
+              timeEl.textContent = `커밋: ${dbStatus.latestCommit.message.slice(0, 20)}...`;
+              document.getElementById('diagMode').textContent = 'GitHub REST API 자동 영구 커밋';
+              document.getElementById('diagMode').style.color = '#34d399';
+            } else {
+              pill.className = 'admin-git-pill local';
+              pill.textContent = '🟡 로컬 파일 DB 모드';
+              shaEl.textContent = 'Local File (data/board.json)';
+              timeEl.textContent = 'Vercel 환경변수 등록 시 GitHub 영구 커밋 활성화';
+              document.getElementById('diagMode').textContent = '로컬 JSON 파일 보존 (환경변수 미등록)';
+              document.getElementById('diagMode').style.color = '#fbbf24';
+            }
+
+            document.getElementById('diagRepo').textContent = dbStatus.repo || 'toomany150/homepage1';
+            document.getElementById('diagBranch').textContent = dbStatus.branch || 'main';
+            document.getElementById('diagPath').textContent = dbStatus.filePath || 'data/board.json';
+          }
+        },
+
+        setFilter: function(filter) {
+          this.state.filter = filter;
+          document.querySelectorAll('.filter-tab-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.filter === filter);
+          });
+          this.renderTable();
+        },
+
+        renderTable: function() {
+          const tbody = document.getElementById('adminPostsTableBody');
+          const q = (document.getElementById('adminSearchInput').value || '').toLowerCase().trim();
+
+          let filtered = [...this.state.posts];
+
+          // Filter tabs
+          if (this.state.filter === 'waiting') {
+            filtered = filtered.filter(p => p.category !== '공지사항' && !(p.replies || []).some(r => r.isAdmin));
+          } else if (this.state.filter === 'pinned') {
+            filtered = filtered.filter(p => Boolean(p.isPinned));
+          } else if (this.state.filter === 'secret') {
+            filtered = filtered.filter(p => Boolean(p.isSecret));
+          }
+
+          // Search query
+          if (q) {
+            filtered = filtered.filter(p =>
+              (p.title && p.title.toLowerCase().includes(q)) ||
+              (p.author && p.author.toLowerCase().includes(q)) ||
+              (p.content && p.content.toLowerCase().includes(q))
+            );
+          }
+
+          if (filtered.length === 0) {
+            tbody.innerHTML = `
+              <tr>
+                <td colspan="8" style="text-align:center; padding:32px; color:#94a3b8;">
+                  조건에 해당하는 게시글이 없습니다.
+                </td>
+              </tr>
+            `;
+            return;
+          }
+
+          tbody.innerHTML = filtered.map((p, idx) => {
+            const hasAdminReply = (p.replies || []).some(r => r.isAdmin);
+            const statusBadge = p.category === '공지사항'
+              ? '<span class="badge-pinned">공지</span>'
+              : (hasAdminReply
+                  ? '<span class="badge-reply-status answered">✓ 완료</span>'
+                  : '<span class="badge-reply-status waiting">대기</span>');
+
+            const dateStr = p.createdAt ? p.createdAt.slice(0, 10) : '';
+
+            return `
+              <tr>
+                <td>${statusBadge}</td>
+                <td><span class="badge-category">${p.category}</span></td>
+                <td>
+                  <div style="font-weight:700; color:#fff; cursor:pointer;" onclick="window.AdminApp.openViewModal('${p.id}')">
+                    ${p.isPinned ? '📌 ' : ''}${p.isSecret ? '🔒 ' : ''}${this.escapeHtml(p.title)}
+                  </div>
+                  <div style="font-size:0.8rem; color:#94a3b8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:350px;">
+                    ${this.escapeHtml(p.secretRawContent || p.content)}
+                  </div>
+                </td>
+                <td>${this.escapeHtml(p.author)}</td>
+                <td style="font-size:0.82rem; color:#94a3b8;">${dateStr}</td>
+                <td style="font-size:0.82rem; color:#94a3b8;">${p.views || 0} / ${p.likes || 0}</td>
+                <td>
+                  <span style="font-weight:700; color:${hasAdminReply ? '#10b981' : '#f87171'};">
+                    ${(p.replies || []).length}
+                  </span>
+                </td>
+                <td>
+                  <div style="display:flex; gap:6px;">
+                    <button class="btn-admin-action btn-action-reply" onclick="window.AdminApp.openReplyModal('${p.id}')" title="대표 답변">
+                      💬 답변
+                    </button>
+                    <button class="btn-admin-action btn-action-pin" onclick="window.AdminApp.togglePin('${p.id}')" title="공지 고정">
+                      ${p.isPinned ? '고정해제' : '상단고정'}
+                    </button>
+                    <button class="btn-admin-action btn-action-del" onclick="window.AdminApp.deletePost('${p.id}')" title="삭제">
+                      삭제
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          }).join('');
+        },
+
+        openReplyModal: function(postId) {
+          const post = this.state.posts.find(p => String(p.id) === String(postId));
+          if (!post) return;
+
+          this.state.activePostId = postId;
+          document.getElementById('replyTargetTitle').textContent = `[${post.category}] ${post.title}`;
+          document.getElementById('replyTargetAuthor').textContent = `작성자: ${post.author} (${post.contact || '연락처 미기재'})`;
+          document.getElementById('replyTargetContent').textContent = post.secretRawContent || post.content;
+          document.getElementById('adminReplyTextarea').value = '';
+          document.getElementById('quickTemplateSelect').value = '';
+
+          document.getElementById('modalAdminReply').showModal();
+        },
+
+        applyTemplate: function(key) {
+          if (TEMPLATES[key]) {
+            document.getElementById('adminReplyTextarea').value = TEMPLATES[key];
+          }
+        },
+
+        submitOfficialReply: async function() {
+          const content = document.getElementById('adminReplyTextarea').value.trim();
+          if (!content) return;
+
+          const btn = document.getElementById('btnAdminReplySubmit');
+          btn.disabled = true;
+          btn.textContent = 'GitHub DB 커밋 중...';
+
+          try {
+            const res = await fetch('/api/admin?action=reply', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.state.token}`
+              },
+              body: JSON.stringify({
+                postId: this.state.activePostId,
+                content
+              })
+            });
+
+            const data = await res.json();
+            if (res.ok && data.success) {
+              document.getElementById('modalAdminReply').close();
+              alert('공식 답변이 GitHub 저장소에 성공적으로 영구 커밋되었습니다!');
+              this.loadDashboard();
+            } else {
+              alert(data.message || '답변 등록 실패');
+            }
+          } catch (e) {
+            alert('오류 발생: ' + e.message);
+          } finally {
+            btn.disabled = false;
+            btn.textContent = 'GitHub DB에 답변 영구 커밋';
+          }
+        },
+
+        togglePin: async function(postId) {
+          try {
+            const res = await fetch('/api/admin?action=pin', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.state.token}`
+              },
+              body: JSON.stringify({ postId })
+            });
+
+            const data = await res.json();
+            if (res.ok && data.success) {
+              this.loadDashboard();
+            }
+          } catch (e) {
+            alert('상태 변경 실패: ' + e.message);
+          }
+        },
+
+        deletePost: async function(postId) {
+          if (!confirm('정말 이 게시글을 GitHub 데이터베이스에서 영구 삭제하시겠습니까?')) return;
+
+          try {
+            const res = await fetch('/api/admin?action=delete-post', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.state.token}`
+              },
+              body: JSON.stringify({ postId })
+            });
+
+            const data = await res.json();
+            if (res.ok && data.success) {
+              alert('게시글이 삭제되었습니다.');
+              this.loadDashboard();
+            } else {
+              alert(data.message || '삭제 실패');
+            }
+          } catch (e) {
+            alert('오류: ' + e.message);
+          }
+        },
+
+        openViewModal: function(postId) {
+          const post = this.state.posts.find(p => String(p.id) === String(postId));
+          if (!post) return;
+
+          document.getElementById('adminViewTitle').textContent = post.title;
+          document.getElementById('adminViewMeta').innerHTML = `
+            분류: <strong>${post.category}</strong> | 작성자: <strong>${post.author}</strong> | 연락처: <strong>${post.contact || '미기재'}</strong> | 등록일: ${post.createdAt}
+          `;
+          document.getElementById('adminViewContent').textContent = post.secretRawContent || post.content;
+
+          const repliesEl = document.getElementById('adminViewRepliesList');
+          if (post.replies && post.replies.length > 0) {
+            repliesEl.innerHTML = post.replies.map(r => `
+              <div style="background:rgba(15,23,42,0.6); padding:10px 12px; border-radius:8px; margin-bottom:8px; border:1px solid rgba(255,255,255,0.06);">
+                <div style="display:flex; justify-content:space-between; font-size:0.82rem; margin-bottom:4px;">
+                  <span style="font-weight:700; color:${r.isAdmin ? '#d4af37' : '#94a3b8'};">${r.author}</span>
+                  <span style="color:#64748b;">${r.createdAt ? r.createdAt.slice(0, 16) : ''}</span>
+                </div>
+                <div style="font-size:0.88rem; color:#cbd5e1; white-space:pre-wrap;">${this.escapeHtml(r.content)}</div>
+              </div>
+            `).join('');
+          } else {
+            repliesEl.innerHTML = '<p style="color:#64748b; font-size:0.88rem;">등록된 답변이 없습니다.</p>';
+          }
+
+          document.getElementById('modalAdminViewPost').showModal();
+        },
+
+        downloadBackup: function() {
+          window.location.href = `/api/admin?action=backup&token=${this.state.token}`;
+        },
+
+        bindEvents: function() {
+          const search = document.getElementById('adminSearchInput');
+          if (search) {
+            search.addEventListener('input', () => this.renderTable());
+          }
+        },
+
+        escapeHtml: function(str) {
+          if (!str) return '';
+          return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+        }
+      };
+
+      window.AdminApp = AdminApp;
+      document.addEventListener('DOMContentLoaded', () => AdminApp.init());
+    })();
+  </script>
+</body>
+</html>

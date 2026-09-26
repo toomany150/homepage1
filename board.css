@@ -1,0 +1,666 @@
+/* ==========================================================================
+   참좋은부동산 - 서버리스 소통게시판 & 어드민 스타일 시스템 (board.css)
+   Airbnb 감성 + Luxury Gold + Modern SaaS Console UI
+   ========================================================================== */
+
+/* -------------------------------------------------------------------------
+   1. Section Layout & Container
+   ------------------------------------------------------------------------- */
+.board-section {
+  padding: 80px 0;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  position: relative;
+}
+
+.board-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.board-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.board-title-group h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--ink-900, #0f172a);
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.board-title-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(212, 175, 55, 0.15);
+  color: #b8860b;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.board-title-group p {
+  color: var(--ink-600, #475569);
+  font-size: 0.98rem;
+  margin-top: 6px;
+}
+
+.board-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-board-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.btn-board-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+  background: linear-gradient(135deg, #c5a028 0%, #9e7308 100%);
+}
+
+.btn-board-admin-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: #ffffff;
+  color: var(--ink-700, #334155);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 12px;
+  border: 1px solid var(--hairline, #e2e8f0);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-board-admin-pill:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: var(--ink-900, #0f172a);
+}
+
+/* -------------------------------------------------------------------------
+   2. Notice Banner Box
+   ------------------------------------------------------------------------- */
+.board-notice-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: #ffffff;
+  border-radius: 14px;
+  border-left: 4px solid var(--primary-gold, #d4af37);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  margin-bottom: 24px;
+  font-size: 0.92rem;
+  color: var(--ink-800, #1e293b);
+}
+
+.board-notice-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: #b8860b;
+}
+
+/* -------------------------------------------------------------------------
+   3. Search & Category Filter Toolbar
+   ------------------------------------------------------------------------- */
+.board-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.board-categories-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.board-cat-btn {
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1px solid var(--hairline, #e2e8f0);
+  color: var(--ink-600, #475569);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.board-cat-btn:hover {
+  border-color: var(--primary-gold, #d4af37);
+  color: #b8860b;
+}
+
+.board-cat-btn.active {
+  background: var(--ink-900, #0f172a);
+  color: #ffffff;
+  border-color: var(--ink-900, #0f172a);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
+}
+
+.board-search-input-wrap {
+  position: relative;
+  min-width: 260px;
+}
+
+.board-search-input-wrap svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.board-search-input {
+  width: 100%;
+  padding: 10px 16px 10px 40px;
+  background: #ffffff;
+  border: 1px solid var(--hairline, #e2e8f0);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.board-search-input:focus {
+  border-color: var(--primary-gold, #d4af37);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+
+/* -------------------------------------------------------------------------
+   4. Post Card List Layout
+   ------------------------------------------------------------------------- */
+.board-post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.board-post-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid var(--hairline, #e2e8f0);
+  padding: 20px 24px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.board-post-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+}
+
+.board-post-card.pinned {
+  border-color: rgba(212, 175, 55, 0.4);
+  background: linear-gradient(180deg, #ffffff 0%, #fffef8 100%);
+}
+
+.board-post-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.board-meta-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge-pinned {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #fff8e6;
+  color: #b8860b;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 6px;
+  border: 1px solid #f2db9a;
+}
+
+.badge-category {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: var(--ink-600, #475569);
+}
+
+.badge-secret {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #f3f4f6;
+  color: #6b7280;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.badge-reply-status {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 6px;
+}
+
+.badge-reply-status.answered {
+  background: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+}
+
+.badge-reply-status.waiting {
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1px solid #fecdd3;
+}
+
+.board-meta-right {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.board-post-title {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--ink-900, #0f172a);
+  line-height: 1.45;
+  margin: 0;
+  transition: color 0.15s;
+}
+
+.board-post-card:hover .board-post-title {
+  color: #b8860b;
+}
+
+.board-post-preview {
+  font-size: 0.92rem;
+  color: var(--ink-600, #475569);
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.board-post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px dashed var(--hairline, #e2e8f0);
+  font-size: 0.84rem;
+  color: var(--ink-500, #64748b);
+  margin-top: 4px;
+}
+
+.board-author-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.board-author-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #475569;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board-author-avatar.admin {
+  background: #d4af37;
+  color: #ffffff;
+}
+
+.board-stats-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stat-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-item svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* -------------------------------------------------------------------------
+   5. Official Admin Answer Card Box inside Post
+   ------------------------------------------------------------------------- */
+.board-official-answer-bubble {
+  margin-top: 10px;
+  background: #fdfaf3;
+  border: 1px solid #f2e2be;
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.official-seal-icon {
+  width: 20px;
+  height: 20px;
+  color: #d4af37;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.official-answer-text {
+  font-size: 0.88rem;
+  color: #453412;
+  line-height: 1.5;
+}
+
+.official-answer-author {
+  font-weight: 700;
+  color: #8f6a06;
+  margin-bottom: 2px;
+}
+
+/* -------------------------------------------------------------------------
+   6. Modals (Detail Viewer, Writer, Password Check)
+   ------------------------------------------------------------------------- */
+.board-modal {
+  border: none;
+  border-radius: 20px;
+  padding: 0;
+  width: 90%;
+  max-width: 680px;
+  background: #ffffff;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+  overflow: hidden;
+}
+
+.board-modal::backdrop {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+}
+
+.board-modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--hairline, #e2e8f0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+}
+
+.board-modal-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink-900, #0f172a);
+  margin: 0;
+}
+
+.board-modal-body {
+  padding: 24px;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.board-modal-body pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--ink-800, #1e293b);
+  margin: 16px 0;
+}
+
+.board-modal-footer {
+  padding: 16px 24px;
+  background: #f8fafc;
+  border-top: 1px solid var(--hairline, #e2e8f0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Replies Thread in Modal */
+.board-replies-section {
+  margin-top: 28px;
+  border-top: 1px solid var(--hairline, #e2e8f0);
+  padding-top: 20px;
+}
+
+.board-replies-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reply-item-card {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.reply-item-card.admin-reply {
+  background: #fefdf7;
+  border-color: #f2db9a;
+}
+
+.reply-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+.reply-author {
+  font-weight: 700;
+  color: var(--ink-900, #0f172a);
+}
+
+.reply-author.admin {
+  color: #b8860b;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.reply-content {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--ink-700, #334155);
+  white-space: pre-wrap;
+}
+
+/* -------------------------------------------------------------------------
+   7. Admin Console Specific Styles
+   ------------------------------------------------------------------------- */
+.admin-page-body {
+  background: #0b1329;
+  color: #f8fafc;
+  min-height: 100vh;
+  font-family: var(--font-family, -apple-system, sans-serif);
+}
+
+.admin-glass-card {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.admin-stat-number {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.admin-git-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.admin-git-pill.local {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.admin-table th {
+  padding: 12px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #94a3b8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-table td {
+  padding: 16px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: middle;
+}
+
+.admin-table tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.btn-admin-action {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-action-reply {
+  background: #d4af37;
+  color: #0b1329;
+}
+.btn-action-reply:hover {
+  background: #e5be48;
+}
+
+.btn-action-pin {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+.btn-action-pin:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-action-del {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+.btn-action-del:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .board-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .board-actions-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .board-search-input-wrap {
+    width: 100%;
+  }
+  .board-post-card {
+    padding: 16px;
+  }
+}
