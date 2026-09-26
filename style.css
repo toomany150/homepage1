@@ -188,15 +188,16 @@ img {
   letter-spacing: 0.5px;
 }
 
-.main-nav {
+.main-nav,
+.desktop-nav {
   display: none;
 }
 
 @media (min-width: 1024px) {
-  .main-nav {
+  .main-nav,
+  .desktop-nav {
     display: flex;
     align-items: center;
-    gap: 28px;
   }
 }
 
@@ -206,7 +207,10 @@ img {
   color: var(--ink-700);
   transition: color var(--transition-fast);
   position: relative;
-  padding: 6px 0;
+  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .nav-link:hover,
@@ -214,12 +218,25 @@ img {
   color: var(--ink-900);
 }
 
+/* 각 메뉴(섹션) 간 세로 구분선 (Section Divider) */
+.desktop-nav .nav-link:not(:first-child)::before,
+.main-nav .nav-link:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 12px;
+  background-color: var(--hairline-dark, #cbd5e1);
+}
+
 .nav-link.active::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 0;
-  width: 100%;
+  left: 14px;
+  width: calc(100% - 28px);
   height: 2px;
   background-color: var(--primary-gold);
   border-radius: 2px;
