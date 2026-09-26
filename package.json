@@ -2,10 +2,9 @@
   "name": "chamgood-realestate-homepage",
   "version": "1.0.0",
   "description": "참좋은공인중개사사무소 공식 홈페이지 및 Vercel GitHub-DB 서버리스 게시판 & 어드민 시스템",
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node local-dev.js",
+    "dev": "node local-dev.js"
   },
   "keywords": [
     "real-estate",

@@ -6,15 +6,36 @@
 (function () {
   'use strict';
 
+  // Guard against server-side / Node.js execution
+  if (typeof window === 'undefined') return;
+
+  // Safe LocalStorage Helper (Prevents SSR / Node.js ReferenceError)
+  const getSafeStorage = (key, fallback = []) => {
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback));
+      }
+    } catch (e) {}
+    return fallback;
+  };
+
+  const setSafeStorage = (key, val) => {
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        localStorage.setItem(key, typeof val === 'string' ? val : JSON.stringify(val));
+      }
+    } catch (e) {}
+  };
+
   // State Management
   const state = {
     currentCategory: 'all',
     currentDealType: 'all',
     currentSort: 'recommended',
     selectedDistrict: 'all',
-    likes: JSON.parse(localStorage.getItem('cham_joeun_likes') || '[]'),
-    userReviews: JSON.parse(localStorage.getItem('cham_joeun_user_reviews') || '[]'),
-    userConsultations: JSON.parse(localStorage.getItem('cham_joeun_user_consultations') || '[]'),
+    likes: getSafeStorage('cham_joeun_likes', []),
+    userReviews: getSafeStorage('cham_joeun_user_reviews', []),
+    userConsultations: getSafeStorage('cham_joeun_user_consultations', []),
     activeReviewCat: 'all'
   };
 
@@ -372,7 +393,7 @@
       state.likes.push(propId);
       window.showToast('관심 매물에 저장되었습니다! 상단 하트에서 확인하세요.');
     }
-    localStorage.setItem('cham_joeun_likes', JSON.stringify(state.likes));
+    setSafeStorage('cham_joeun_likes', state.likes);
     updateLikesCount();
     renderProperties();
   };
@@ -670,7 +691,7 @@
     };
 
     state.userReviews.unshift(newReview);
-    localStorage.setItem('cham_joeun_user_reviews', JSON.stringify(state.userReviews));
+    setSafeStorage('cham_joeun_user_reviews', state.userReviews);
 
     renderReviews();
     writeReviewModal.close();

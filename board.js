@@ -7,6 +7,9 @@
 (function () {
   'use strict';
 
+  // Guard against server-side / Node.js execution
+  if (typeof window === 'undefined') return;
+
   const BoardApp = {
     state: {
       category: '전체',
@@ -19,7 +22,7 @@
       totalPages: 1,
       currentPost: null,
       isOffline: false,
-      adminToken: localStorage.getItem('chamgood_admin_token') || ''
+      adminToken: (typeof window !== 'undefined' && window.localStorage) ? (localStorage.getItem('chamgood_admin_token') || '') : ''
     },
 
     init: async function () {
@@ -60,7 +63,8 @@
     fallbackLoad: async function () {
       this.state.isOffline = true;
       try {
-        const localData = localStorage.getItem('chamgood_board_offline_cache');
+        const hasStorage = typeof window !== 'undefined' && window.localStorage;
+        const localData = hasStorage ? localStorage.getItem('chamgood_board_offline_cache') : null;
         if (localData) {
           const parsed = JSON.parse(localData);
           return { success: true, posts: parsed.posts || [], categories: parsed.settings?.categories || this.state.categories };
@@ -68,7 +72,9 @@
         const res = await fetch('data/board.json');
         if (res.ok) {
           const parsed = await res.json();
-          localStorage.setItem('chamgood_board_offline_cache', JSON.stringify(parsed));
+          if (hasStorage) {
+            localStorage.setItem('chamgood_board_offline_cache', JSON.stringify(parsed));
+          }
           return { success: true, posts: parsed.posts || [], categories: parsed.settings?.categories || this.state.categories };
         }
       } catch (e) {
