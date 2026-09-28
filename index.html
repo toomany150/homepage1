@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>참좋은공인중개사사무소 | 부산 사상구 아파트·주택·상가·사무실·토지 전문</title>
-  <meta name="description" content="부산 사상구 공인중개사 신제환 대표. 덕포동 426-16 1층 위치. 아파트, 주택, 상가·사무실, 토지 100% 현장 검증 실매물 및 실시간 1:1 상담.">
-  <meta name="keywords" content="사상구부동산, 덕포동부동산, 사상참좋은부동산, 사상상가, 사상사무실, 사상아파트, 사상단독주택, 사상토지">
+  <title>참좋은공인중개사사무소 | 부산 사상구 아파트·주택·상가점포·사무실·빌딩·공장창고·토지 전문</title>
+  <meta name="description" content="부산 사상구 공인중개사 신제환 대표. 덕포동 426-16 1층 위치. 아파트, 주택, 상가점포, 사무실, 빌딩건물, 공장창고, 토지 100% 현장 검증 실매물 및 실시간 1:1 상담.">
+  <meta name="keywords" content="사상구부동산, 덕포동부동산, 사상참좋은부동산, 사상아파트, 사상주택, 사상상가점포, 사상사무실, 사상빌딩건물, 사상공장창고, 사상토지">
 
   <!-- Open Graph -->
   <meta property="og:title" content="참좋은공인중개사사무소 | 사상구 부동산의 모든 것">
@@ -20,8 +20,19 @@
 
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="board.css">
+
+  <!-- 최상단 스크롤 고정 및 브라우저 복원 위치 방지 스크립트 -->
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  </script>
 </head>
 <body>
+  <script>
+    window.scrollTo(0, 0);
+  </script>
 
   <!-- ==========================================================================
        Header / Navigation (Glassmorphic Sticky Header)
@@ -91,7 +102,7 @@
       <nav class="drawer-nav">
         <button class="drawer-link" data-cat="all">
           <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          <span>전체 매물 모아보기</span>
+          <span>전체</span>
         </button>
         <button class="drawer-link" data-cat="apartment">
           <svg class="icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="6" x2="9" y2="6.01"/><line x1="15" y1="6" x2="15" y2="6.01"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/><line x1="9" y1="14" x2="9" y2="14.01"/><line x1="15" y1="14" x2="15" y2="14.01"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
@@ -99,15 +110,27 @@
         </button>
         <button class="drawer-link" data-cat="house">
           <svg class="icon" viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10H3z"/><path d="M9 20v-6h6v6"/></svg>
-          <span>주택 / 빌라</span>
+          <span>주택</span>
         </button>
         <button class="drawer-link" data-cat="store">
           <svg class="icon" viewBox="0 0 24 24"><path d="M3 3h18v4H3zM4 7v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7"/><path d="M9 11v6M15 11v6"/></svg>
-          <span>상가 · 사무실</span>
+          <span>상가점포</span>
+        </button>
+        <button class="drawer-link" data-cat="office">
+          <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <span>사무실</span>
+        </button>
+        <button class="drawer-link" data-cat="building">
+          <svg class="icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+          <span>빌딩건물</span>
+        </button>
+        <button class="drawer-link" data-cat="factory">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M2 20h20M5 20V8l5 4V8l5 4V4h4v16"/></svg>
+          <span>공장창고</span>
         </button>
         <button class="drawer-link" data-cat="land">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          <span>토지 / 나대지</span>
+          <svg class="icon" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+          <span>토지</span>
         </button>
       </nav>
 
@@ -195,15 +218,18 @@
 
           <div class="search-divider" aria-hidden="true"></div>
 
-          <!-- 2. 매물 종류 (전체 로 변경) -->
+          <!-- 2. 매물 종류 -->
           <div class="search-segment">
             <label class="search-segment-label" for="searchCategory">매물 종류 (무엇을)</label>
             <select class="search-select" id="searchCategory">
               <option value="all">전체</option>
               <option value="apartment">아파트</option>
-              <option value="house">주택 / 빌라</option>
-              <option value="store">상가 / 사무실</option>
-              <option value="land">토지 / 나대지</option>
+              <option value="house">주택</option>
+              <option value="store">상가점포</option>
+              <option value="office">사무실</option>
+              <option value="building">빌딩건물</option>
+              <option value="factory">공장창고</option>
+              <option value="land">토지</option>
             </select>
           </div>
 
@@ -253,7 +279,7 @@
   </section>
 
   <!-- ==========================================================================
-       Section 1: 매물 카테고리 (아파트, 주택, 상가·사무실, 토지)
+       Section 1: 매물 카테고리 (전체, 아파트, 주택, 상가점포, 사무실, 빌딩건물, 공장창고, 토지)
        ========================================================================== -->
   <section class="section-properties" id="propertiesSection">
     <div class="container">
@@ -263,14 +289,14 @@
           Real Estate Showcase
         </span>
         <h2 class="section-title">참좋은 엄선 추천 매물</h2>
-        <p class="section-desc">사상구 및 부산 전역의 아파트, 주택, 상가·사무실, 토지 실매물을 확인하세요.</p>
+        <p class="section-desc">사상구 및 부산 전역의 아파트, 주택, 상가점포, 사무실, 빌딩건물, 공장창고, 토지 실매물을 확인하세요.</p>
       </div>
 
-      <!-- Category Tab Strip (아파트, 주택, 상가·사무실, 토지) -->
+      <!-- Category Tab Strip (전체, 아파트, 주택, 상가점포, 사무실, 빌딩건물, 공장창고, 토지) -->
       <div class="category-tab-strip" role="tablist" aria-label="매물 카테고리">
         <button class="category-tab active" data-category="all" role="tab" aria-selected="true">
           <svg class="icon category-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          전체보기
+          전체
         </button>
         <button class="category-tab" data-category="apartment" role="tab" aria-selected="false">
           <svg class="icon category-icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="6" x2="9" y2="6.01"/><line x1="15" y1="6" x2="15" y2="6.01"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/><line x1="9" y1="14" x2="9" y2="14.01"/><line x1="15" y1="14" x2="15" y2="14.01"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
@@ -282,10 +308,22 @@
         </button>
         <button class="category-tab" data-category="store" role="tab" aria-selected="false">
           <svg class="icon category-icon" viewBox="0 0 24 24"><path d="M3 3h18v4H3zM4 7v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7"/><path d="M9 11v6M15 11v6"/></svg>
-          상가 · 사무실
+          상가점포
+        </button>
+        <button class="category-tab" data-category="office" role="tab" aria-selected="false">
+          <svg class="icon category-icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          사무실
+        </button>
+        <button class="category-tab" data-category="building" role="tab" aria-selected="false">
+          <svg class="icon category-icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+          빌딩건물
+        </button>
+        <button class="category-tab" data-category="factory" role="tab" aria-selected="false">
+          <svg class="icon category-icon" viewBox="0 0 24 24"><path d="M2 20h20M5 20V8l5 4V8l5 4V4h4v16"/></svg>
+          공장창고
         </button>
         <button class="category-tab" data-category="land" role="tab" aria-selected="false">
-          <svg class="icon category-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <svg class="icon category-icon" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
           토지
         </button>
       </div>
@@ -503,7 +541,7 @@
           Customer Reviews
         </span>
         <h2 class="section-title">참좋은부동산 고객 실거래 후기</h2>
-        <p class="section-desc">사상구에서 상가, 사무실, 아파트, 주택을 거래하신 고객님들의 100% 진솔한 평가입니다.</p>
+        <p class="section-desc">사상구에서 아파트, 주택, 상가점포, 사무실, 빌딩건물, 공장창고, 토지를 거래하신 고객님들의 100% 진솔한 평가입니다.</p>
       </div>
 
       <!-- Rating Hero Banner (Airbnb / Stripe Metric Style) -->
@@ -529,12 +567,15 @@
         </div>
       </div>
 
-      <!-- Review Filter Chips (아파트, 주택, 상가·사무실, 토지) -->
+      <!-- Review Filter Chips (전체, 아파트, 주택, 상가점포, 사무실, 빌딩건물, 공장창고, 토지) -->
       <div class="review-filter-strip" role="group" aria-label="후기 분류 필터">
-        <button class="review-chip active" data-review-cat="all">전체보기</button>
+        <button class="review-chip active" data-review-cat="all">전체</button>
         <button class="review-chip" data-review-cat="apartment">아파트</button>
         <button class="review-chip" data-review-cat="house">주택</button>
-        <button class="review-chip" data-review-cat="store">상가 · 사무실</button>
+        <button class="review-chip" data-review-cat="store">상가점포</button>
+        <button class="review-chip" data-review-cat="office">사무실</button>
+        <button class="review-chip" data-review-cat="building">빌딩건물</button>
+        <button class="review-chip" data-review-cat="factory">공장창고</button>
         <button class="review-chip" data-review-cat="land">토지</button>
       </div>
 
@@ -782,10 +823,13 @@
         <div class="form-group" style="margin-bottom:14px;">
           <label class="form-label" for="reviewCategory">거래 매물 종류</label>
           <select class="form-select" id="reviewCategory" required>
-            <option value="apartment">아파트 매매/전세</option>
-            <option value="house">주택 매매</option>
-            <option value="store">상가 · 사무실 임대/매매</option>
-            <option value="land">토지 매매</option>
+            <option value="apartment">아파트</option>
+            <option value="house">주택</option>
+            <option value="store">상가점포</option>
+            <option value="office">사무실</option>
+            <option value="building">빌딩건물</option>
+            <option value="factory">공장창고</option>
+            <option value="land">토지</option>
           </select>
         </div>
         <div class="form-group" style="margin-bottom:14px;">
@@ -870,9 +914,12 @@
           <select class="custom-form-select" id="regCategory" required>
             <option value="" disabled selected>선택해 주세요</option>
             <option value="아파트">아파트</option>
-            <option value="주택">주택 / 빌라</option>
-            <option value="상가·사무실">상가 · 사무실</option>
-            <option value="토지">토지 / 나대지</option>
+            <option value="주택">주택</option>
+            <option value="상가점포">상가점포</option>
+            <option value="사무실">사무실</option>
+            <option value="빌딩건물">빌딩건물</option>
+            <option value="공장창고">공장창고</option>
+            <option value="토지">토지</option>
           </select>
         </div>
 
@@ -975,9 +1022,12 @@
           <select class="custom-form-select" id="buyCategory" required>
             <option value="" disabled selected>선택해 주세요</option>
             <option value="아파트">아파트</option>
-            <option value="주택">주택 / 빌라</option>
-            <option value="상가·사무실">상가 · 사무실</option>
-            <option value="토지">토지 / 나대지</option>
+            <option value="주택">주택</option>
+            <option value="상가점포">상가점포</option>
+            <option value="사무실">사무실</option>
+            <option value="빌딩건물">빌딩건물</option>
+            <option value="공장창고">공장창고</option>
+            <option value="토지">토지</option>
           </select>
         </div>
 
@@ -1140,5 +1190,22 @@
   <script src="data.js"></script>
   <script src="main.js"></script>
   <script src="board.js"></script>
+
+  <!-- 페이지 로드 완료 시 최상단 고정 보장 스크립트 -->
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+      if (window.location.hash) {
+        history.replaceState(null, null, window.location.pathname + window.location.search);
+        window.scrollTo(0, 0);
+      }
+    });
+    window.addEventListener('load', function () {
+      window.scrollTo(0, 0);
+    });
+  </script>
 </body>
 </html>

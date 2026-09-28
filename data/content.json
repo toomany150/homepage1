@@ -174,7 +174,7 @@
     {
       "id": "STORE-01",
       "category": "store",
-      "categoryName": "상가·사무실",
+      "categoryName": "상가점포",
       "title": "사상역 3번출구 메인 먹자상권 1층 코너 상가",
       "district": "괘법동",
       "location": "부산 사상구 괘법동 530번지",
@@ -232,7 +232,7 @@
     {
       "id": "STORE-02",
       "category": "store",
-      "categoryName": "상가·사무실",
+      "categoryName": "상가점포",
       "title": "덕포역 1·2번 출구 역세권 1층 전면 무권리 상가 (참좋은부동산 인근)",
       "district": "덕포동",
       "location": "부산 사상구 덕포동 426-16 1층",
@@ -284,9 +284,9 @@
       "agentNotes": "임대인분 성향이 매우 온화하여 장기 임차 안정성이 보장되며, 렌트프리 1개월 협의 가능합니다."
     },
     {
-      "id": "STORE-03",
-      "category": "store",
-      "categoryName": "상가·사무실",
+      "id": "OFFICE-01",
+      "category": "office",
+      "categoryName": "사무실",
       "title": "부산진구 당감동 대로변 신축 3층 메디컬·사무실 임대 (기타구 추천)",
       "district": "기타구 (부산진구)",
       "location": "부산 부산진구 당감동 대로변",
@@ -342,9 +342,66 @@
       "agentNotes": "부산 전지역 네트워크를 통해 고객님이 원하시는 사무실 조건을 딱 맞춤으로 찾아드립니다."
     },
     {
+      "id": "BUILD-01",
+      "category": "building",
+      "categoryName": "빌딩건물",
+      "title": "사상역 역세권 대로변 5층 올근생 수익형 상가빌딩 (만실 운영)",
+      "district": "괘법동",
+      "location": "부산 사상구 괘법동 광장로 대로변",
+      "dealType": "매매",
+      "price": "32억원",
+      "priceValue": 320000,
+      "area": "대지 330㎡ (100평) / 연면적 990㎡ (300평)",
+      "floor": "지하 1층 ~ 지상 5층 (승강기 완비)",
+      "rooms": "전층 상가 및 사무실 임대 (총 8개 호실)",
+      "maintenanceFee": "자체관리",
+      "direction": "남서향",
+      "moveInDate": "협의가능",
+      "builtYear": "2018년 (내외관 최상급 컨디션)",
+      "image": "images/hero_busan.jpg",
+      "tags": [
+        "#사상역대로변",
+        "#수익형빌딩",
+        "#수익률연5.4%",
+        "#올근생",
+        "#엘리베이터"
+      ],
+      "isFeatured": true,
+      "rating": "4.99",
+      "reviewCount": 16,
+      "description": "사상역 복합환승센터 및 경전철 환승역세권 대로변에 위치한 가시성 탁월한 5층 올근생 상가빌딩입니다. 1층 약국 및 대형 프랜차이즈, 상층부 의원·학원·사무실로 전층 공실 없이 만실 임대 운영 중이며 안정적인 월세 수익과 향후 사상스마트시티 연계 시세차익이 확실한 우량 자산 매물입니다.",
+      "stripeSpecs": [
+        {
+          "label": "매매 가격",
+          "value": "32억원 (대출 승계 가능)"
+        },
+        {
+          "label": "대지 / 연면적",
+          "value": "대지 100평 / 연면적 300평 (지하1~지상5층)"
+        },
+        {
+          "label": "보증금 / 월세",
+          "value": "총 보증금 3억 5,000만원 / 월 1,280만원"
+        },
+        {
+          "label": "연간 임대수익률",
+          "value": "연 5.39% (고수익 알짜 빌딩)"
+        },
+        {
+          "label": "승강기 및 주차",
+          "value": "최신 10인승 엘리베이터 완비, 자주식 6대"
+        },
+        {
+          "label": "용도지역 / 추천",
+          "value": "일반상업지역 / 자산가 사옥 및 임대수익형"
+        }
+      ],
+      "agentNotes": "법인 및 개인 자산가 고객님께 강력 추천드리는 알짜 빌딩입니다. 세무사 및 법무사 협업으로 취득세 절세 및 명의 플랜까지 원스톱으로 지원해 드립니다."
+    },
+    {
       "id": "FACTORY-01",
       "category": "factory",
-      "categoryName": "공장",
+      "categoryName": "공장창고",
       "title": "감전동 스마트그린공단 층고 9m 호이스트 5톤 신축급 공장",
       "district": "감전동",
       "location": "부산 사상구 감전동 공업지역 내",
@@ -407,7 +464,7 @@
     {
       "id": "FACTORY-02",
       "category": "factory",
-      "categoryName": "공장",
+      "categoryName": "공장창고",
       "title": "모라동 첨단 지식산업센터 드라이브인 공장/창고",
       "district": "모라동",
       "location": "부산 사상구 모라동 벤처밸리",
@@ -606,9 +663,9 @@
     {
       "id": "REV-01",
       "name": "성*철 대표님 (삼양정밀)",
-      "dealType": "공장 매매",
+      "dealType": "공장창고 매매",
       "category": "factory",
-      "categoryName": "공장",
+      "categoryName": "공장창고",
       "rating": 5,
       "date": "2026.09.19",
       "propertyTitle": "감전동 200평 호이스트 5톤 공장 매입",
@@ -630,9 +687,9 @@
     {
       "id": "REV-03",
       "name": "박동* 대표님 (온지카페)",
-      "dealType": "상가 임대",
+      "dealType": "상가점포 임대",
       "category": "store",
-      "categoryName": "상가",
+      "categoryName": "상가점포",
       "rating": 5,
       "date": "2026.09.08",
       "propertyTitle": "사상역 메인 1층 코너 카페 창업",
@@ -654,14 +711,50 @@
     {
       "id": "REV-05",
       "name": "김만* 대표님 (물류유통)",
-      "dealType": "창고 임대",
+      "dealType": "공장창고 임대",
       "category": "factory",
-      "categoryName": "공장",
+      "categoryName": "공장창고",
       "rating": 5,
       "date": "2026.08.15",
       "propertyTitle": "삼락동 대형 물류창고 300평 임대",
       "content": "대형 츄레라 진출입이 필수라 매물 구하기가 정말 어려웠는데, 40피트 차량 회전각 나오는 부지를 귀신같이 찾아주셨습니다. 보증금 조율도 만족스럽고 법률 자문도 훌륭합니다.",
       "verifiedBadge": "물류창고 계약완료"
+    },
+    {
+      "id": "REV-06",
+      "name": "정*우 대표님 (IT솔루션)",
+      "dealType": "사무실 임대",
+      "category": "office",
+      "categoryName": "사무실",
+      "rating": 5,
+      "date": "2026.08.08",
+      "propertyTitle": "사상스마트시티 쾌적한 40평 사옥 이전",
+      "content": "개발팀 인원이 늘어나면서 주차와 교통이 편리한 사옥 이전을 고민했는데, 모라 벤처밸리 쪽 최상급 컨디션 사무실을 신속하게 중개해 주셨습니다. 렌트프리 협상부터 인테리어 공사 기간까지 배려받을 수 있게 조율해 주셔서 감사합니다!",
+      "verifiedBadge": "사무실 임대차계약 완료"
+    },
+    {
+      "id": "REV-07",
+      "name": "송*호 대표님 (자산운용)",
+      "dealType": "빌딩 매매",
+      "category": "building",
+      "categoryName": "빌딩건물",
+      "rating": 5,
+      "date": "2026.07.25",
+      "propertyTitle": "사상역 대로변 5층 올근생 상가빌딩 매입",
+      "content": "은퇴 후 안정적인 현금흐름을 위한 수익형 빌딩을 찾고 있었는데, 신제환 대표님의 정밀한 임대수익률 분석과 권리분석 덕분에 확신을 갖고 계약했습니다. 복잡한 취득세 및 법인 명의 이전 절차도 세무사 연계로 깔끔하게 처리되었습니다.",
+      "verifiedBadge": "상가빌딩 소유권이전"
+    },
+    {
+      "id": "REV-08",
+      "name": "한*수 대표님 (시행개발)",
+      "dealType": "토지 매매",
+      "category": "land",
+      "categoryName": "토지",
+      "rating": 5,
+      "date": "2026.07.12",
+      "propertyTitle": "엄궁동 130평 신축 나대지 매수 및 개발자문",
+      "content": "사상스마트시티 배후부지 토지를 찾던 중 엄궁동 알짜 나대지를 소개해 주셨습니다. 건폐율, 용적률, 도로점용 허가 여부까지 구청 인허가 사항을 사전에 완벽히 검토해 주셔서 안심하고 매수했습니다.",
+      "verifiedBadge": "토지 매매계약 완료"
     }
   ],
   "recentConsultations": [

@@ -687,12 +687,14 @@
       <section id="panelProperties" class="admin-panel active">
         <div class="table-toolbar">
           <div class="filter-tabs">
-            <button class="filter-tab-btn active" data-cat="all" onclick="window.AdminApp.filterProperties('all')">전체 매물</button>
+            <button class="filter-tab-btn active" data-cat="all" onclick="window.AdminApp.filterProperties('all')">전체</button>
             <button class="filter-tab-btn" data-cat="apartment" onclick="window.AdminApp.filterProperties('apartment')">아파트</button>
-            <button class="filter-tab-btn" data-cat="store" onclick="window.AdminApp.filterProperties('store')">상가·점포</button>
-            <button class="filter-tab-btn" data-cat="factory" onclick="window.AdminApp.filterProperties('factory')">공장·창고</button>
-            <button class="filter-tab-btn" data-cat="house" onclick="window.AdminApp.filterProperties('house')">주택·빌라</button>
-            <button class="filter-tab-btn" data-cat="land" onclick="window.AdminApp.filterProperties('land')">토지·개발</button>
+            <button class="filter-tab-btn" data-cat="house" onclick="window.AdminApp.filterProperties('house')">주택</button>
+            <button class="filter-tab-btn" data-cat="store" onclick="window.AdminApp.filterProperties('store')">상가점포</button>
+            <button class="filter-tab-btn" data-cat="office" onclick="window.AdminApp.filterProperties('office')">사무실</button>
+            <button class="filter-tab-btn" data-cat="building" onclick="window.AdminApp.filterProperties('building')">빌딩건물</button>
+            <button class="filter-tab-btn" data-cat="factory" onclick="window.AdminApp.filterProperties('factory')">공장창고</button>
+            <button class="filter-tab-btn" data-cat="land" onclick="window.AdminApp.filterProperties('land')">토지</button>
           </div>
 
           <div style="display:flex; gap:12px; align-items:center;">
@@ -983,10 +985,12 @@
           <label>카테고리 <span class="req">*</span></label>
           <select id="editPropCategory" required class="select-dark" onchange="window.AdminApp.onPropCategoryChange(this.value)">
             <option value="apartment">아파트 (apartment)</option>
-            <option value="house">주택·빌라 (house)</option>
-            <option value="store">상가·점포 (store)</option>
-            <option value="factory">공장·창고 (factory)</option>
-            <option value="land">토지·나대지 (land)</option>
+            <option value="house">주택 (house)</option>
+            <option value="store">상가점포 (store)</option>
+            <option value="office">사무실 (office)</option>
+            <option value="building">빌딩건물 (building)</option>
+            <option value="factory">공장창고 (factory)</option>
+            <option value="land">토지 (land)</option>
           </select>
         </div>
 
@@ -1649,6 +1653,8 @@
             apartment: 'images/apt_interior.jpg',
             house: 'images/house_exterior.jpg',
             store: 'images/store_street.jpg',
+            office: 'images/office_interior_real.jpg',
+            building: 'images/hero_busan.jpg',
             factory: 'images/factory_commercial.jpg',
             land: 'images/store_street.jpg'
           };
@@ -1667,8 +1673,10 @@
           const categoryNames = {
             apartment: '아파트',
             house: '주택',
-            store: '상가',
-            factory: '공장',
+            store: '상가점포',
+            office: '사무실',
+            building: '빌딩건물',
+            factory: '공장창고',
             land: '토지'
           };
 

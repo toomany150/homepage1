@@ -101,6 +101,11 @@
 
   // Initialize
   function init() {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     renderProperties();
     renderBlogPosts();
     renderNews();
@@ -304,7 +309,7 @@
         <article class="prop-card" onclick="window.openPropertyDetail('${item.id}')" role="button" tabindex="0" aria-label="${item.title}">
           <div class="prop-thumb-box">
             <img src="${item.image}" alt="${item.title}" class="prop-thumb-img" loading="lazy">
-            ${item.isFeatured ? `<span class="prop-badge-featured">${item.category === 'factory' ? '사상공단 실매물' : '특급 상권'}</span>` : ''}
+            ${item.isFeatured ? `<span class="prop-badge-featured">${item.category === 'factory' ? '사상공단 실매물' : (item.category === 'building' ? '수익형 빌딩' : item.category === 'office' ? '역세권 사옥' : '특급 상권')}</span>` : ''}
             <button class="btn-prop-like ${isLiked ? 'liked' : ''}" onclick="event.stopPropagation(); window.toggleLike('${item.id}');" aria-label="관심매물 찜하기">
               ${ICONS.heart}
             </button>
@@ -336,18 +341,18 @@
                     <th>전력 용량</th>
                     <td>${item.powerCapacity || '250kW'}</td>
                   </tr>
-                ` : item.category === 'store' ? `
+                ` : (item.category === 'store' || item.category === 'office' || item.category === 'building') ? `
                   <tr>
                     <th>전용 면적</th>
                     <td>${item.area}</td>
                   </tr>
                   <tr>
                     <th>추천 업종</th>
-                    <td>카페/음식점/의원</td>
+                    <td>${item.recommendedUse || item.currentUse || '근생/사무실'}</td>
                   </tr>
                   <tr>
-                    <th>수익률</th>
-                    <td><strong style="color:var(--accent-emerald);">${item.expectedYield || '5.8%'}</strong></td>
+                    <th>수익률/차임</th>
+                    <td><strong style="color:var(--accent-emerald);">${item.expectedYield || item.price}</strong></td>
                   </tr>
                 ` : `
                   <tr>
@@ -776,11 +781,31 @@
       return;
     }
 
+    const catDealTypes = {
+      apartment: '아파트 매매',
+      house: '주택 매매',
+      store: '상가점포 임대',
+      office: '사무실 임대',
+      building: '빌딩건물 매매',
+      factory: '공장창고 매매',
+      land: '토지 매매'
+    };
+    const catNames = {
+      apartment: '아파트',
+      house: '주택',
+      store: '상가점포',
+      office: '사무실',
+      building: '빌딩건물',
+      factory: '공장창고',
+      land: '토지'
+    };
+
     const newReview = {
       id: 'REV-USER-' + Date.now(),
       name: author,
-      dealType: cat === 'factory' ? '공장 매매' : cat === 'store' ? '상가·사무실 임대' : '아파트 매매',
+      dealType: catDealTypes[cat] || '부동산 계약',
       category: cat,
+      categoryName: catNames[cat] || '부동산',
       rating: score,
       date: new Date().toISOString().slice(0, 10).replace(/-/g, '.'),
       propertyTitle: propTitle,
@@ -952,9 +977,13 @@
 
   // Run on DOM ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', () => {
+      init();
+      window.scrollTo(0, 0);
+    });
   } else {
     init();
+    window.scrollTo(0, 0);
   }
 
 })();
