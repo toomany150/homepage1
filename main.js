@@ -145,7 +145,7 @@
 
   function applyNewContent(newData) {
     if (!newData) return;
-    if (Array.isArray(newData.properties)) {
+    if (Array.isArray(newData.properties) && newData.properties.length > 0) {
       REAL_ESTATE_DATA.properties = newData.properties;
     }
     if (Array.isArray(newData.blogPosts) && newData.blogPosts.length > 0) {
