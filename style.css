@@ -895,7 +895,7 @@ img {
 .prop-thumb-box {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 966 / 895;
   overflow: hidden;
   background-color: var(--surface-alt);
 }

@@ -39,7 +39,9 @@
     activeReviewCat: 'all',
     activeBlogTab: 'all',
     propCurrentPage: 1,
-    propPageSize: 6
+    propPageSize: 6,
+    blogCurrentPage: 1,
+    blogPageSize: 6
   };
 
   // SVG Helper Icons
@@ -338,11 +340,6 @@
                 ${item.price}
                 <span class="prop-price-sub">${item.floor || ''}</span>
               </div>
-              <div class="prop-quick-specs">
-                <span class="spec-chip">📐 ${item.area}</span>
-                ${item.rooms ? `<span class="spec-chip">🚪 ${item.rooms}</span>` : ''}
-                ${item.direction ? `<span class="spec-chip">🧭 ${item.direction.split('(')[0].trim()}</span>` : ''}
-              </div>
               ${item.agentNickname ? `
                 <div class="prop-card-agent-badge">
                   <span>🏷️ 담당: <strong>${item.agentNickname}</strong></span>
@@ -434,7 +431,7 @@
     }).join('');
   }
 
-  // 2. Render Naver Blog Posts (썸네일 + 요약내용 + 태그 및 카테고리 필터링)
+  // 2. Render Naver Blog Posts (썸네일 + 요약내용 + 태그 및 카테고리 필터링 + 6개 페이징)
   function renderBlogPosts() {
     if (!blogGrid) return;
 
@@ -443,7 +440,51 @@
       posts = posts.filter(p => p.section === state.activeBlogTab);
     }
 
-    blogGrid.innerHTML = posts.map(post => `
+    // 업로드 최신순(날짜 및 logNo 역순) 정렬
+    posts = [...posts].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+    const totalPages = Math.ceil(posts.length / state.blogPageSize) || 1;
+    if (state.blogCurrentPage > totalPages) {
+      state.blogCurrentPage = 1;
+    }
+
+    // Render Blog Pagination Controls
+    const blogPagination = document.getElementById('blogPagination');
+    if (blogPagination) {
+      if (totalPages <= 1) {
+        blogPagination.innerHTML = '';
+      } else {
+        let pagesHtml = '';
+        pagesHtml += `
+          <button class="page-nav-btn prev" ${state.blogCurrentPage === 1 ? 'disabled' : ''} onclick="window.changeBlogPage(${state.blogCurrentPage - 1})" aria-label="이전 페이지">
+            <svg class="icon" viewBox="0 0 24 24" style="width:16px; height:16px;"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>이전</span>
+          </button>
+        `;
+
+        for (let p = 1; p <= totalPages; p++) {
+          pagesHtml += `
+            <button class="page-num-btn ${p === state.blogCurrentPage ? 'active' : ''}" onclick="window.changeBlogPage(${p})" aria-label="${p}페이지">
+              ${p}
+            </button>
+          `;
+        }
+
+        pagesHtml += `
+          <button class="page-nav-btn next" ${state.blogCurrentPage === totalPages ? 'disabled' : ''} onclick="window.changeBlogPage(${state.blogCurrentPage + 1})" aria-label="다음 페이지">
+            <span>다음</span>
+            <svg class="icon" viewBox="0 0 24 24" style="width:16px; height:16px;"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        `;
+
+        blogPagination.innerHTML = pagesHtml;
+      }
+    }
+
+    const startIdx = (state.blogCurrentPage - 1) * state.blogPageSize;
+    const visiblePosts = posts.slice(startIdx, startIdx + state.blogPageSize);
+
+    blogGrid.innerHTML = visiblePosts.map(post => `
       <article class="blog-card" onclick="window.open('${post.link}', '_blank')" role="link" tabindex="0" aria-label="${post.title}">
         <div class="blog-thumb-box">
           <img src="${post.thumbnail}" alt="${post.title}" class="blog-thumb-img" loading="lazy">
@@ -556,6 +597,15 @@
     const section = document.getElementById('propertiesSection');
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  window.changeBlogPage = function (pageNum) {
+    state.blogCurrentPage = pageNum;
+    renderBlogPosts();
+    const blogSection = document.getElementById('blog');
+    if (blogSection) {
+      blogSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
   window.toggleLike = function (propId) {
@@ -981,6 +1031,7 @@
         document.querySelectorAll('.blog-tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         state.activeBlogTab = btn.getAttribute('data-blog-tab') || 'all';
+        state.blogCurrentPage = 1;
         renderBlogPosts();
       });
     });
