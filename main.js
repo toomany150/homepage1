@@ -41,7 +41,9 @@
     propCurrentPage: 1,
     propPageSize: 6,
     blogCurrentPage: 1,
-    blogPageSize: 6
+    blogPageSize: 6,
+    newsCurrentPage: 1,
+    newsPageSize: 4
   };
 
   // SVG Helper Icons
@@ -513,11 +515,52 @@
     `).join('');
   }
 
-  // 3. Render Real Estate News Board
+  // 3. Render Real Estate News Board (TODAY 경제 및 부동산 이슈 - 4개 페이징)
   function renderNews() {
     if (!newsGrid) return;
 
-    newsGrid.innerHTML = REAL_ESTATE_DATA.newsList.map(news => `
+    const newsList = REAL_ESTATE_DATA.newsList || [];
+    const totalPages = Math.ceil(newsList.length / state.newsPageSize) || 1;
+    if (state.newsCurrentPage > totalPages) {
+      state.newsCurrentPage = 1;
+    }
+
+    const newsPagination = document.getElementById('newsPagination');
+    if (newsPagination) {
+      if (totalPages <= 1) {
+        newsPagination.innerHTML = '';
+      } else {
+        let pagesHtml = '';
+        pagesHtml += `
+          <button class="page-nav-btn prev" ${state.newsCurrentPage === 1 ? 'disabled' : ''} onclick="window.changeNewsPage(${state.newsCurrentPage - 1})" aria-label="이전 페이지">
+            <svg class="icon" viewBox="0 0 24 24" style="width:16px; height:16px;"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>이전</span>
+          </button>
+        `;
+
+        for (let p = 1; p <= totalPages; p++) {
+          pagesHtml += `
+            <button class="page-num-btn ${p === state.newsCurrentPage ? 'active' : ''}" onclick="window.changeNewsPage(${p})" aria-label="${p}페이지">
+              ${p}
+            </button>
+          `;
+        }
+
+        pagesHtml += `
+          <button class="page-nav-btn next" ${state.newsCurrentPage === totalPages ? 'disabled' : ''} onclick="window.changeNewsPage(${state.newsCurrentPage + 1})" aria-label="다음 페이지">
+            <span>다음</span>
+            <svg class="icon" viewBox="0 0 24 24" style="width:16px; height:16px;"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        `;
+
+        newsPagination.innerHTML = pagesHtml;
+      }
+    }
+
+    const startIdx = (state.newsCurrentPage - 1) * state.newsPageSize;
+    const visibleNews = newsList.slice(startIdx, startIdx + state.newsPageSize);
+
+    newsGrid.innerHTML = visibleNews.map(news => `
       <article class="news-card" onclick="window.showNewsModal('${news.id}')" role="button" tabindex="0" aria-label="${news.title}">
         <div>
           <div class="news-card-header">
@@ -608,6 +651,15 @@
       blogSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  window.changeNewsPage = function (pageNum) {
+    state.newsCurrentPage = pageNum;
+    renderNews();
+    const newsSection = document.getElementById('news');
+    if (newsSection) {
+      newsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   window.toggleLike = function (propId) {
     const idx = state.likes.indexOf(propId);
     if (idx > -1) {
@@ -693,9 +745,6 @@
             `).join('')}
           </div>
         </div>
-        <div style="padding:16px; background:var(--primary-gold-light); border-radius:8px; font-size:0.88rem; color:var(--primary-gold-dark); font-weight:600;">
-          💡 <strong>공인중개사 팁:</strong> ${item.agentNotes}
-        </div>
       `;
       propertyDetailModal.showModal();
       return;
@@ -735,14 +784,10 @@
           `).join('')}
         </div>
 
-        <div style="padding:16px; background:var(--primary-gold-light); border-radius:8px; font-size:0.88rem; color:var(--primary-gold-dark); font-weight:600; margin-bottom:16px;">
-          💡 <strong>공인중개사 코멘트:</strong> ${item.agentNotes}
-        </div>
-
         <!-- 네이버 블로그 상세 포스팅 바로가기 버튼 -->
         <a href="${item.blogLink || 'https://blog.naver.com/toomany22'}" target="_blank" rel="noopener noreferrer" class="btn-modal-blog-link">
-          <svg class="icon" viewBox="0 0 24 24" style="width:18px; height:18px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          <span>네이버 블로그에서 현장 실사진 &amp; 상세 분석 보기</span>
+          <svg class="icon" viewBox="0 0 24 24" style="width:20px; height:20px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span>👉 네이버 블로그에서 현장 실사진 &amp; 상세 분석 보기</span>
         </a>
       `;
     } else {
@@ -775,14 +820,10 @@
           </tbody>
         </table>
 
-        <div style="padding:16px; background:var(--surface-alt); border-left:4px solid var(--ink-900); border-radius:4px; font-size:0.88rem; color:var(--ink-800); font-weight:600; margin-bottom:16px;">
-          💼 <strong>공인중개사 중개 전략:</strong> ${item.agentNotes}
-        </div>
-
         <!-- 네이버 블로그 상세 포스팅 바로가기 버튼 -->
         <a href="${item.blogLink || 'https://blog.naver.com/toomany22'}" target="_blank" rel="noopener noreferrer" class="btn-modal-blog-link">
-          <svg class="icon" viewBox="0 0 24 24" style="width:18px; height:18px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          <span>네이버 블로그에서 현장 실사진 &amp; 상세 분석 보기</span>
+          <svg class="icon" viewBox="0 0 24 24" style="width:20px; height:20px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span>👉 네이버 블로그에서 현장 실사진 &amp; 상세 분석 보기</span>
         </a>
       `;
     }
