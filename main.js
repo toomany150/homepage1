@@ -36,7 +36,8 @@
     likes: getSafeStorage('cham_joeun_likes', []),
     userReviews: getSafeStorage('cham_joeun_user_reviews', []),
     userConsultations: getSafeStorage('cham_joeun_user_consultations', []),
-    activeReviewCat: 'all'
+    activeReviewCat: 'all',
+    activeBlogTab: 'all'
   };
 
   // SVG Helper Icons
@@ -380,15 +381,21 @@
     }).join('');
   }
 
-  // 2. Render Naver Blog Posts (썸네일 + 요약내용)
+  // 2. Render Naver Blog Posts (썸네일 + 요약내용 + 태그 및 카테고리 필터링)
   function renderBlogPosts() {
     if (!blogGrid) return;
 
-    blogGrid.innerHTML = REAL_ESTATE_DATA.blogPosts.map(post => `
+    let posts = REAL_ESTATE_DATA.blogPosts || [];
+    if (state.activeBlogTab !== 'all') {
+      posts = posts.filter(p => p.section === state.activeBlogTab);
+    }
+
+    blogGrid.innerHTML = posts.map(post => `
       <article class="blog-card" onclick="window.open('${post.link}', '_blank')" role="link" tabindex="0" aria-label="${post.title}">
         <div class="blog-thumb-box">
           <img src="${post.thumbnail}" alt="${post.title}" class="blog-thumb-img" loading="lazy">
           <span class="blog-category-badge">${post.category}</span>
+          <span class="blog-section-badge">${post.section || '전문칼럼'}</span>
         </div>
         <div class="blog-card-body">
           <div class="blog-meta-row">
@@ -397,10 +404,15 @@
           </div>
           <h3 class="blog-title">${post.title}</h3>
           <p class="blog-excerpt">${post.excerpt}</p>
+          ${post.tags && post.tags.length ? `
+            <div class="blog-tags-row">
+              ${post.tags.map(t => `<span class="blog-tag-chip">${t}</span>`).join('')}
+            </div>
+          ` : ''}
           <div class="blog-card-footer">
-            <span>작성자: ${post.author}</span>
+            <span class="blog-author-badge">담당: ${post.author}</span>
             <span class="blog-btn-more">
-              블로그 전문보기
+              블로그 원문보기
               ${ICONS.arrowRight}
             </span>
           </div>
@@ -889,6 +901,16 @@
         renderProperties();
       });
     }
+
+    // Blog Filter Tabs
+    document.querySelectorAll('.blog-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.blog-tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.activeBlogTab = btn.getAttribute('data-blog-tab') || 'all';
+        renderBlogPosts();
+      });
+    });
 
     // Review Filter Chips
     document.querySelectorAll('.review-chip').forEach(chip => {
