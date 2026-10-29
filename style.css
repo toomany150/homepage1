@@ -1108,57 +1108,93 @@ img {
   margin-top: 1px;
 }
 
-/* Property Load More & View All Wrap */
-.prop-loadmore-wrap {
+/* Property Pagination Container (1, 2, 3 페이징) */
+.prop-pagination-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
   margin-top: 36px;
   flex-wrap: wrap;
 }
 
-.btn-prop-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+.page-num-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
   background: #ffffff;
-  color: var(--ink-900);
-  border: 1.5px solid var(--hairline-dark);
-  padding: 12px 28px;
-  border-radius: var(--radius-full);
+  border: 1px solid var(--hairline-dark);
+  color: var(--ink-800);
   font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all var(--transition-fast);
 }
 
-.btn-prop-more:hover {
+.page-num-btn:hover {
   border-color: var(--primary-gold-dark);
   color: var(--primary-gold-dark);
   background: var(--primary-gold-light);
-  transform: translateY(-2px);
 }
 
-.btn-prop-viewall {
+.page-num-btn.active {
+  background: var(--ink-900);
+  border-color: var(--ink-900);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.page-nav-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: var(--naver-green);
-  color: #ffffff;
-  padding: 12px 24px;
-  border-radius: var(--radius-full);
-  font-size: 0.92rem;
+  gap: 6px;
+  padding: 8px 16px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  border: 1px solid var(--hairline-dark);
+  color: var(--ink-700);
+  font-size: 0.88rem;
   font-weight: 700;
-  text-decoration: none;
-  box-shadow: var(--shadow-sm);
+  cursor: pointer;
   transition: all var(--transition-fast);
 }
 
-.btn-prop-viewall:hover {
+.page-nav-btn:hover:not(:disabled) {
+  border-color: var(--primary-gold-dark);
+  color: var(--primary-gold-dark);
+  background: var(--primary-gold-light);
+}
+
+.page-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: var(--hairline);
+}
+
+/* Modal Naver Blog Direct Link Button */
+.btn-modal-blog-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--naver-green);
+  color: #ffffff;
+  padding: 14px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-modal-blog-link:hover {
   background: var(--naver-green-dark);
-  transform: translateY(-2px);
+  color: #ffffff;
 }
 
 /* Tag Chips */

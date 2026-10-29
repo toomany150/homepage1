@@ -38,7 +38,8 @@
     userConsultations: getSafeStorage('cham_joeun_user_consultations', []),
     activeReviewCat: 'all',
     activeBlogTab: 'all',
-    propVisibleLimit: 6
+    propCurrentPage: 1,
+    propPageSize: 6
   };
 
   // SVG Helper Icons
@@ -251,18 +252,46 @@
       propCount.textContent = items.length;
     }
 
-    const btnMore = document.getElementById('btnPropLoadMore');
-    const totalItems = items.length;
-    if (btnMore) {
-      if (items.length <= state.propVisibleLimit) {
-        btnMore.style.display = 'none';
+    const totalPages = Math.ceil(items.length / state.propPageSize) || 1;
+    if (state.propCurrentPage > totalPages) {
+      state.propCurrentPage = 1;
+    }
+
+    // Render Pagination Controls
+    const paginationContainer = document.getElementById('propPagination');
+    if (paginationContainer) {
+      if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
       } else {
-        btnMore.style.display = 'inline-flex';
-        btnMore.innerHTML = `<span>추천매물 더보기 (+${Math.min(6, totalItems - state.propVisibleLimit)}개)</span><svg class="icon" viewBox="0 0 24 24" style="width:18px; height:18px;"><polyline points="6 9 12 15 18 9"/></svg>`;
+        let pagesHtml = '';
+        pagesHtml += `
+          <button class="page-nav-btn prev" ${state.propCurrentPage === 1 ? 'disabled' : ''} onclick="window.changePropPage(${state.propCurrentPage - 1})" aria-label="이전 페이지">
+            <svg class="icon" viewBox="0 0 24 24" style="width:16px; height:16px;"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>이전</span>
+          </button>
+        `;
+
+        for (let p = 1; p <= totalPages; p++) {
+          pagesHtml += `
+            <button class="page-num-btn ${p === state.propCurrentPage ? 'active' : ''}" onclick="window.changePropPage(${p})" aria-label="${p}페이지">
+              ${p}
+            </button>
+          `;
+        }
+
+        pagesHtml += `
+          <button class="page-nav-btn next" ${state.propCurrentPage === totalPages ? 'disabled' : ''} onclick="window.changePropPage(${state.propCurrentPage + 1})" aria-label="다음 페이지">
+            <span>다음</span>
+            <svg class="icon" viewBox="0 0 24 24" style="width:16px; height:16px;"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        `;
+
+        paginationContainer.innerHTML = pagesHtml;
       }
     }
 
-    const visibleItems = items.slice(0, state.propVisibleLimit);
+    const startIdx = (state.propCurrentPage - 1) * state.propPageSize;
+    const visibleItems = items.slice(startIdx, startIdx + state.propPageSize);
 
     if (items.length === 0) {
       propertyGrid.innerHTML = `
@@ -527,7 +556,15 @@
     `).join('');
   }
 
-  // 6. Favorites Management (찜하기)
+  // Page Change Handler
+  window.changePropPage = function (pageNum) {
+    state.propCurrentPage = pageNum;
+    renderProperties();
+    const section = document.getElementById('propertiesSection');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   window.toggleLike = function (propId) {
     const idx = state.likes.indexOf(propId);
     if (idx > -1) {
@@ -655,9 +692,15 @@
           `).join('')}
         </div>
 
-        <div style="padding:16px; background:var(--primary-gold-light); border-radius:8px; font-size:0.88rem; color:var(--primary-gold-dark); font-weight:600;">
+        <div style="padding:16px; background:var(--primary-gold-light); border-radius:8px; font-size:0.88rem; color:var(--primary-gold-dark); font-weight:600; margin-bottom:16px;">
           💡 <strong>공인중개사 코멘트:</strong> ${item.agentNotes}
         </div>
+
+        <!-- 네이버 블로그 상세 포스팅 바로가기 버튼 -->
+        <a href="https://blog.naver.com/toomany22" target="_blank" rel="noopener noreferrer" class="btn-modal-blog-link">
+          <svg class="icon" viewBox="0 0 24 24" style="width:18px; height:18px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span>네이버 블로그에서 현장 실사진 &amp; 상세 분석 보기</span>
+        </a>
       `;
     } else {
       // Commercial & Industrial (Stripe Layout)
@@ -689,9 +732,15 @@
           </tbody>
         </table>
 
-        <div style="padding:16px; background:var(--surface-alt); border-left:4px solid var(--ink-900); border-radius:4px; font-size:0.88rem; color:var(--ink-800); font-weight:600;">
+        <div style="padding:16px; background:var(--surface-alt); border-left:4px solid var(--ink-900); border-radius:4px; font-size:0.88rem; color:var(--ink-800); font-weight:600; margin-bottom:16px;">
           💼 <strong>공인중개사 중개 전략:</strong> ${item.agentNotes}
         </div>
+
+        <!-- 네이버 블로그 상세 포스팅 바로가기 버튼 -->
+        <a href="https://blog.naver.com/toomany22" target="_blank" rel="noopener noreferrer" class="btn-modal-blog-link">
+          <svg class="icon" viewBox="0 0 24 24" style="width:18px; height:18px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span>네이버 블로그에서 현장 실사진 &amp; 상세 분석 보기</span>
+        </a>
       `;
     }
 
@@ -909,6 +958,7 @@
         tab.classList.add('active');
         tab.setAttribute('aria-selected', 'true');
         state.currentCategory = tab.getAttribute('data-category');
+        state.propCurrentPage = 1;
         renderProperties();
       });
     });
@@ -919,15 +969,9 @@
         document.querySelectorAll('.deal-chip').forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
         state.currentDealType = chip.getAttribute('data-deal');
-        state.propVisibleLimit = 6;
+        state.propCurrentPage = 1;
         renderProperties();
       });
-    });
-
-    // Property Load More Button (+6개씩 더보기)
-    document.getElementById('btnPropLoadMore')?.addEventListener('click', () => {
-      state.propVisibleLimit += 6;
-      renderProperties();
     });
 
     // Sort Dropdown
