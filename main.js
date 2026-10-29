@@ -145,7 +145,7 @@
 
   function applyNewContent(newData) {
     if (!newData) return;
-    if (Array.isArray(newData.properties) && newData.properties.length > 0) {
+    if (Array.isArray(newData.properties)) {
       REAL_ESTATE_DATA.properties = newData.properties;
     }
     if (Array.isArray(newData.blogPosts) && newData.blogPosts.length > 0) {
@@ -296,10 +296,20 @@
     if (items.length === 0) {
       propertyGrid.innerHTML = `
         <div style="grid-column: 1 / -1; padding: 60px 20px; text-align: center; background:#fff; border-radius:14px; border:1px dashed var(--hairline);">
-          <svg class="icon" viewBox="0 0 24 24" style="width:48px; height:48px; color:var(--ink-500); margin-bottom:12px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <h3 style="font-size:1.15rem; font-weight:700; color:var(--ink-900); margin-bottom:6px;">해당 조건의 매물이 없습니다</h3>
-          <p style="font-size:0.9rem; color:var(--ink-600); margin-bottom:16px;">다른 지역 또는 거래 유형을 선택해 보시거나 1:1 맞춤 매물 의뢰를 남겨주세요.</p>
-          <button class="deal-chip" onclick="window.resetFilters();" style="display:inline-block;">필터 초기화</button>
+          <svg class="icon" viewBox="0 0 24 24" style="width:48px; height:48px; color:var(--primary-gold-dark); margin-bottom:12px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <h3 style="font-size:1.2rem; font-weight:800; color:var(--ink-900); margin-bottom:8px;">100% 현장 검증 실매물을 준비 중입니다</h3>
+          <p style="font-size:0.92rem; color:var(--ink-600); margin-bottom:20px; max-width:540px; margin-left:auto; margin-right:auto; line-height:1.6;">
+            참좋은부동산은 허위매물 없는 100% 실매물만을 엄선하여 브리핑합니다.<br>
+            원하시는 조건(지역, 가격, 면적, 업종)을 1:1 상담으로 남겨주시면 즉시 최적의 매물을 찾아드립니다.
+          </p>
+          <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+            <a href="https://blog.naver.com/toomany22" target="_blank" rel="noopener noreferrer" class="btn-naver-blog" style="padding:10px 20px; font-size:0.9rem;">
+              <span>네이버 블로그 실시간 매물 보기</span>
+            </a>
+            <a href="tel:010-9667-4201" class="deal-chip" style="background:var(--primary-gold); color:#191919; border-color:var(--primary-gold); font-weight:700; padding:10px 20px;">
+              <span>010-9667-4201 직통상담</span>
+            </a>
+          </div>
         </div>
       `;
       return;
