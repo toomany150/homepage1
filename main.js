@@ -324,11 +324,13 @@
           <article class="prop-card" onclick="window.openPropertyDetail('${item.id}')" role="button" tabindex="0" aria-label="${item.title}">
             <div class="prop-thumb-box">
               <img src="${item.image}" alt="${item.title}" class="prop-thumb-img" loading="lazy">
-              ${item.isFeatured ? `<span class="prop-badge-featured">추천매물</span>` : ''}
+              <div class="prop-badges-group">
+                ${item.isFeatured ? `<span class="prop-badge-featured">추천매물</span>` : ''}
+                <span class="prop-deal-badge">${item.dealType}</span>
+              </div>
               <button class="btn-prop-like ${isLiked ? 'liked' : ''}" onclick="event.stopPropagation(); window.toggleLike('${item.id}');" aria-label="관심매물 찜하기">
                 ${ICONS.heart}
               </button>
-              <span class="prop-deal-badge">${item.dealType}</span>
             </div>
             <div class="prop-card-body">
               <div class="prop-meta-row">
@@ -339,20 +341,6 @@
               <div class="prop-price">
                 ${item.price}
                 <span class="prop-price-sub">${item.floor || ''}</span>
-              </div>
-              
-              <div class="airbnb-specs">
-                <div class="airbnb-spec-item">
-                  <svg class="icon" viewBox="0 0 24 24" style="width:16px; height:16px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-                  <span>${item.rooms || '전용 84㎡'}</span>
-                </div>
-                <div class="airbnb-spec-item">
-                  <svg class="icon" viewBox="0 0 24 24" style="width:16px; height:16px;"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-                  <span>${item.area}</span>
-                </div>
-              </div>
-              <div class="prop-tags">
-                ${item.tags.map(t => `<span class="prop-tag">${t}</span>`).join('')}
               </div>
               ${item.agentNickname ? `
                 <div class="prop-card-agent-badge">
@@ -370,11 +358,13 @@
         <article class="prop-card" onclick="window.openPropertyDetail('${item.id}')" role="button" tabindex="0" aria-label="${item.title}">
           <div class="prop-thumb-box">
             <img src="${item.image}" alt="${item.title}" class="prop-thumb-img" loading="lazy">
-            ${item.isFeatured ? `<span class="prop-badge-featured">${item.category === 'factory' ? '사상공단 실매물' : (item.category === 'building' ? '수익형 빌딩' : item.category === 'office' ? '역세권 사옥' : '특급 상권')}</span>` : ''}
+            <div class="prop-badges-group">
+              ${item.isFeatured ? `<span class="prop-badge-featured">${item.category === 'factory' ? '사상공단 실매물' : (item.category === 'building' ? '수익형 빌딩' : item.category === 'office' ? '역세권 사옥' : '특급 상권')}</span>` : ''}
+              <span class="prop-deal-badge" style="background:var(--ink-900); color:var(--primary-gold);">${item.dealType}</span>
+            </div>
             <button class="btn-prop-like ${isLiked ? 'liked' : ''}" onclick="event.stopPropagation(); window.toggleLike('${item.id}');" aria-label="관심매물 찜하기">
               ${ICONS.heart}
             </button>
-            <span class="prop-deal-badge" style="background:var(--ink-900); color:var(--primary-gold);">${item.dealType}</span>
           </div>
           <div class="prop-card-body">
             <div class="prop-meta-row">

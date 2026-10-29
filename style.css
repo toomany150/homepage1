@@ -895,7 +895,7 @@ img {
 .prop-thumb-box {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background-color: var(--surface-alt);
 }
@@ -904,6 +904,7 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform var(--transition-smooth);
 }
 
@@ -911,10 +912,18 @@ img {
   transform: scale(1.05);
 }
 
-.prop-badge-featured {
+.prop-badges-group {
   position: absolute;
   top: 12px;
   left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 2;
+}
+
+.prop-badge-featured {
+  position: static;
   background: rgba(15, 23, 42, 0.85);
   color: var(--primary-gold);
   backdrop-filter: blur(6px);
@@ -954,15 +963,14 @@ img {
 }
 
 .prop-deal-badge {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
+  position: static;
   background: var(--primary-gold);
   color: var(--ink-900);
   font-size: 0.78rem;
   font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
 }
 
 .prop-card-body {
