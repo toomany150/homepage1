@@ -341,13 +341,6 @@
                 <span class="prop-price-sub">${item.floor || ''}</span>
               </div>
               
-              <!-- 3줄 요약 SEO 브리핑 텍스트 -->
-              ${item.seoSummary && item.seoSummary.length ? `
-                <div class="prop-seo-summary">
-                  ${item.seoSummary.map(s => `<p class="prop-seo-point"><span class="seo-bullet">✔</span> ${s}</p>`).join('')}
-                </div>
-              ` : ''}
-
               <div class="airbnb-specs">
                 <div class="airbnb-spec-item">
                   <svg class="icon" viewBox="0 0 24 24" style="width:16px; height:16px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
@@ -392,13 +385,6 @@
             <div class="prop-price">
               ${item.price}
             </div>
-
-            <!-- 3줄 요약 SEO 브리핑 텍스트 -->
-            ${item.seoSummary && item.seoSummary.length ? `
-              <div class="prop-seo-summary">
-                ${item.seoSummary.map(s => `<p class="prop-seo-point"><span class="seo-bullet">✔</span> ${s}</p>`).join('')}
-              </div>
-            ` : ''}
 
             <!-- Stripe Style Data Table Preview -->
             <table class="stripe-table">
