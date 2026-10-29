@@ -1108,6 +1108,41 @@ img {
   margin-top: 1px;
 }
 
+/* 담당 중개사 뱃지 */
+.prop-card-agent-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--hairline);
+  font-size: 0.78rem;
+  color: var(--ink-700);
+}
+
+.prop-card-agent-badge strong {
+  color: var(--ink-900);
+}
+
+.prop-agent-call-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: var(--primary-gold-light);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 50%;
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: transform var(--transition-fast);
+}
+
+.prop-agent-call-btn:hover {
+  transform: scale(1.15);
+  background: var(--primary-gold);
+}
+
 /* Property Pagination Container (1, 2, 3 페이징) */
 .prop-pagination-container {
   display: flex;

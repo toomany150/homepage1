@@ -361,6 +361,12 @@
               <div class="prop-tags">
                 ${item.tags.map(t => `<span class="prop-tag">${t}</span>`).join('')}
               </div>
+              ${item.agentNickname ? `
+                <div class="prop-card-agent-badge">
+                  <span>🏷️ 담당: <strong>${item.agentNickname}</strong></span>
+                  ${item.agentPhone ? `<a href="tel:${item.agentPhone}" class="prop-agent-call-btn" onclick="event.stopPropagation();" aria-label="직통전화">📞</a>` : ''}
+                </div>
+              ` : ''}
             </div>
           </article>
         `;
@@ -443,6 +449,12 @@
             <div class="prop-tags">
               ${item.tags.map(t => `<span class="prop-tag">${t}</span>`).join('')}
             </div>
+            ${item.agentNickname ? `
+              <div class="prop-card-agent-badge">
+                <span>🏷️ 담당: <strong>${item.agentNickname}</strong></span>
+                ${item.agentPhone ? `<a href="tel:${item.agentPhone}" class="prop-agent-call-btn" onclick="event.stopPropagation();" aria-label="직통전화">📞</a>` : ''}
+              </div>
+            ` : ''}
           </div>
         </article>
       `;
@@ -707,7 +719,7 @@
         </div>
 
         <!-- 네이버 블로그 상세 포스팅 바로가기 버튼 -->
-        <a href="https://blog.naver.com/toomany22" target="_blank" rel="noopener noreferrer" class="btn-modal-blog-link">
+        <a href="${item.blogLink || 'https://blog.naver.com/toomany22'}" target="_blank" rel="noopener noreferrer" class="btn-modal-blog-link">
           <svg class="icon" viewBox="0 0 24 24" style="width:18px; height:18px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           <span>네이버 블로그에서 현장 실사진 &amp; 상세 분석 보기</span>
         </a>
@@ -747,7 +759,7 @@
         </div>
 
         <!-- 네이버 블로그 상세 포스팅 바로가기 버튼 -->
-        <a href="https://blog.naver.com/toomany22" target="_blank" rel="noopener noreferrer" class="btn-modal-blog-link">
+        <a href="${item.blogLink || 'https://blog.naver.com/toomany22'}" target="_blank" rel="noopener noreferrer" class="btn-modal-blog-link">
           <svg class="icon" viewBox="0 0 24 24" style="width:18px; height:18px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           <span>네이버 블로그에서 현장 실사진 &amp; 상세 분석 보기</span>
         </a>
