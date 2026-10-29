@@ -333,19 +333,20 @@
               </button>
             </div>
             <div class="prop-card-body">
-              <div class="prop-meta-row">
-                <span class="prop-district">${ICONS.pin} ${item.district}</span>
-                <span class="prop-rating">${ICONS.star} ${item.rating}</span>
-              </div>
               <h3 class="prop-title">${item.title}</h3>
               <div class="prop-price">
                 ${item.price}
                 <span class="prop-price-sub">${item.floor || ''}</span>
               </div>
+              <div class="prop-quick-specs">
+                <span class="spec-chip">📐 ${item.area}</span>
+                ${item.rooms ? `<span class="spec-chip">🚪 ${item.rooms}</span>` : ''}
+                ${item.direction ? `<span class="spec-chip">🧭 ${item.direction.split('(')[0].trim()}</span>` : ''}
+              </div>
               ${item.agentNickname ? `
                 <div class="prop-card-agent-badge">
                   <span>🏷️ 담당: <strong>${item.agentNickname}</strong></span>
-                  ${item.agentPhone ? `<a href="tel:${item.agentPhone}" class="prop-agent-call-btn" onclick="event.stopPropagation();" aria-label="직통전화">📞</a>` : ''}
+                  ${item.agentPhone ? `<a href="tel:${item.agentPhone}" class="prop-agent-call-btn" onclick="event.stopPropagation();" aria-label="직통전화">📞 전화상담</a>` : ''}
                 </div>
               ` : ''}
             </div>
@@ -367,10 +368,6 @@
             </button>
           </div>
           <div class="prop-card-body">
-            <div class="prop-meta-row">
-              <span class="prop-district">${ICONS.pin} ${item.district}</span>
-              <span class="prop-rating" style="color:var(--primary-gold-dark);">${item.categoryName}</span>
-            </div>
             <h3 class="prop-title">${item.title}</h3>
             <div class="prop-price">
               ${item.price}
