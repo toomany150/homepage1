@@ -447,13 +447,11 @@
       <article class="blog-card" onclick="window.open('${post.link}', '_blank')" role="link" tabindex="0" aria-label="${post.title}">
         <div class="blog-thumb-box">
           <img src="${post.thumbnail}" alt="${post.title}" class="blog-thumb-img" loading="lazy">
-          <span class="blog-category-badge">${post.category}</span>
-          <span class="blog-section-badge">${post.section || '전문칼럼'}</span>
         </div>
         <div class="blog-card-body">
           <div class="blog-meta-row">
+            <span class="blog-card-cat-tag">${post.category}</span>
             <span>${post.date}</span>
-            <span>조회 ${post.views}</span>
           </div>
           <h3 class="blog-title">${post.title}</h3>
           <p class="blog-excerpt">${post.excerpt}</p>
