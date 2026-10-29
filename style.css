@@ -1078,6 +1078,89 @@ img {
   border-bottom: 1px solid var(--hairline);
 }
 
+/* 3줄 요약 SEO 브리핑 텍스트 스타일 */
+.prop-seo-summary {
+  background: var(--surface-soft);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.prop-seo-point {
+  font-size: 0.81rem;
+  color: var(--ink-700);
+  line-height: 1.45;
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.seo-bullet {
+  color: var(--primary-gold-dark);
+  font-size: 0.75rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Property Load More & View All Wrap */
+.prop-loadmore-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+
+.btn-prop-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: var(--ink-900);
+  border: 1.5px solid var(--hairline-dark);
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.btn-prop-more:hover {
+  border-color: var(--primary-gold-dark);
+  color: var(--primary-gold-dark);
+  background: var(--primary-gold-light);
+  transform: translateY(-2px);
+}
+
+.btn-prop-viewall {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--naver-green);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.btn-prop-viewall:hover {
+  background: var(--naver-green-dark);
+  transform: translateY(-2px);
+}
+
 /* Tag Chips */
 .prop-tags {
   display: flex;

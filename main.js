@@ -37,7 +37,8 @@
     userReviews: getSafeStorage('cham_joeun_user_reviews', []),
     userConsultations: getSafeStorage('cham_joeun_user_consultations', []),
     activeReviewCat: 'all',
-    activeBlogTab: 'all'
+    activeBlogTab: 'all',
+    propVisibleLimit: 6
   };
 
   // SVG Helper Icons
@@ -250,6 +251,19 @@
       propCount.textContent = items.length;
     }
 
+    const btnMore = document.getElementById('btnPropLoadMore');
+    const totalItems = items.length;
+    if (btnMore) {
+      if (items.length <= state.propVisibleLimit) {
+        btnMore.style.display = 'none';
+      } else {
+        btnMore.style.display = 'inline-flex';
+        btnMore.innerHTML = `<span>추천매물 더보기 (+${Math.min(6, totalItems - state.propVisibleLimit)}개)</span><svg class="icon" viewBox="0 0 24 24" style="width:18px; height:18px;"><polyline points="6 9 12 15 18 9"/></svg>`;
+      }
+    }
+
+    const visibleItems = items.slice(0, state.propVisibleLimit);
+
     if (items.length === 0) {
       propertyGrid.innerHTML = `
         <div style="grid-column: 1 / -1; padding: 60px 20px; text-align: center; background:#fff; border-radius:14px; border:1px dashed var(--hairline);">
@@ -262,7 +276,7 @@
       return;
     }
 
-    propertyGrid.innerHTML = items.map(item => {
+    propertyGrid.innerHTML = visibleItems.map(item => {
       const isLiked = state.likes.includes(item.id);
 
       // A. Residential: Apartment & House
@@ -287,6 +301,14 @@
                 ${item.price}
                 <span class="prop-price-sub">${item.floor || ''}</span>
               </div>
+              
+              <!-- 3줄 요약 SEO 브리핑 텍스트 -->
+              ${item.seoSummary && item.seoSummary.length ? `
+                <div class="prop-seo-summary">
+                  ${item.seoSummary.map(s => `<p class="prop-seo-point"><span class="seo-bullet">✔</span> ${s}</p>`).join('')}
+                </div>
+              ` : ''}
+
               <div class="airbnb-specs">
                 <div class="airbnb-spec-item">
                   <svg class="icon" viewBox="0 0 24 24" style="width:16px; height:16px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
@@ -325,6 +347,13 @@
             <div class="prop-price">
               ${item.price}
             </div>
+
+            <!-- 3줄 요약 SEO 브리핑 텍스트 -->
+            ${item.seoSummary && item.seoSummary.length ? `
+              <div class="prop-seo-summary">
+                ${item.seoSummary.map(s => `<p class="prop-seo-point"><span class="seo-bullet">✔</span> ${s}</p>`).join('')}
+              </div>
+            ` : ''}
 
             <!-- Stripe Style Data Table Preview -->
             <table class="stripe-table">
@@ -890,8 +919,15 @@
         document.querySelectorAll('.deal-chip').forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
         state.currentDealType = chip.getAttribute('data-deal');
+        state.propVisibleLimit = 6;
         renderProperties();
       });
+    });
+
+    // Property Load More Button (+6개씩 더보기)
+    document.getElementById('btnPropLoadMore')?.addEventListener('click', () => {
+      state.propVisibleLimit += 6;
+      renderProperties();
     });
 
     // Sort Dropdown
