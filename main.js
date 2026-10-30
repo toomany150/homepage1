@@ -121,6 +121,23 @@
     updateLikesCount();
     bindEvents();
     loadDynamicContent();
+    loadRealtimeBlogPosts();
+  }
+
+  // Load real-time Naver Blog RSS feed (대표님 toomany22 + 소속공인중개사 0초 자동 연동)
+  async function loadRealtimeBlogPosts() {
+    try {
+      const res = await fetch('/api/blog-rss');
+      if (res.ok) {
+        const json = await res.json();
+        if (json.success && Array.isArray(json.posts) && json.posts.length > 0) {
+          REAL_ESTATE_DATA.blogPosts = json.posts;
+          renderBlogPosts();
+        }
+      }
+    } catch (e) {
+      console.warn('Real-time blog RSS fetch error (using fallback posts):', e);
+    }
   }
 
   // Load latest dynamic content from API or JSON
@@ -489,7 +506,7 @@
     blogGrid.innerHTML = visiblePosts.map(post => `
       <article class="blog-card" onclick="window.open('${post.link}', '_blank')" role="link" tabindex="0" aria-label="${post.title}">
         <div class="blog-thumb-box">
-          <img src="${post.thumbnail}" alt="${post.title}" class="blog-thumb-img" loading="lazy">
+          <img src="${post.thumbnail}" alt="${post.title}" class="blog-thumb-img" loading="lazy" onerror="this.onerror=null; this.src='images/blog_post_hd_01.webp';">
         </div>
         <div class="blog-card-body">
           <div class="blog-meta-row">
