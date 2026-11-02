@@ -345,10 +345,6 @@
           <article class="prop-card" onclick="window.openPropertyDetail('${item.id}')" role="button" tabindex="0" aria-label="${item.title}">
             <div class="prop-thumb-box">
               <img src="${item.image}" alt="${item.title}" class="prop-thumb-img" loading="lazy">
-              <div class="prop-badges-group">
-                ${item.isFeatured ? `<span class="prop-badge-featured">추천매물</span>` : ''}
-                <span class="prop-deal-badge">${item.dealType}</span>
-              </div>
               <button class="btn-prop-like ${isLiked ? 'liked' : ''}" onclick="event.stopPropagation(); window.toggleLike('${item.id}');" aria-label="관심매물 찜하기">
                 ${ICONS.heart}
               </button>
@@ -375,10 +371,6 @@
         <article class="prop-card" onclick="window.openPropertyDetail('${item.id}')" role="button" tabindex="0" aria-label="${item.title}">
           <div class="prop-thumb-box">
             <img src="${item.image}" alt="${item.title}" class="prop-thumb-img" loading="lazy">
-            <div class="prop-badges-group">
-              ${item.isFeatured ? `<span class="prop-badge-featured">${item.category === 'factory' ? '사상공단 실매물' : (item.category === 'building' ? '수익형 빌딩' : item.category === 'office' ? '역세권 사옥' : '특급 상권')}</span>` : ''}
-              <span class="prop-deal-badge" style="background:var(--ink-900); color:var(--primary-gold);">${item.dealType}</span>
-            </div>
             <button class="btn-prop-like ${isLiked ? 'liked' : ''}" onclick="event.stopPropagation(); window.toggleLike('${item.id}');" aria-label="관심매물 찜하기">
               ${ICONS.heart}
             </button>
