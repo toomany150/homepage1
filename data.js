@@ -7,6 +7,59 @@ const REAL_ESTATE_DATA = {
   // 1. 매물 데이터 (블로그 100% 현장 검증 실매물 연동)
   properties: [
     {
+        "id": "APT-224462495399",
+        "category": "apartment",
+        "categoryName": "아파트",
+        "title": "부산 가야역 롯데캐슬 스카이엘 전세분양 | 보증금·계약조건·평면도 총정리",
+        "district": "가야동",
+        "location": "부산시 부산진구 가야동 (가야역 롯데캐슬 스카이엘)",
+        "dealType": "전세",
+        "price": "3억 5,000만~4억 4,500만원",
+        "priceValue": 35000,
+        "area": "전용 77A · 84A · 84B (33~35평형)",
+        "floor": "최고 43층 (총 4개동 486세대)",
+        "rooms": "방 3개 · 욕실 2개",
+        "maintenanceFee": "신축 규정 관리비",
+        "direction": "남향 / 남동향 (도심 파노라마 조망)",
+        "moveInDate": "즉시 / 협의 입주",
+        "builtYear": "2025년 신축 준공 (롯데건설)",
+        "parking": "세대당 1.3대",
+        "image": "images/blog_hd_09_crop.webp",
+        "tags": [
+            "#가야역롯데캐슬",
+            "#스카이엘",
+            "#전세분양",
+            "#HUG보증보험",
+            "#부산진구신축"
+        ],
+        "isFeatured": true,
+        "rating": "4.99",
+        "reviewCount": 32,
+        "blogLink": "https://blog.naver.com/toomany22/224462495399",
+        "agentNickname": "황금터잡이 신제환 대표",
+        "agentPhone": "010-9667-4201",
+        "seoSummary": [
+            "부산 2호선 가야역 초역세권 43층 초고층 랜드마크 롯데캐슬 브랜드 신축 아파트 전세분양 실매물입니다.",
+            "HUG(주택도시보증공사) 100% 안심 전세보증금 반환보증과 계약금 10% 조건으로 안전하게 입주 가능합니다.",
+            "77A, 84A, 84B 선호도 높은 중대형 실속 평면으로 탁 트인 도심 조망과 풍부한 일조권을 누립니다."
+        ],
+        "description": "부산시 부산진구 가야동 가야역 롯데캐슬 스카이엘 43층 초고층 신축 브랜드 대단지 아파트 전세분양 안내입니다. 전세 3억 5,000만원부터 4억 4,500만원까지 타입별 층별 다양한 호실을 보유하고 있으며, HUG 보증금 반환보증으로 보증금을 100% 안전하게 보호받으실 수 있습니다.",
+        "amenities": [
+            {
+                "icon": "train",
+                "label": "부산 2호선 가야역 도보 초역세권"
+            },
+            {
+                "icon": "shield",
+                "label": "HUG 100% 안심 전세보증금 반환보증"
+            },
+            {
+                "icon": "sun",
+                "label": "최고 43층 탁 트인 도심 파노라마 조망"
+            }
+        ]
+    },
+    {
         "id": "APT-224458326524",
         "category": "apartment",
         "categoryName": "아파트",
