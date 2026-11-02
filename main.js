@@ -345,9 +345,6 @@
           <article class="prop-card" onclick="window.openPropertyDetail('${item.id}')" role="button" tabindex="0" aria-label="${item.title}">
             <div class="prop-thumb-box">
               <img src="${item.image}" alt="${item.title}" class="prop-thumb-img" loading="lazy">
-              <button class="btn-prop-like ${isLiked ? 'liked' : ''}" onclick="event.stopPropagation(); window.toggleLike('${item.id}');" aria-label="관심매물 찜하기">
-                ${ICONS.heart}
-              </button>
             </div>
             <div class="prop-card-body">
               <h3 class="prop-title">${item.title}</h3>
@@ -371,9 +368,6 @@
         <article class="prop-card" onclick="window.openPropertyDetail('${item.id}')" role="button" tabindex="0" aria-label="${item.title}">
           <div class="prop-thumb-box">
             <img src="${item.image}" alt="${item.title}" class="prop-thumb-img" loading="lazy">
-            <button class="btn-prop-like ${isLiked ? 'liked' : ''}" onclick="event.stopPropagation(); window.toggleLike('${item.id}');" aria-label="관심매물 찜하기">
-              ${ICONS.heart}
-            </button>
           </div>
           <div class="prop-card-body">
             <h3 class="prop-title">${item.title}</h3>
