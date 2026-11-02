@@ -454,7 +454,23 @@
   function renderBlogPosts() {
     if (!blogGrid) return;
 
-    let posts = REAL_ESTATE_DATA.blogPosts || [];
+    const allPosts = REAL_ESTATE_DATA.blogPosts || [];
+
+    // Update Tab Counters dynamically
+    const countAll = allPosts.length;
+    const countHouse = allPosts.filter(p => p.section === '주택').length;
+    const countCommercial = allPosts.filter(p => p.section === '상가').length;
+    const countEtc = allPosts.filter(p => p.section === '기타').length;
+
+    document.querySelectorAll('.blog-tab-btn').forEach(btn => {
+      const tab = btn.getAttribute('data-blog-tab');
+      if (tab === 'all') btn.textContent = `전체 칼럼 (${countAll})`;
+      else if (tab === '주택') btn.textContent = `주택 관련 (${countHouse})`;
+      else if (tab === '상가') btn.textContent = `상가 관련 (${countCommercial})`;
+      else if (tab === '기타') btn.textContent = `기타 정보·정책 (${countEtc})`;
+    });
+
+    let posts = allPosts;
     if (state.activeBlogTab !== 'all') {
       posts = posts.filter(p => p.section === state.activeBlogTab);
     }
@@ -506,7 +522,7 @@
     blogGrid.innerHTML = visiblePosts.map(post => `
       <article class="blog-card" onclick="window.open('${post.link}', '_blank')" role="link" tabindex="0" aria-label="${post.title}">
         <div class="blog-thumb-box">
-          <img src="${post.thumbnail}" alt="${post.title}" class="blog-thumb-img" loading="lazy" onerror="this.onerror=null; this.src='images/blog_post_hd_01.webp';">
+          <img src="${post.thumbnail}" alt="${post.title}" class="blog-thumb-img" loading="lazy" onerror="this.onerror=null; this.src='${post.section === '상가' ? 'images/blog_post_hd_05.webp' : (post.section === '기타' ? 'images/blog_post_hd_11.webp' : 'images/blog_post_hd_01.webp')}';">
         </div>
         <div class="blog-card-body">
           <div class="blog-meta-row">

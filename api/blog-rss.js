@@ -2,6 +2,23 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
+// Verified HD graphic mapping for official real-estate analysis columns
+const HD_COLUMN_MAP = {
+  "224440466912": { thumbnail: "images/blog_post_hd_01.webp", section: "주택", category: "주택 임대차 법률" },
+  "224408527081": { thumbnail: "images/blog_post_hd_02.webp", section: "주택", category: "주택 세무/행정" },
+  "224408279136": { thumbnail: "images/blog_post_hd_03.webp", section: "주택", category: "주택 권리분석" },
+  "224408180316": { thumbnail: "images/blog_post_hd_04.webp", section: "주택", category: "주택 권리분석" },
+  "224443605792": { thumbnail: "images/blog_post_hd_05.webp", section: "상가", category: "상가 권리분석" },
+  "224435278374": { thumbnail: "images/blog_post_hd_06.webp", section: "상가", category: "상가 인허가 실무" },
+  "224427503920": { thumbnail: "images/blog_post_hd_07.webp", section: "상가", category: "상가 소방/안전" },
+  "224368079641": { thumbnail: "images/blog_post_hd_08.webp", section: "상가", category: "상가 양도양수" },
+  "224353086495": { thumbnail: "images/blog_post_hd_09.webp", section: "상가", category: "상가 대장분석" },
+  "224346247074": { thumbnail: "images/blog_post_hd_10.webp", section: "상가", category: "상가 창업가이드" },
+  "224448195780": { thumbnail: "images/blog_post_hd_11.webp", section: "기타", category: "정책/공공임대" },
+  "224411354836": { thumbnail: "images/blog_post_hd_12.webp", section: "기타", category: "부동산 상식" },
+  "224361375888": { thumbnail: "images/blog_post_hd_13.webp", section: "기타", category: "부동산 법률/정책" }
+};
+
 function fetchRss(blogId) {
   return new Promise((resolve) => {
     const url = `https://rss.blog.naver.com/${encodeURIComponent(blogId)}.xml`;
@@ -52,15 +69,38 @@ function parseNaverRss(xmlText, source) {
     let title = decodeHtml(getTag('title')).replace(/\s*:\s*네이버\s*블로그$/, '').trim();
     let link = getTag('link');
     let guid = getTag('guid');
-    let category = decodeHtml(getTag('category')) || '부동산 정보';
+    let rawCategory = decodeHtml(getTag('category')) || '부동산 정보';
     let pubDateStr = getTag('pubDate');
     let rawTag = decodeHtml(getTag('tag'));
     let desc = getTag('description');
+
+    // 1. FILTER OUT PROPERTY POSTS (매물 글은 상단 매물 섹션에 들어가므로 칼럼 섹션에서 완벽 배제)
+    const isProperty = (
+      rawCategory.includes('추천매물') ||
+      rawCategory.includes('매물') ||
+      rawCategory.includes('아파트') ||
+      title.includes('아파트 매매') ||
+      title.includes('탑층') ||
+      title.includes('급매') ||
+      title.includes('뻥뷰') ||
+      title.includes('조경뷰')
+    );
+    if (isProperty) {
+      continue;
+    }
 
     // Extract logNo from link or guid
     const logMatch = (link || guid).match(/\/(\d+)(\?|$)/) || (link || guid).match(/logNo=(\d+)/);
     const logNo = logMatch ? logMatch[1] : Date.now().toString();
     const cleanLink = `https://blog.naver.com/${source.id}/${logNo}`;
+
+    // Determine section (주택 / 상가 / 기타)
+    let section = '기타';
+    if (rawCategory.includes('주택') || title.includes('주택') || title.includes('전월세') || title.includes('임대차')) {
+      section = '주택';
+    } else if (rawCategory.includes('상가') || title.includes('상가') || title.includes('권리금') || title.includes('양도양수') || title.includes('업종')) {
+      section = '상가';
+    }
 
     // Format date YYYY.MM.DD
     let formattedDate = '';
@@ -87,17 +127,19 @@ function parseNaverRss(xmlText, source) {
       tags = rawTag.split(',').map(t => t.trim()).filter(Boolean).map(t => t.startsWith('#') ? t : `#${t}`);
     }
 
-    // Extract thumbnail
+    // High quality thumbnail resolution
     let thumbnail = '';
-    if (desc) {
-      const imgMatch = desc.match(/https:\/\/(?:blogthumb|postfiles)\.pstatic\.net\/[^\s"'>]+/);
-      if (imgMatch) {
-        let rawImg = imgMatch[0].split('?')[0];
-        thumbnail = `${rawImg}?type=w800`;
-      }
-    }
-    if (!thumbnail) {
-      thumbnail = 'images/blog_post_hd_01.webp';
+    let category = rawCategory.replace(/■|\[|\]/g, '').trim();
+
+    if (HD_COLUMN_MAP[logNo]) {
+      thumbnail = HD_COLUMN_MAP[logNo].thumbnail;
+      section = HD_COLUMN_MAP[logNo].section;
+      category = HD_COLUMN_MAP[logNo].category;
+    } else {
+      // Clean category fallback image
+      if (section === '주택') thumbnail = 'images/blog_post_hd_01.webp';
+      else if (section === '상가') thumbnail = 'images/blog_post_hd_05.webp';
+      else thumbnail = 'images/blog_post_hd_11.webp';
     }
 
     // Extract excerpt
@@ -111,7 +153,7 @@ function parseNaverRss(xmlText, source) {
     items.push({
       id: `BLOG-${logNo}`,
       logNo,
-      section: 'column',
+      section,
       title,
       category,
       date: formattedDate,
