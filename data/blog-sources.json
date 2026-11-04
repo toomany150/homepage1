@@ -7,6 +7,16 @@
     "blogName": "참좋은공인중개사 대표 블로그",
     "profileImg": "images/ceo_profile.jpg",
     "isRepresentative": true
+  },
+  {
+    "id": "ha_blog_id",
+    "agentName": "하팀장",
+    "seriesName": "하팀장의 든든중개노트",
+    "role": "소속 공인중개사",
+    "phone": "010-9667-4201",
+    "blogName": "하팀장의 든든중개노트",
+    "profileImg": "images/agent_default.jpg",
+    "isRepresentative": false,
+    "isActive": false
   }
 ]
-

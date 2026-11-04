@@ -269,16 +269,20 @@
       items.sort((a, b) => a.priceValue - b.priceValue);
     }
 
+    // Separate items by Series
+    const shinItems = items.filter(p => !p.seriesName || p.seriesName.includes('신소장') || (p.agentNickname && p.agentNickname.includes('신제환')));
+    const haItems = items.filter(p => (p.seriesName && p.seriesName.includes('하팀장')) || (p.agentNickname && p.agentNickname.includes('하팀장')));
+
     if (propCount) {
       propCount.textContent = items.length;
     }
 
-    const totalPages = Math.ceil(items.length / state.propPageSize) || 1;
+    // 1. Pagination for Shin Sojang's Grid
+    const totalPages = Math.ceil(shinItems.length / state.propPageSize) || 1;
     if (state.propCurrentPage > totalPages) {
       state.propCurrentPage = 1;
     }
 
-    // Render Pagination Controls
     const paginationContainer = document.getElementById('propPagination');
     if (paginationContainer) {
       if (totalPages <= 1) {
@@ -312,58 +316,45 @@
     }
 
     const startIdx = (state.propCurrentPage - 1) * state.propPageSize;
-    const visibleItems = items.slice(startIdx, startIdx + state.propPageSize);
+    const visibleShinItems = shinItems.slice(startIdx, startIdx + state.propPageSize);
 
-    if (items.length === 0) {
+    if (shinItems.length === 0) {
       propertyGrid.innerHTML = `
-        <div style="grid-column: 1 / -1; padding: 60px 20px; text-align: center; background:#fff; border-radius:14px; border:1px dashed var(--hairline);">
-          <svg class="icon" viewBox="0 0 24 24" style="width:48px; height:48px; color:var(--primary-gold-dark); margin-bottom:12px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <h3 style="font-size:1.2rem; font-weight:800; color:var(--ink-900); margin-bottom:8px;">100% 현장 검증 실매물을 준비 중입니다</h3>
-          <p style="font-size:0.92rem; color:var(--ink-600); margin-bottom:20px; max-width:540px; margin-left:auto; margin-right:auto; line-height:1.6;">
-            참좋은부동산은 허위매물 없는 100% 실매물만을 엄선하여 브리핑합니다.<br>
-            원하시는 조건(지역, 가격, 면적, 업종)을 1:1 상담으로 남겨주시면 즉시 최적의 매물을 찾아드립니다.
-          </p>
-          <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
-            <a href="https://blog.naver.com/toomany22" target="_blank" rel="noopener noreferrer" class="btn-naver-blog" style="padding:10px 20px; font-size:0.9rem;">
-              <span>네이버 블로그 실시간 매물 보기</span>
-            </a>
-            <a href="tel:010-9667-4201" class="deal-chip" style="background:var(--primary-gold); color:#191919; border-color:var(--primary-gold); font-weight:700; padding:10px 20px;">
-              <span>010-9667-4201 직통상담</span>
-            </a>
-          </div>
+        <div style="grid-column: 1 / -1; padding: 50px 20px; text-align: center; background:#fff; border-radius:14px; border:1px dashed var(--hairline);">
+          <h4 style="font-size:1.1rem; font-weight:800; color:var(--ink-900); margin-bottom:6px;">해당 조건의 신소장 추천 매물을 준비 중입니다</h4>
+          <p style="font-size:0.88rem; color:var(--ink-600); margin-bottom:14px;">조건(지역, 가격, 면적)을 1:1 상담으로 남겨주시면 딱 맞는 매물을 즉시 찾아드립니다.</p>
+          <a href="tel:010-9667-4201" class="deal-chip" style="background:var(--primary-gold); color:#191919; font-weight:700; padding:8px 18px; text-decoration:none;">010-9667-4201 직통상담</a>
         </div>
       `;
-      return;
+    } else {
+      propertyGrid.innerHTML = visibleShinItems.map(renderSinglePropertyCard).join('');
     }
 
-    propertyGrid.innerHTML = visibleItems.map(item => {
-      const isLiked = state.likes.includes(item.id);
-
-      // A. Residential: Apartment & House
-      if (item.category === 'apartment' || item.category === 'house') {
-        return `
-          <article class="prop-card" onclick="window.openPropertyDetail('${item.id}')" role="button" tabindex="0" aria-label="${item.title}">
-            <div class="prop-thumb-box">
-              <img src="${item.image}" alt="${item.title}" class="prop-thumb-img" loading="lazy">
+    // 2. Render Ha Team Leader's Grid
+    const haPropertyGrid = document.getElementById('haPropertyGrid');
+    if (haPropertyGrid) {
+      if (haItems.length > 0) {
+        haPropertyGrid.innerHTML = haItems.map(renderSinglePropertyCard).join('');
+      } else {
+        haPropertyGrid.innerHTML = `
+          <div class="ha-intro-card">
+            <div class="ha-intro-icon">📝</div>
+            <div class="ha-intro-body">
+              <h4>하팀장의 든든중개노트 첫 매물 현장 실사 브리핑 준비 중</h4>
+              <p>소속공인중개사 하팀장이 꼼꼼하게 권리분석 및 현장 조사를 진행 중인 추천 실매물이 곧 업데이트됩니다.<br>
+              사상구 상가·아파트 실시간 매물 접수 및 매수 의뢰는 하팀장 직통상담을 이용해 주세요.</p>
             </div>
-            <div class="prop-card-body">
-              <h3 class="prop-title">${item.title}</h3>
-              <div class="prop-price">
-                ${item.price}
-                <span class="prop-price-sub">${item.floor || ''}</span>
-              </div>
-              ${item.agentNickname ? `
-                <div class="prop-card-agent-badge">
-                  <span>🏷️ 담당: <strong>${item.agentNickname}</strong></span>
-                  ${item.agentPhone ? `<a href="tel:${item.agentPhone}" class="prop-agent-call-btn" onclick="event.stopPropagation();" aria-label="직통전화">📞 전화상담</a>` : ''}
-                </div>
-              ` : ''}
-            </div>
-          </article>
+            <a href="tel:010-9667-4201" class="btn-ha-call">📞 하팀장 상담문의</a>
+          </div>
         `;
       }
+    }
+  }
 
-      // C. Commercial / Factory / Land (Stripe Style Spec Table)
+  // Card Template Helper
+  function renderSinglePropertyCard(item) {
+    // A. Residential: Apartment & House
+    if (item.category === 'apartment' || item.category === 'house') {
       return `
         <article class="prop-card" onclick="window.openPropertyDetail('${item.id}')" role="button" tabindex="0" aria-label="${item.title}">
           <div class="prop-thumb-box">
@@ -373,67 +364,88 @@
             <h3 class="prop-title">${item.title}</h3>
             <div class="prop-price">
               ${item.price}
+              <span class="prop-price-sub">${item.floor || ''}</span>
             </div>
-
-            <!-- Stripe Style Data Table Preview -->
-            <table class="stripe-table">
-              <tbody>
-                ${item.category === 'factory' ? `
-                  <tr>
-                    <th>유효 층고</th>
-                    <td>${item.ceilingHeight || 'H=9m'}</td>
-                  </tr>
-                  <tr>
-                    <th>호이스트</th>
-                    <td>${item.hoist || '5톤 1기'}</td>
-                  </tr>
-                  <tr>
-                    <th>전력 용량</th>
-                    <td>${item.powerCapacity || '250kW'}</td>
-                  </tr>
-                ` : (item.category === 'store' || item.category === 'office' || item.category === 'building') ? `
-                  <tr>
-                    <th>전용 면적</th>
-                    <td>${item.area}</td>
-                  </tr>
-                  <tr>
-                    <th>추천 업종</th>
-                    <td>${item.recommendedUse || item.currentUse || '근생/사무실'}</td>
-                  </tr>
-                  <tr>
-                    <th>수익률/차임</th>
-                    <td><strong style="color:var(--accent-emerald);">${item.expectedYield || item.price}</strong></td>
-                  </tr>
-                ` : `
-                  <tr>
-                    <th>토지 면적</th>
-                    <td>${item.area}</td>
-                  </tr>
-                  <tr>
-                    <th>용도 지역</th>
-                    <td>${item.zoning || '준공업지역'}</td>
-                  </tr>
-                  <tr>
-                    <th>도로 접면</th>
-                    <td>${item.roadContact || '6m 도로 접'}</td>
-                  </tr>
-                `}
-              </tbody>
-            </table>
-
-            <div class="prop-tags">
-              ${item.tags.map(t => `<span class="prop-tag">${t}</span>`).join('')}
-            </div>
-            ${item.agentNickname ? `
+            ${item.agentNickname || item.seriesName ? `
               <div class="prop-card-agent-badge">
-                <span>🏷️ 담당: <strong>${item.agentNickname}</strong></span>
-                ${item.agentPhone ? `<a href="tel:${item.agentPhone}" class="prop-agent-call-btn" onclick="event.stopPropagation();" aria-label="직통전화">📞</a>` : ''}
+                <span>🏷️ <strong>${item.seriesName || item.agentNickname}</strong></span>
+                ${item.agentPhone ? `<a href="tel:${item.agentPhone}" class="prop-agent-call-btn" onclick="event.stopPropagation();" aria-label="직통전화">📞 전화상담</a>` : ''}
               </div>
             ` : ''}
           </div>
         </article>
       `;
-    }).join('');
+    }
+
+    // B. Commercial / Factory / Land (Stripe Style Spec Table)
+    return `
+      <article class="prop-card" onclick="window.openPropertyDetail('${item.id}')" role="button" tabindex="0" aria-label="${item.title}">
+        <div class="prop-thumb-box">
+          <img src="${item.image}" alt="${item.title}" class="prop-thumb-img" loading="lazy">
+        </div>
+        <div class="prop-card-body">
+          <h3 class="prop-title">${item.title}</h3>
+          <div class="prop-price">
+            ${item.price}
+          </div>
+
+          <table class="stripe-table">
+            <tbody>
+              ${item.category === 'factory' ? `
+                <tr>
+                  <th>유효 층고</th>
+                  <td>${item.ceilingHeight || 'H=9m'}</td>
+                </tr>
+                <tr>
+                  <th>호이스트</th>
+                  <td>${item.hoist || '5톤 1기'}</td>
+                </tr>
+                <tr>
+                  <th>전력 용량</th>
+                  <td>${item.powerCapacity || '250kW'}</td>
+                </tr>
+              ` : (item.category === 'store' || item.category === 'office' || item.category === 'building') ? `
+                <tr>
+                  <th>전용 면적</th>
+                  <td>${item.area}</td>
+                </tr>
+                <tr>
+                  <th>추천 업종</th>
+                  <td>${item.recommendedUse || item.currentUse || '근생/사무실'}</td>
+                </tr>
+                <tr>
+                  <th>수익률/차임</th>
+                  <td><strong style="color:var(--accent-emerald);">${item.expectedYield || item.price}</strong></td>
+                </tr>
+              ` : `
+                <tr>
+                  <th>토지 면적</th>
+                  <td>${item.area}</td>
+                </tr>
+                <tr>
+                  <th>용도 지역</th>
+                  <td>${item.zoning || '준공업지역'}</td>
+                </tr>
+                <tr>
+                  <th>도로 접면</th>
+                  <td>${item.roadContact || '6m 도로 접'}</td>
+                </tr>
+              `}
+            </tbody>
+          </table>
+
+          <div class="prop-tags">
+            ${item.tags.map(t => `<span class="prop-tag">${t}</span>`).join('')}
+          </div>
+          ${item.agentNickname || item.seriesName ? `
+            <div class="prop-card-agent-badge">
+              <span>🏷️ <strong>${item.seriesName || item.agentNickname}</strong></span>
+              ${item.agentPhone ? `<a href="tel:${item.agentPhone}" class="prop-agent-call-btn" onclick="event.stopPropagation();" aria-label="직통전화">📞</a>` : ''}
+            </div>
+          ` : ''}
+        </div>
+      </article>
+    `;
   }
 
   // 2. Render Naver Blog Posts (썸네일 + 요약내용 + 태그 및 카테고리 필터링 + 6개 페이징)
