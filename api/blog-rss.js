@@ -4,6 +4,8 @@ const path = require('path');
 
 // Verified HD graphic mapping for official real-estate analysis columns
 const HD_COLUMN_MAP = {
+  "224473465592": { thumbnail: "images/blog_post_hd_15.webp", section: "상가", category: "상가계약·법인실무" },
+  "224470379686": { thumbnail: "images/blog_post_hd_16.webp", section: "주택", category: "아파트 현장 브리핑" },
   "224468505667": { thumbnail: "images/blog_post_hd_14.webp", section: "상가", category: "상가세무·부가세실무" },
   "224440466912": { thumbnail: "images/blog_post_hd_01.webp", section: "주택", category: "주택 임대차 법률" },
   "224408527081": { thumbnail: "images/blog_post_hd_02.webp", section: "주택", category: "주택 세무/행정" },
@@ -75,32 +77,55 @@ function parseNaverRss(xmlText, source) {
     let rawTag = decodeHtml(getTag('tag'));
     let desc = getTag('description');
 
-    // 1. FILTER OUT PROPERTY POSTS (매물 글은 상단 매물 섹션에 들어가므로 칼럼 섹션에서 완벽 배제)
-    const isProperty = (
-      rawCategory.includes('추천매물') ||
-      rawCategory.includes('매물') ||
-      rawCategory.includes('아파트') ||
-      title.includes('아파트 매매') ||
-      title.includes('탑층') ||
-      title.includes('급매') ||
-      title.includes('뻥뷰') ||
-      title.includes('조경뷰')
-    );
-    if (isProperty) {
-      continue;
-    }
-
     // Extract logNo from link or guid
     const logMatch = (link || guid).match(/\/(\d+)(\?|$)/) || (link || guid).match(/logNo=(\d+)/);
     const logNo = logMatch ? logMatch[1] : Date.now().toString();
+
+    // FILTER: If explicitly registered in HD_COLUMN_MAP, always include!
+    if (!HD_COLUMN_MAP[logNo]) {
+      // 1. FILTER OUT PROPERTY POSTS
+      const isProperty = (
+        rawCategory.includes('추천매물') ||
+        rawCategory.includes('매물') ||
+        rawCategory.includes('아파트') ||
+        title.includes('아파트 매매') ||
+        title.includes('탑층') ||
+        title.includes('급매') ||
+        title.includes('뻥뷰') ||
+        title.includes('조경뷰')
+      );
+      if (isProperty) {
+        continue;
+      }
+
+      // 2. FILTER OUT IRRELEVANT LIFE/RESTAURANT POSTS
+      const isIrrelevantLife = (
+        rawCategory.includes('맛집') ||
+        rawCategory.includes('일상') ||
+        rawCategory.includes('여행') ||
+        title.includes('맛집') ||
+        title.includes('시락국') ||
+        title.includes('참치') ||
+        title.includes('벚꽃') ||
+        title.includes('야영장') ||
+        title.includes('꼬막') ||
+        title.includes('장어구이') ||
+        title.includes('샤브막심') ||
+        title.includes('손칼국수')
+      );
+      if (isIrrelevantLife) {
+        continue;
+      }
+    }
+
     const cleanLink = `https://blog.naver.com/${source.id}/${logNo}`;
 
     // Determine section (주택 / 상가 / 기타)
     let section = '기타';
-    if (rawCategory.includes('주택') || title.includes('주택') || title.includes('전월세') || title.includes('임대차')) {
-      section = '주택';
-    } else if (rawCategory.includes('상가') || title.includes('상가') || title.includes('권리금') || title.includes('양도양수') || title.includes('업종')) {
+    if (rawCategory.includes('상가') || title.includes('상가') || title.includes('권리금') || title.includes('양도양수') || title.includes('업종') || title.includes('법인')) {
       section = '상가';
+    } else if (rawCategory.includes('주택') || title.includes('주택') || title.includes('아파트') || title.includes('전월세') || title.includes('임대차')) {
+      section = '주택';
     }
 
     // Format date YYYY.MM.DD
