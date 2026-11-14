@@ -4,7 +4,6 @@ const path = require('path');
 
 // Verified HD graphic mapping for official real-estate analysis columns
 const HD_COLUMN_MAP = {
-  "224475652940": { thumbnail: "images/blog_post_hd_17.webp", section: "주택", category: "분양정보·재개발분석" },
   "224473465592": { thumbnail: "images/blog_post_hd_15.webp", section: "상가", category: "상가계약·법인실무" },
   "224468505667": { thumbnail: "images/blog_post_hd_14.webp", section: "상가", category: "상가세무·부가세실무" },
   "224440466912": { thumbnail: "images/blog_post_hd_01.webp", section: "주택", category: "주택 임대차 법률" },
@@ -89,6 +88,8 @@ function parseNaverRss(xmlText, source) {
         rawCategory.includes('매물') ||
         rawCategory.includes('아파트') ||
         title.includes('아파트 매매') ||
+        title.includes('푸르지오') ||
+        title.includes('분양 예정') ||
         title.includes('전세 공급') ||
         title.includes('매매') ||
         title.includes('월세') ||
