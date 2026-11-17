@@ -37,8 +37,12 @@ async function sync() {
   const dataJsPath = path.join(__dirname, 'data.js');
   if (fs.existsSync(dataJsPath)) {
     let dataJsText = fs.readFileSync(dataJsPath, 'utf-8');
-    const startMarker = 'blogPosts: [';
-    const startIdx = dataJsText.indexOf(startMarker);
+    let startMarker = '"blogPosts": [';
+    let startIdx = dataJsText.indexOf(startMarker);
+    if (startIdx === -1) {
+      startMarker = 'blogPosts: [';
+      startIdx = dataJsText.indexOf(startMarker);
+    }
     if (startIdx !== -1) {
       // Find the end of blogPosts array
       let openBrackets = 0;
@@ -60,7 +64,7 @@ async function sync() {
           .map((line, idx) => idx === 0 ? line : '    ' + line)
           .join('\n');
         
-        dataJsText = dataJsText.substring(0, startIdx + 'blogPosts: '.length) +
+        dataJsText = dataJsText.substring(0, startIdx + startMarker.indexOf('[')) +
           postsJsonStr +
           dataJsText.substring(endIdx + 1);
 
