@@ -95,6 +95,7 @@ function parseNaverRss(xmlText, source) {
         title.includes('전세 공급') ||
         title.includes('매매') ||
         title.includes('월세') ||
+        title.includes('임대') ||
         title.includes('탑층') ||
         title.includes('급매') ||
         title.includes('뻥뷰') ||
