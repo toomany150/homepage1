@@ -686,7 +686,7 @@
   window.changeNewsPage = function (pageNum) {
     state.newsCurrentPage = pageNum;
     renderNews();
-    const newsSection = document.getElementById('news');
+    const newsSection = document.getElementById('newsSection') || document.getElementById('news');
     if (newsSection) {
       newsSection.scrollIntoView({ behavior: 'smooth' });
     }
@@ -879,12 +879,18 @@
       <div style="font-size:0.95rem; color:var(--ink-700); line-height:1.8; margin-bottom:24px;">
         ${item.content}
       </div>
-      <div style="background:var(--primary-gold-light); padding:16px; border-radius:8px; border:1px solid rgba(212,175,55,0.3);">
-        <strong style="color:var(--primary-gold-dark); font-size:0.92rem;">참좋은공인중개사 리서치 브리핑</strong>
+      <div style="background:var(--primary-gold-light); padding:16px; border-radius:8px; border:1px solid rgba(212,175,55,0.3); margin-bottom:20px;">
+        <strong style="color:var(--primary-gold-dark); font-size:0.92rem;">💡 참좋은공인중개사 황금터잡이 신소장 실무 브리핑</strong>
         <p style="font-size:0.88rem; color:var(--ink-800); margin-top:4px;">
-          본 정책 및 인프라 확충에 따른 사상구 인근(괘법, 감전, 엄궁) 실물 부동산 영향에 대해 궁금하신 점은 1:1 상담 또는 유선으로 맞춤 권리분석을 받아보실 수 있습니다.
+          ${item.insight || '본 정책 및 인프라 확충에 따른 사상구 인근(괘법, 감전, 엄궁) 실물 부동산 영향에 대해 궁금하신 점은 1:1 상담 또는 유선으로 맞춤 권리분석을 받아보실 수 있습니다.'}
         </p>
       </div>
+      ${item.link ? `
+        <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="btn-modal-blog-link">
+          <svg class="icon" viewBox="0 0 24 24" style="width:20px; height:20px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span>👉 네이버 블로그에서 '신소장 TODAY 3-3브리핑' 원문 전체보기</span>
+        </a>
+      ` : ''}
     `;
     propertyDetailModal.showModal();
   };

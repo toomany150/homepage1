@@ -124,6 +124,11 @@ function parseNaverRss(xmlText, source) {
       if (isIrrelevantLife) {
         continue;
       }
+
+      // 3. FILTER OUT DAILY 3-3 BRIEFINGS FROM COLUMN LIST (handled in dedicated 3-3 briefing section)
+      if (rawCategory.includes('3-3브리핑') || title.includes('3-3 브리핑') || title.includes('3-3브리핑')) {
+        continue;
+      }
     }
 
     const cleanLink = `https://blog.naver.com/${source.id}/${logNo}`;
