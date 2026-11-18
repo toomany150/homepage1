@@ -769,6 +769,15 @@
 
     modalPropertyTitle.textContent = item.title;
 
+    const modalCallBtn = document.getElementById('modalCallBtn');
+    const modalCallBtnText = document.getElementById('modalCallBtnText');
+    if (modalCallBtn) {
+      modalCallBtn.href = `tel:${item.agentPhone || '010-9667-4201'}`;
+    }
+    if (modalCallBtnText) {
+      modalCallBtnText.textContent = item.category === 'info' ? '기타 상담문의' : '이 매물 전화 문의';
+    }
+
     // Check if Info Guide
     if (item.category === 'info') {
       modalPropertyContent.innerHTML = `
@@ -881,6 +890,15 @@
     if (!item || !propertyDetailModal) return;
 
     modalPropertyTitle.textContent = item.title;
+
+    const modalCallBtn = document.getElementById('modalCallBtn');
+    const modalCallBtnText = document.getElementById('modalCallBtnText');
+    if (modalCallBtn) {
+      modalCallBtn.href = 'tel:010-9667-4201';
+    }
+    if (modalCallBtnText) {
+      modalCallBtnText.textContent = '기타 상담문의';
+    }
 
     let sectionsHtml = '';
     if (item.sections && Array.isArray(item.sections)) {
@@ -1199,7 +1217,7 @@
     // Share Button in Modal
     document.getElementById('btnModalShare')?.addEventListener('click', () => {
       navigator.clipboard.writeText(window.location.href);
-      window.showToast('매물 링크가 클립보드에 복사되었습니다!');
+      window.showToast('링크가 클립보드에 복사되었습니다!');
     });
 
     // Mobile Drawer
