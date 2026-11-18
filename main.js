@@ -592,18 +592,31 @@
     const visibleNews = newsList.slice(startIdx, startIdx + state.newsPageSize);
 
     newsGrid.innerHTML = visibleNews.map(news => `
-      <article class="news-card" onclick="window.showNewsModal('${news.id}')" role="button" tabindex="0" aria-label="${news.title}">
+      <article class="news-card ${news.thumbnail ? 'has-thumb' : ''}" onclick="window.showNewsModal('${news.id}')" role="button" tabindex="0" aria-label="${news.title}">
         <div>
-          <div class="news-card-header">
-            <span class="news-badge ${news.badgeColor}">${news.badge}</span>
-            <span class="news-source">${news.source}</span>
-            <span class="news-date">${news.date}</span>
+          ${news.thumbnail ? `
+            <div class="news-thumb-box">
+              <img src="${news.thumbnail}" alt="${news.title}" class="news-thumb-img" loading="lazy">
+              <span class="news-thumb-badge">신소장 3-3 브리핑</span>
+            </div>
+          ` : ''}
+          <div class="news-card-body">
+            <div class="news-card-header">
+              <span class="news-badge ${news.badgeColor}">${news.badge}</span>
+              <span class="news-source">${news.source}</span>
+              <span class="news-date">${news.date}</span>
+            </div>
+            <h3 class="news-card-title">${news.title}</h3>
+            ${news.badges && news.badges.length > 0 ? `
+              <div class="news-pill-tags">
+                ${news.badges.map(b => `<span class="news-pill-tag">#${b}</span>`).join('')}
+              </div>
+            ` : ''}
+            <p class="news-card-summary">${news.summary}</p>
           </div>
-          <h3 class="news-card-title">${news.title}</h3>
-          <p class="news-card-summary">${news.summary}</p>
         </div>
         <div class="news-card-footer">
-          <span>공인중개사 분석 브리핑 읽기</span>
+          <span>신소장 3-3 브리핑 전문 읽기</span>
           ${ICONS.arrowRight}
         </div>
       </article>
@@ -868,7 +881,40 @@
     if (!item || !propertyDetailModal) return;
 
     modalPropertyTitle.textContent = item.title;
+
+    let sectionsHtml = '';
+    if (item.sections && Array.isArray(item.sections)) {
+      sectionsHtml = `
+        <div style="display:flex; flex-direction:column; gap:16px; margin:20px 0;">
+          ${item.sections.map(sec => `
+            <div style="background:var(--surface-soft); border:1px solid var(--hairline); border-radius:12px; padding:18px;">
+              <h4 style="font-size:1.02rem; font-weight:800; color:var(--ink-900); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+                <span style="display:inline-block; width:4px; height:16px; background:var(--primary-gold); border-radius:2px;"></span>
+                ${sec.category}
+              </h4>
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                ${sec.items.map(it => `
+                  <div style="border-bottom:1px dashed var(--hairline); padding-bottom:12px;">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:5px;">
+                      <span style="font-size:0.75rem; font-weight:800; color:#fff; background:var(--primary-gold-dark); padding:2px 7px; border-radius:4px;">${it.badge}</span>
+                      <strong style="font-size:0.95rem; color:var(--ink-900);">${it.title}</strong>
+                    </div>
+                    <p style="font-size:0.88rem; color:var(--ink-700); line-height:1.6; margin-left:4px;">${it.desc}</p>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
     modalPropertyContent.innerHTML = `
+      ${item.thumbnail ? `
+        <div style="border-radius:12px; overflow:hidden; margin-bottom:18px; border:1px solid var(--hairline); box-shadow:var(--shadow-sm);">
+          <img src="${item.thumbnail}" alt="${item.title}" style="width:100%; max-height:360px; object-fit:cover; display:block;">
+        </div>
+      ` : ''}
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
         <span class="news-badge ${item.badgeColor}">${item.badge}</span>
         <span style="font-size:0.85rem; color:var(--ink-500);">${item.source} · ${item.date}</span>
@@ -876,12 +922,15 @@
       <p style="font-size:1.05rem; font-weight:700; color:var(--ink-900); line-height:1.6; margin-bottom:16px;">
         ${item.summary}
       </p>
-      <div style="font-size:0.95rem; color:var(--ink-700); line-height:1.8; margin-bottom:24px;">
-        ${item.content}
-      </div>
+      ${sectionsHtml}
+      ${item.content ? `
+        <div style="font-size:0.95rem; color:var(--ink-700); line-height:1.8; margin-bottom:20px;">
+          ${item.content}
+        </div>
+      ` : ''}
       <div style="background:var(--primary-gold-light); padding:16px; border-radius:8px; border:1px solid rgba(212,175,55,0.3); margin-bottom:20px;">
         <strong style="color:var(--primary-gold-dark); font-size:0.92rem;">💡 참좋은공인중개사 황금터잡이 신소장 실무 브리핑</strong>
-        <p style="font-size:0.88rem; color:var(--ink-800); margin-top:4px;">
+        <p style="font-size:0.88rem; color:var(--ink-800); margin-top:4px; line-height:1.6;">
           ${item.insight || '본 정책 및 인프라 확충에 따른 사상구 인근(괘법, 감전, 엄궁) 실물 부동산 영향에 대해 궁금하신 점은 1:1 상담 또는 유선으로 맞춤 권리분석을 받아보실 수 있습니다.'}
         </p>
       </div>
