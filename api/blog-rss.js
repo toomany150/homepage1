@@ -4,6 +4,7 @@ const path = require('path');
 
 // Verified HD graphic mapping for official real-estate analysis columns
 const HD_COLUMN_MAP = {
+  "224483682574": { thumbnail: "images/blog_post_hd_19.webp", section: "주택", category: "LH전세임대·권리분석" },
   "224480602280": { thumbnail: "images/blog_post_hd_18.webp", section: "주택", category: "주택임대차·전세보증" },
   "224477106833": { thumbnail: "images/blog_post_hd_16.webp", section: "상가", category: "상가인허가·용도변경" },
   "224473465592": { thumbnail: "images/blog_post_hd_15.webp", section: "상가", category: "상가계약·법인실무" },
