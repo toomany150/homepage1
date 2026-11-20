@@ -131,7 +131,12 @@
       if (res.ok) {
         const json = await res.json();
         if (json.success && Array.isArray(json.posts) && json.posts.length > 0) {
-          REAL_ESTATE_DATA.blogPosts = json.posts;
+          // 모닝 경제 브리핑 및 3-3 브리핑은 지식 칼럼 그리드에서 제외
+          REAL_ESTATE_DATA.blogPosts = json.posts.filter(p => {
+            const t = p.title || '';
+            const c = p.category || '';
+            return !t.includes('모닝') && !c.includes('모닝') && !t.includes('3-3브리핑') && !t.includes('3-3 브리핑');
+          });
           renderBlogPosts();
         }
       }

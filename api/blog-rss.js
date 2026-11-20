@@ -128,8 +128,20 @@ function parseNaverRss(xmlText, source) {
         continue;
       }
 
-      // 3. FILTER OUT DAILY 3-3 BRIEFINGS FROM COLUMN LIST (handled in dedicated 3-3 briefing section)
-      if (rawCategory.includes('3-3브리핑') || title.includes('3-3 브리핑') || title.includes('3-3브리핑')) {
+      // 3. FILTER OUT DAILY BRIEFINGS & HA TEAM LEADER'S MORNING BRIEFINGS FROM COLUMN LIST
+      const isBriefing = (
+        rawCategory.includes('3-3브리핑') ||
+        rawCategory.includes('모닝') ||
+        rawCategory.includes('브리핑') ||
+        title.includes('3-3 브리핑') ||
+        title.includes('3-3브리핑') ||
+        title.includes('모닝 경제') ||
+        title.includes('모닝 경제 브리핑') ||
+        title.includes('하팀장의 모닝') ||
+        logNo === '224484293424' ||
+        logNo === '224483256377'
+      );
+      if (isBriefing) {
         continue;
       }
     }
