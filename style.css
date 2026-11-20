@@ -1246,6 +1246,25 @@ img {
   border-color: var(--hairline);
 }
 
+/* Ha Team Leader Property Pagination Controls (에메랄드 테마) */
+#haPropPagination .page-num-btn:hover {
+  border-color: #059669;
+  color: #059669;
+  background: #ecfdf5;
+}
+
+#haPropPagination .page-num-btn.active {
+  background: #059669;
+  border-color: #059669;
+  color: #ffffff;
+}
+
+#haPropPagination .page-nav-btn:hover:not(:disabled) {
+  border-color: #059669;
+  color: #059669;
+  background: #ecfdf5;
+}
+
 /* Modal Naver Blog Direct Link Button */
 .btn-modal-blog-link {
   display: flex;

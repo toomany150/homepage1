@@ -40,6 +40,8 @@
     activeBlogTab: 'all',
     propCurrentPage: 1,
     propPageSize: 6,
+    haPropCurrentPage: 1,
+    haPropPageSize: 6,
     blogCurrentPage: 1,
     blogPageSize: 6,
     newsCurrentPage: 1,
@@ -335,11 +337,52 @@
       propertyGrid.innerHTML = visibleShinItems.map(renderSinglePropertyCard).join('');
     }
 
+    // 2. Pagination for Ha Team Leader's Grid (6개 넘어가면 1, 2, 3 페이징)
+    const haTotalPages = Math.ceil(haItems.length / state.haPropPageSize) || 1;
+    if (state.haPropCurrentPage > haTotalPages) {
+      state.haPropCurrentPage = 1;
+    }
+
+    const haPaginationContainer = document.getElementById('haPropPagination');
+    if (haPaginationContainer) {
+      if (haTotalPages <= 1) {
+        haPaginationContainer.innerHTML = '';
+      } else {
+        let pagesHtml = '';
+        pagesHtml += `
+          <button class="page-nav-btn prev" ${state.haPropCurrentPage === 1 ? 'disabled' : ''} onclick="window.changeHaPropPage(${state.haPropCurrentPage - 1})" aria-label="이전 페이지">
+            <svg class="icon" viewBox="0 0 24 24" style="width:16px; height:16px;"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>이전</span>
+          </button>
+        `;
+
+        for (let p = 1; p <= haTotalPages; p++) {
+          pagesHtml += `
+            <button class="page-num-btn ${p === state.haPropCurrentPage ? 'active' : ''}" onclick="window.changeHaPropPage(${p})" aria-label="${p}페이지">
+              ${p}
+            </button>
+          `;
+        }
+
+        pagesHtml += `
+          <button class="page-nav-btn next" ${state.haPropCurrentPage === haTotalPages ? 'disabled' : ''} onclick="window.changeHaPropPage(${state.haPropCurrentPage + 1})" aria-label="다음 페이지">
+            <span>다음</span>
+            <svg class="icon" viewBox="0 0 24 24" style="width:16px; height:16px;"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        `;
+
+        haPaginationContainer.innerHTML = pagesHtml;
+      }
+    }
+
+    const haStartIdx = (state.haPropCurrentPage - 1) * state.haPropPageSize;
+    const visibleHaItems = haItems.slice(haStartIdx, haStartIdx + state.haPropPageSize);
+
     // 2. Render Ha Team Leader's Grid
     const haPropertyGrid = document.getElementById('haPropertyGrid');
     if (haPropertyGrid) {
       if (haItems.length > 0) {
-        haPropertyGrid.innerHTML = haItems.map(renderSinglePropertyCard).join('');
+        haPropertyGrid.innerHTML = visibleHaItems.map(renderSinglePropertyCard).join('');
       } else {
         haPropertyGrid.innerHTML = `
           <div class="ha-intro-card">
@@ -692,6 +735,15 @@
     }
   };
 
+  window.changeHaPropPage = function (pageNum) {
+    state.haPropCurrentPage = pageNum;
+    renderProperties();
+    const section = document.getElementById('haSeriesBanner') || document.getElementById('haPropertyGrid');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   window.changeBlogPage = function (pageNum) {
     state.blogCurrentPage = pageNum;
     renderBlogPosts();
@@ -997,6 +1049,8 @@
       }
     });
 
+    state.propCurrentPage = 1;
+    state.haPropCurrentPage = 1;
     renderProperties();
 
     // Scroll to properties
@@ -1110,6 +1164,8 @@
     state.currentCategory = 'all';
     state.currentDealType = 'all';
     state.selectedDistrict = 'all';
+    state.propCurrentPage = 1;
+    state.haPropCurrentPage = 1;
 
     document.querySelectorAll('.category-tab').forEach((t, i) => t.classList.toggle('active', i === 0));
     document.querySelectorAll('.deal-chip').forEach((c, i) => c.classList.toggle('active', i === 0));
@@ -1152,6 +1208,7 @@
         tab.setAttribute('aria-selected', 'true');
         state.currentCategory = tab.getAttribute('data-category');
         state.propCurrentPage = 1;
+        state.haPropCurrentPage = 1;
         renderProperties();
       });
     });
@@ -1163,6 +1220,7 @@
         chip.classList.add('active');
         state.currentDealType = chip.getAttribute('data-deal');
         state.propCurrentPage = 1;
+        state.haPropCurrentPage = 1;
         renderProperties();
       });
     });
@@ -1171,6 +1229,8 @@
     if (propSortSelect) {
       propSortSelect.addEventListener('change', (e) => {
         state.currentSort = e.target.value;
+        state.propCurrentPage = 1;
+        state.haPropCurrentPage = 1;
         renderProperties();
       });
     }
